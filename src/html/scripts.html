@@ -1,0 +1,153 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script type="text/javascript">
+  hljs.registerLanguage('bm', hljs => {
+    var keywords = [
+      'and',
+      'as',
+      'break',
+      'catch',
+      'class',
+      'let',
+      'constructor',
+      'defer',
+      'do',
+      'else',
+      'enum',
+      'export',
+      'extension',
+      'for',
+      'from',
+      'function',
+      'getter',
+      'if',
+      'implements',
+      'import',
+      'inherits',
+      'interface',
+      'lambda',
+      'loop',
+      'module',
+      'native',
+      'not',
+      'of',
+      'operator',
+      'or',
+      'protect',
+      'return',
+      'setter',
+      'share',
+      'this',
+      'throw',
+      'using',
+      'var',
+      'while',
+    ];
+    var literals = [
+      'true', 'false', 'null',
+    ];
+    var built_ins = [
+      // interfaces
+      'Any',
+      'Error',
+      'List',
+      'String',
+
+      // types
+      'Int',
+      'Long',
+      'Bool',
+      'Single',
+      'Double',
+
+      // methods
+      'close',
+      'pull',
+      'peek',
+
+      // modules
+      'Console',
+    ];
+    return {
+      keywords: {
+        keyword: keywords.join(' '),
+        literal: literals.join(' '),
+        built_in: built_ins.join(' '),
+      },
+      contains: [
+        {
+          className: 'comment',
+          variants: [
+            { begin: /\/\//, end: /$/ },
+            { begin: /\/\*/, end: /\*\// }
+          ]
+        },
+        {
+          className: 'string',
+          variants: [
+            { begin: '\"', end: '\"' },
+            { begin: '\'', end: '\'' },
+            { begin: '`', end: '`' },
+            { begin: '```', end: '```' },
+            { begin: '\"\"\"', end: '\"\"\"' },
+          ],
+          contains: [
+            {
+              className: 'template',
+              begin: /\$\{/,
+              end: /\}/
+            }
+          ],
+        },
+        {
+          className: 'number',
+          variants: [
+            { begin: '[^a-zA-Z][0-9]+' },
+          ]
+        },
+      ]
+    };
+  });
+</script>
+
+<script type="text/javascript">
+  hljs.registerLanguage('cbnf', hljs => {
+    return {
+      contains: [
+        {
+          className: 'string',
+          variants: [
+            { begin: /\"/, end: /\"/ },
+          ]
+        },
+        {
+          className: 'comment',
+          variants: [
+            { begin: /\#/, end: /$/ }
+          ]
+        },
+        {
+          className: 'keyword',
+          begin: /[A-Za-z]+/,
+          end: /[A-Za-z0-9\-]*/
+        },
+      ]
+    };
+  });
+</script>
+
+<script type="text/javascript">
+  hljs.initHighlightingOnLoad();
+</script>
+
+<script type="text/javascript">
+  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
+    for (const element of document.getElementsByTagName(tag)) {
+      const content = element.innerText;
+      const id = element.getAttribute('id');
+      if (id) {
+        element.innerHTML = `<a href="#${id}">${content}</a>`;
+      }
+    }
+  });
+</script>

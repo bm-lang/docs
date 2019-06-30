@@ -1,0 +1,182 @@
+= Classes
+
+Classes are custom types that can be instantiated into values using constructors.
+All other members declared in the class than the construtors can only be accessed through an instance of the class.
+Only some <<Built-in Classes>> can be created using literals, without invoking a constructor.
+
+.Class Implementation
+[source,bm]
+----
+class User {
+  let id Int;
+  var name String = null;
+  var email String = null;
+
+  constructor new(@id) { id = @id; }
+
+  function delete() { /* ... */ }
+
+  getter displayName String { return "${name} <${email}>"; }
+
+  operator == (other! User) Bool { return this.id == other.id; }
+}
+----
+
+.Equivalent Implementation
+[source,bm]
+----
+class User {
+  let id Int;
+  var name String = null;
+  var email String = null;
+
+  constructor new(@id) { id = @id; }
+}
+
+function User_delete(user User) { /* ... */ }
+
+function User_get_displayName(user User) { return "${user.name} <${user.email}>"; }
+
+function User_equals(User left, User right) {
+  if left == null { return right == null; }
+  else if right == null { return false; }
+  else { return left.id == right.id; }
+}
+----
+
+== Class inheritance
+
+Classes can inherit from one or more classes only following these rules:
+
+- The constructors in the base class must be chained to one constructor of each superclass.
+- A class can't define a member with a name already defined in some superclass,
+in other words, inherited members cannot be overridden.
+- If two or more superclasses have a member with the same name it will cause an inheritance collision.
+
+NOTE: See <<_type_system>> for more details.
+
+[source,bm]
+----
+// represents an identifiable thing
+class Entity {
+  export let id String;
+
+  share constructor new(@id String) {
+    id = @id;
+  }
+}
+
+// represents a record with control fields
+class Record {
+  export let createdAt Date;
+
+  share var $updatedAt Date = null;
+
+  share constructor new() {
+    createdAt = Date.now();
+  }
+
+  export getter updatedAt Date {
+    return $updatedAt;
+  }
+}
+
+// represents the user entity record
+class User inherits Entity, Record {
+
+  protect var $name String = null;
+
+  // must be chained to the superclasses' constructors
+  export constructor new(@id String)
+    : Entity.new(@id), Record.new() {}
+
+  export getter name { return $name; }
+
+  // non-protected superclasses' members can be accessed
+  export setter name(@name String) {
+    $name = @name;
+    $updatedAt = Date.now();
+  }
+}
+
+function test() {
+  let user = User.new("0001");
+  console.log(user.id);          // prints 0001
+  console.log(user.name);        // prints null
+  console.log(user.updatedAt);   // prints null
+  console.log(user.createdAt);   // prints a Date
+
+  user.name = "Mat";
+
+  console.log(user.name);        // prints Mat
+  console.log(user.updatedAt);   // prints a Date
+}
+----
+
+== Class Extension
+
+TODO: Keyword `extends`. Only one superclass allowed. Inherits everything even the constructors.
+
+== Interface implementation
+
+Despite it is not necessary, a class can explicitly implement one or more [interfaces](#interfaces).
+The compiler will verify that the class comply with the definition of the interfaces.
+The interfaces specified will obbey the <<Interface Inheritance>> rules.
+If a function specified by an interface is not implemented, the class will be trated as <<Incomplete Class>>.
+
+[source,bm]
+----
+interface Drawable {
+  function draw(g Graphcs);
+}
+
+interface Shape {
+  getter origin Point;
+  getter size Size;
+}
+
+class Rectangle implements Drawable, Shape {
+  export var origin Point = null;
+  export var size Size = null;
+
+  export function draw(g Graphics) {
+    g.drawRect(origin.x, origin.y, size.width, size.height);
+  }
+
+  export constructor new() {}
+}
+
+class Oval {
+  export var origin Point = null;
+  export var size Size = null;
+
+  export function draw(g Graphics) {
+    g.drawOval(origin.x, origin.y, size.width, size.height);
+  }
+
+  export constructor new() {}
+}
+
+function test() {
+  let g = Graphics.new();
+  let shapes = ArrayList<Shape>.new();
+
+  shapes.add(Rectangle.new());
+
+  // next line is correct despite it was not explicit in the class definition
+  shapes.add(Oval.new());
+
+  for shapes : shape {
+    shape.draw(g);
+  }
+}
+----
+
+== Incomplete Class
+
+Since classes can inherit from other classes, the complete definition can be delegated to subclasses.
+Rules:
+
+* Only functions, getters, and setters can be defined as incomplete members.
+* Classes with incomplete members can't be instantiated since the complete definition is missing.
+* Classes designed to be instantiated must define all incomplete members that were inherited.

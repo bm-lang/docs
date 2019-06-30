@@ -1,0 +1,43 @@
+@import "palette";
+
+#content{
+  table.tableblock{
+    caption-side: bottom;
+    margin: 1em auto;
+
+    caption {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &, th, td {
+      border-collapse: collapse;
+      border: 1px solid $normal-border-color;
+    }
+
+    th, td {
+      padding: 2px 4px;
+
+      &.halign-left { text-align: left; }
+      &.halign-center { text-align: center; }
+      &.halign-right { text-align: right; }
+      &.valign-top { vertical-align: top; }
+      &.valign-bottom { vertical-align: bottom; }
+
+      code {
+        white-space: nowrap;
+      }
+
+      p {
+        margin: 0;
+        text-align: inherit;
+        vertical-align: inherit;
+      }
+    }
+
+    thead tr,
+    tbody tr:nth-child(even) {
+      background-color: $light-background;
+    }
+  }
+}

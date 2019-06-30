@@ -1,0 +1,70 @@
+= Properties
+
+Unlike normal fields, properties aren't allocated in memory, every time they are retrieved or assigned,
+the getter or setter logic is executed respectively.
+
+Despite properties are declared separately by using getters and setters, they must comply with following rules:
+
+* Properties can only be owned by <<Modules>> and <<Classes>>.
+* In a class or module, there can only be one getter and one setter with the same name in order to conform a property.
+* Getters must return a value and can't receive any parameter.
+* Setters must receive only one parameter and can't return values.
+* In a property, the return type of the getter must be exactly the same than the setter parameter.
+
+When using interfaces, fields can be treated as properties transparently.
+
+[source,bm]
+----
+class DefaultApplication {
+  export let version String = "1.0";
+
+  protect $baseTitle String = "Default Application";
+
+  export getter title() String {
+    return $baseTitle + " v${version}";
+  }
+
+  export setter title(@title String) {
+    $baseTitle = @title;
+  }
+}
+
+class CustomApplication {
+  export var title String = "Custom Application";
+
+  protect let $majorVersion int;
+  protect let $minorVersion int;
+
+  export constructor new(@maj int, @min int) {
+    $majorVersion = @maj;
+    $minorVersion = @min;
+  }
+
+  export getter version() String {
+    return $majorVersion + "." + $minorVersion;
+  }
+}
+
+interface Application {
+  let version String;
+  var title String;
+}
+
+function test() {
+  var app Application = null;
+
+  app = DefaultApplication();
+
+  console.log(app.title);   // "Default Application v1.0"
+  console.log(app.version); // "1.0"
+  app.title = "MyApp";
+  console.log(app.title);   // "MyApp v1.0"
+
+  app = CustomApplication.new(2, 3);
+
+  console.log(app.title);   // "Custom Application"
+  console.log(app.version); // "2.3"
+  app.title = "MyApp";
+  console.log(app.title);   // "MyApp"
+}
+----

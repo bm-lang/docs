@@ -1,0 +1,3045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.9">
+<meta name="author" content="Sergio Pedraza">
+<title>Bm Language</title>
+<link rel="stylesheet" href="./styles/bm.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>Bm Language</h1>
+<div class="details">
+<span id="author" class="author">Sergio Pedraza</span><br>
+<span id="email" class="email"><a href="https://github.com/sergiouph">@sergiouph</a></span><br>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#_overview">Overview</a></li>
+<li><a href="#_principles">Principles</a>
+<ul class="sectlevel2">
+<li><a href="#_trackable_origin">Trackable Origin</a></li>
+<li><a href="#_readability">Readability</a></li>
+<li><a href="#_immutability_over_mutability">Immutability over mutability</a></li>
+<li><a href="#_loose_coupling">Loose Coupling</a></li>
+</ul>
+</li>
+<li><a href="#_language">Language</a>
+<ul class="sectlevel2">
+<li><a href="#_structure">Structure</a>
+<ul class="sectlevel3">
+<li><a href="#_members">Members</a></li>
+<li><a href="#_containers">Containers</a></li>
+</ul>
+</li>
+<li><a href="#_suites">Suites</a>
+<ul class="sectlevel3">
+<li><a href="#_suite_file">Suite File</a></li>
+<li><a href="#_suite_version">Suite Version</a></li>
+<li><a href="#_entry_point">Entry Point</a></li>
+</ul>
+</li>
+<li><a href="#_reference_system">Reference System</a>
+<ul class="sectlevel3">
+<li><a href="#_naming_rules">Naming Rules</a></li>
+<li><a href="#_member_path">Member Path</a></li>
+<li><a href="#_shadowing_disallowance">Shadowing Disallowance</a></li>
+</ul>
+</li>
+<li><a href="#_access_system">Access System</a>
+<ul class="sectlevel3">
+<li><a href="#_protect_modifier">Protect Modifier</a></li>
+<li><a href="#_default_modifier">Default Modifier</a></li>
+<li><a href="#_share_modifier">Share Modifier</a></li>
+<li><a href="#_export_modifier">Export Modifier</a></li>
+</ul>
+</li>
+<li><a href="#_modules">Modules</a>
+<ul class="sectlevel3">
+<li><a href="#_global_module">Global Module</a></li>
+<li><a href="#_explicit_modules">Explicit Modules</a></li>
+<li><a href="#_implicit_modules">Implicit Modules</a></li>
+</ul>
+</li>
+<li><a href="#_imports">Imports</a>
+<ul class="sectlevel3">
+<li><a href="#_member_links">Member Links</a></li>
+<li><a href="#_import_syntax">Import Syntax</a></li>
+<li><a href="#_importing_modules">Importing Modules</a></li>
+</ul>
+</li>
+<li><a href="#_extensions">Extensions</a></li>
+<li><a href="#_templates">Templates</a></li>
+<li><a href="#_overloading">Overloading</a></li>
+<li><a href="#_extended_functions">Extended Functions</a></li>
+<li><a href="#_initialization">Initialization</a>
+<ul class="sectlevel3">
+<li><a href="#_inline_initialization">Inline Initialization</a></li>
+<li><a href="#_delegated_initialization">Delegated Initialization</a></li>
+<li><a href="#_function_parameter_initialization">Function Parameter Initialization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_type_system">Type System</a>
+<ul class="sectlevel2">
+<li><a href="#_references">References</a></li>
+<li><a href="#_null_values">Null Values</a></li>
+<li><a href="#_type_inference">Type Inference</a></li>
+<li><a href="#_type_casting">Type Casting</a></li>
+<li><a href="#_natives">Natives</a></li>
+<li><a href="#_built_in_types">Built-in Types</a></li>
+<li><a href="#_literals">Literals</a></li>
+</ul>
+</li>
+<li><a href="#_classes">Classes</a>
+<ul class="sectlevel2">
+<li><a href="#_class_inheritance">Class inheritance</a></li>
+<li><a href="#_class_extension">Class Extension</a></li>
+<li><a href="#_interface_implementation">Interface implementation</a></li>
+<li><a href="#_incomplete_class">Incomplete Class</a></li>
+</ul>
+</li>
+<li><a href="#_interfaces">Interfaces</a></li>
+<li><a href="#_lambdas">Lambdas</a>
+<ul class="sectlevel2">
+<li><a href="#_lambda_creation">Lambda Creation</a>
+<ul class="sectlevel3">
+<li><a href="#_inline_lambdas">Inline Lambdas</a></li>
+<li><a href="#_function_lambdas">Function Lambdas</a></li>
+<li><a href="#_property_lambdas">Property Lambdas</a></li>
+<li><a href="#_field_lambdas">Field Lambdas</a></li>
+<li><a href="#_operator_lambdas">Operator Lambdas</a></li>
+</ul>
+</li>
+<li><a href="#_closures">Closures</a></li>
+</ul>
+</li>
+<li><a href="#_enums">Enums</a></li>
+<li><a href="#_fields">Fields</a></li>
+<li><a href="#_functions">Functions</a>
+<ul class="sectlevel2">
+<li><a href="#_function_parameters">Function Parameters</a></li>
+<li><a href="#_optional_parameters">Optional parameters</a></li>
+</ul>
+</li>
+<li><a href="#_properties">Properties</a></li>
+<li><a href="#_constructors">Constructors</a></li>
+<li><a href="#_operators">Operators</a>
+<ul class="sectlevel2">
+<li><a href="#_operator_symbols">Operator Symbols</a></li>
+</ul>
+</li>
+<li><a href="#_instructions">Instructions</a>
+<ul class="sectlevel2">
+<li><a href="#_conditionals">Conditionals</a>
+<ul class="sectlevel3">
+<li><a href="#_if_else">If-Else</a></li>
+<li><a href="#_switch">Switch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_loops">Loops</a>
+<ul class="sectlevel2">
+<li><a href="#_infinite_loop">Infinite (loop)</a></li>
+<li><a href="#_conditional_while">Conditional (while)</a></li>
+<li><a href="#_incremental_for_while_step">Incremental (for - while - step)</a></li>
+<li><a href="#_iterative_for_in_else">Iterative (for - in - else)</a></li>
+</ul>
+</li>
+<li><a href="#_error_handling">Error Handling</a></li>
+<li><a href="#_expressions">Expressions</a>
+<ul class="sectlevel2">
+<li><a href="#_literals_2">Literals</a></li>
+</ul>
+</li>
+<li><a href="#_auto_closing">Auto-Closing</a></li>
+<li><a href="#_named_arguments">Named Arguments</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bm is a general purpose programming language designed to be simple to write, read and maintain.
+It can be considered a multi-paradigm language since it is focused to provide robust solutions
+by enforcing principles not limited to a specific paradigm.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_principles">Principles</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The design of the Bm Language is driven by a set of principles explained below.</p>
+</div>
+<div class="sect2">
+<h3 id="_trackable_origin">Trackable Origin</h3>
+<div class="paragraph">
+<p>Every symbol in the code is defined in some place which can be found using simple rules.</p>
+</div>
+<div class="paragraph">
+<p>A <a href="#_members">member</a> can&#8217;t be used if it is not explicitly imported or defined.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">import Int from bm;
+
+let x Int = null; // OK
+let y String = null; // ERROR! `String` is not defined</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Shadowing is disallowed so references can&#8217;t be ambiguous.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let enabled = true;
+
+class Test {
+  let enabled = false; // ERROR: `enabled` is already defined
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Fields must be initialized, there are no default values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class User {
+  var id Int; // ERROR! `id` needs to be initialized
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_readability">Readability</h3>
+<div class="paragraph">
+<p>The written code must be easy to read and the developer must write the minimum amount of code.</p>
+</div>
+<div class="paragraph">
+<p>The type inference allows to omit the type in most cases.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let count = 0;                           // type: Int
+let name = "Mat";                        // type: String
+let rect = Rectangle.new(0, 0, 10, 10);  // type: Rectangle
+let a = null;                            // type: Any</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Parenthesis after an <code>if</code>, <code>for</code>, <code>while</code>, etc. are no required.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function main(args Array&lt;String&gt;) {
+  if args.length == 0 {
+    println("Missing arguments");
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All <a href="#_members">members</a> in the most basic form share the same syntax pattern.
+Advanced usage introduces specific syntax.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cbnf" data-lang="cbnf">member = [access-modifier]
+  member-type
+  member-name
+  parameters
+  [advanced-usage]
+  body;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extensions allow to have large class definitions and even so have small files.</p>
+</div>
+<div class="listingblock">
+<div class="title">user.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module entities {
+  class User {
+    let id Int;
+    constructor new(@id Int) {
+      id = @id;
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">user.delete.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module entities {
+  function User.delete() {
+    // ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">main.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">import entities.User;
+
+function main() {
+  // since the extension is declared in the same module
+  // it is applied automatically
+  User.new(10).delete();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_immutability_over_mutability">Immutability over mutability</h3>
+<div class="paragraph">
+<p>Parameters in functions are constant by default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function add(a Int, b Int) {
+  a += b;                    // ERROR: `a` is constant
+  return a;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Getters, setters and interfaces allow to control if a field is mutable or not.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">interface Person {
+  let name String;
+}
+class Dog {
+  var name = "Mathison";
+}
+function test() {
+  let dog = Dog();
+  dog.name = "Mat";
+  let per = (Person)dog;
+  per.name = "...";        // ERROR: `per.name` is constant
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Declaring constants are as simple as declaring variables.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">var mutable = "";
+let immutable = "";
+mutable = null;
+immutable = null;     // ERROR: `immutable` is constant</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Constants can be defined in constructors easing its use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Cat {
+  let name; // OK: initialization is delegated
+  constructor new(@name) {
+    name = @name;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loose_coupling">Loose Coupling</h3>
+<div class="paragraph">
+<p><a href="#_interfaces">Interfaces</a> and <a href="#_templates">Templates</a> help to write code completely decoupled.</p>
+</div>
+<div class="listingblock">
+<div class="title">Modules <code>entities</code> and <code>storage</code> are completely decoupled.</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module entities {
+  class User {
+    var key String = null;
+  }
+}
+module storage {
+  interface Item&lt;ID&gt; {
+    let key ID;
+  }
+  class Container&lt;ID&gt; {
+    function save(item Item&lt;ID&gt;) { /* do something with `item.key` */ }
+  }
+}
+function main() {
+  let container = Container&lt;String&gt;();
+  let user = User();
+  container.save(user);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extensions make possible to add features to existing <a href="#_classes">Classes</a> and <a href="#_interfaces">Interfaces</a> without changing the original definition.</p>
+</div>
+<div class="listingblock">
+<div class="title">The class <code>List</code> knows nothing about the function <code>compact</code>.</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module lib {
+  share interface List&lt;T&gt; {
+    let length Int;
+    operator `[]` (index Int) T;
+  }
+  share module ext {
+    function List.compact() List&lt;T&gt; {
+      // create a new list without `null` values
+    }
+  }
+}
+module app {
+  import List, ext from lib;
+  function test() {
+    let items List&lt;Int&gt; = [10, null, 20];
+
+    // `compact` function comes from the extension
+    log(items.compact()); // [10, 20]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple Inheritance allows to reduce the depth of inheritance and having decoupled classes.</p>
+</div>
+<div class="listingblock">
+<div class="title">The classes <code>Element</code> and <code>Listenable</code> are stand-alone while <code>Input</code> uses them.</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Element {
+  var id String = null;
+}
+class Listenable {
+  protect let listeners = ArrayList&lt;Listener&gt;.new();
+  function on(key String, handle Handler) { /* ... */ }
+  function trigger(key String, event Event) { /* ... */ }
+}
+class Input inherits Element, Listenable {
+  protect var $value String = null;
+  setter value(@value String) {
+    $value = @value;
+    trigger("changed", Event.fromId(id));
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_language">Language</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bm can be considered as a part of the C-family languages and influenced indeed by many other languages.
+Driven by the <a href="#_readability">Readability</a> principle, the syntax of Bm is aims to be free of ambiguities for the parser
+as well for the human who reads it.</p>
+</div>
+<div class="paragraph">
+<p>The code written in Bm is free-form, there is no pattern to follow regarding the source files,
+even so, the resulting code organization keeps being relatively simple
+since the language doesn&#8217;t allow to create intricated designs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_modules">Modules</a> are the only members which can be nested.</p>
+</li>
+<li>
+<p><a href="#_implicit_modules">Implicit Modules</a> make explicit the module structure.</p>
+</li>
+<li>
+<p>There is no concept of <em>Inner Classes</em> or <em>Static Members</em>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_structure">Structure</h3>
+<div class="paragraph">
+<p>Bm has a simple structure to organize the logic: Members and Containers.
+Some containers are also members and some members only contain logic.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Is Container?</th>
+<th class="tableblock halign-left valign-top">Is Member?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#source-file">Source File</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_modules">Module</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_classes">Class</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_interfaces">Interface</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_enums">Enum</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_lambdas">Lambda</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_fields">Field</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_imports">Import</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_functions">Function</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_properties">Property</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_operators">Operator</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_constructors">Constructor</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_members">Members</h4>
+<div class="paragraph">
+<p>A member represents an unique named item that belongs to a container.
+A member definition is not necessarily unique, some members can be composed by more than one definition:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_functions">Functions</a>, <a href="#_constructors">Constructors</a> and <a href="#_operators">Operators</a>:
+since the <a href="#_overloading">Overloading</a> of a member is allowed, each overload counts as one definition that composes the same member.</p>
+</li>
+<li>
+<p><a href="#_properties">Properties</a>: a <code>getter</code> or <code>setter</code> definitions with the same name in a container, compose a single property.</p>
+</li>
+<li>
+<p><a href="#_modules">Modules</a>: all module definitions with the same <a href="#member-path">Member Path</a> found in a suite, compose the same module.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The only members that can implement logic are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_functions">Function</a></p>
+</li>
+<li>
+<p><a href="#_properties">Property</a></p>
+</li>
+<li>
+<p><a href="#_operators">Operator</a></p>
+</li>
+<li>
+<p><a href="#_constructors">Constructor</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_containers">Containers</h4>
+<div class="paragraph">
+<p>The containers are used to group members, all members have an owner which must be a container
+(the <a href="#_global_module">Global Module</a> is the only member that doesn&#8217;t have owner since it is the root).</p>
+</div>
+<div class="paragraph">
+<p>The owner of a member is not necessarily the container where it was defined:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <span id="source-file"><strong>Source Files</strong></span> are containers but the actual owner of the members defined inside is the
+<a href="#_implicit_modules">Implicit Module</a> which represents the directory of the file.</p>
+</li>
+<li>
+<p>When <a href="#_imports">importing</a> a member, the actual owner of the member is where is was first defined,
+the owner doesn&#8217;t change becase it was imported into another module.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The fact that the containers can hold members already defined in other containers helps to build the <a href="#_reference_system">Reference System</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Relationship between containers and members which can own</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Container</th>
+<th class="tableblock halign-left valign-top">Members</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_modules">Module</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_classes">Class</a>,
+ <a href="#_interfaces">Interface</a>,
+ <a href="#_functions">Function</a>,
+ <a href="#_fields">Field</a>,
+ <a href="#_properties">Property</a>,
+ <a href="#_lambdas">Lambda</a>,
+ <a href="#_enums">Enum</a>,
+ <a href="#_imports">Import</a>,
+ <a href="#_modules">Module</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_classes">Class</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_fields">Field</a>,
+ <a href="#_properties">Property</a>,
+ <a href="#_functions">Function</a>,
+ <a href="#_operators">Operator</a>,
+ <a href="#_constructors">Constructor</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_interfaces">Interface</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_fields">Field</a>,
+ <a href="#_functions">Function</a>,
+ <a href="#_operators">Operator</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_enums">Enum</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_fields">Field</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_suites">Suites</h3>
+<div class="paragraph">
+<p>Suites are distributable containers for all members that define an Application or a Library.
+The concepts of Application and Library are only important if the suite is expected to be executed.
+Only suites that contain an <a href="#_entry_point">Entry Point</a> can be executed and called <em>Applications</em>
+otherwise they can be considered only <em>Libraries</em>.
+At the end, all suites can be dependencies of other suites.</p>
+</div>
+<div class="paragraph">
+<p>The suites can be stored in two formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Source suite</strong>: Is a directory with a <a href="#_suite_file">Suite File</a> that contains the source files that can be compiled.</p>
+</li>
+<li>
+<p><strong>Compiled suite</strong>: Is a <code>.bms</code> file that can be distributed, it contains the necessary information to be imported in other suites or executed in any plattform.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_suite_file">Suite File</h4>
+<div class="paragraph">
+<p>A suite file defines a source suite, the parent directory of the file is considered the <a href="#_global_module">Global Module</a>.
+The file should be named <code>bm.json</code> (JSON format) or <code>bm.yml</code> (YAML format).
+The following meta-data can be defined in the suite file:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is an UUID identifying the suite, it is like the fingerpirnt, it should remain the same across all versions of the suite.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The code name of the suite, it follows the <a href="#_naming_rules">Naming Rules</a>, together with the ID the suite can be identified globally.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The version of the suite in the format <em>major.minor.patch</em>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_suite_version">Suite Version</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Major</em> changes break backward-compatibility.</p>
+</li>
+<li>
+<p><em>Minor</em> changes introduce new features.</p>
+</li>
+<li>
+<p><em>Patch</em> changes solve bugs.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_entry_point">Entry Point</h4>
+<div class="paragraph">
+<p>Since the all logic of the programs is contained in a member,
+the default entry point of a program is the function <code>main</code> that must be located in the <a href="#_global_module">Global Module</a>.
+In order to access to the arguments,
+the function may declare an array of strings (<code>Array&lt;String&gt;</code>) as the only argument.</p>
+</div>
+<div class="listingblock">
+<div class="title">main.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">import Array, String from bm;
+
+function main(args Array&lt;String&gt;) {
+  // program logic
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_system">Reference System</h3>
+<div class="paragraph">
+<p>This system defines the rules for referencing members in the code
+based on the relationship between containers and members.
+Referencing a member doesn&#8217;t guarantees the access to it,
+the access to the members is managed by the <a href="#_access_system">Access System</a>.</p>
+</div>
+<div class="paragraph">
+<p>Since all members have a <a href="#_naming_rules">name</a>, containers can be viewed as a list of names and each name
+could contain more names since some members are containers too.
+This structure of names is delimited by following rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A member cannot be defined in a container if the container or any of its parents have already a member with the same name,
+this results in <a href="#_shadowing_disallowance">Shadowing Disallowance</a>.</p>
+</li>
+<li>
+<p>In a given container, any name defined in the container or any of its parents is available to be referenced.</p>
+</li>
+<li>
+<p>A member can be referenced by using the <a href="#_member_path">Member Path</a> as long as the first name of the path is available to be referenced.</p>
+</li>
+<li>
+<p>The names defined in a container without name like <a href="#source-file">Source Files</a>, are assumed by its parent container.</p>
+</li>
+<li>
+<p>Given two containers with name that are siblings, the members defined in each container are not available to be referenced in each other.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_naming_rules">Naming Rules</h4>
+<div class="paragraph">
+<p>Any name can be given to a member, but the way to represent the names in the Bm Language obbey two formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One letter followed by more letters or digits.</p>
+</li>
+<li>
+<p>Delimited string using grave accent (<code>`</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The characters that are considered letters are
+from <code>a</code> to <code>z</code> (lowercase), from <code>A</code> to <code>Z</code> (uppercase), <code>_</code> (underscore), <code>$</code> (dollar sign) and <code>@</code> (at symbol).
+The delimited string follows the <a href="#Character Escaping">[Character Escaping]</a> rules.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_member_path">Member Path</h4>
+<div class="paragraph">
+<p>Since the name of a member is unique, members can be referenced unambiguously using the member path
+which can be generated by joining the path of the container and the name of the member with a point (<code>.</code>),
+containers without name are ignored.</p>
+</div>
+<div class="listingblock">
+<div class="title">Member Path example</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">                                        // Member Path:
+module math {                           // "math"
+  let PI = 3.141592;                    // "math.PI"
+  function max(a int, b int) int {      // "math.max"
+    return a &gt; b ? a : b;
+  }
+  module geo {                          // "math.geo"
+    function tan(value double) double { // "math.geo.tan"
+      // fancy maths...
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shadowing_disallowance">Shadowing Disallowance</h4>
+<div class="paragraph">
+<p>Naming a member with the same name than a member that can be referenced is not allowed because it generates ambiguity.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let x = 0;
+
+class Point {
+  var x = 0; // ERROR: The member "x" is already defined in the parent module.
+  var y = 0;
+
+  function moveTo(@x, y) { // ERROR: The member "y" is already defined in the class "Point".
+    let Point = null; // ERROR: The member "Point" is already defined in the parent module.
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_access_system">Access System</h3>
+<div class="paragraph">
+<p>This system refers to how the members are accessed through the modules.
+This is controlled by using a set of keywords called access modifiers
+which define the rules to access to some member from a certain module.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. How access modifiers work</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 15%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Who can access to the member?</th>
+<th class="tableblock halign-left valign-top"><code>protect</code></th>
+<th class="tableblock halign-left valign-top"><em>(default)</em></th>
+<th class="tableblock halign-left valign-top"><code>share</code></th>
+<th class="tableblock halign-left valign-top"><code>export</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Same declaring container</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Same module in the same suite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any module in the same suite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any module in any suite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_protect_modifier">Protect Modifier</h4>
+<div class="paragraph">
+<p>The <code>protect</code> modifier is the most secure modifier, the access to members declared with this modifier
+is limited only to the container where the member was declared,
+they can&#8217;t be imported or accessed by other source files.</p>
+</div>
+<div class="listingblock">
+<div class="title">file1.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Foo {
+  protect let BAR = 1;
+}
+
+protect let BAZ = Foo().BAR + 1; // ERROR: `BAR` is not accessible</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">file2.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">protect let QUX = BAZ + 1; // ERROR: `BAZ` is not accessible
+
+module abc {
+  let XYZ = QUX + 1; // OK! `QUX` is accessible
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_default_modifier">Default Modifier</h4>
+<div class="paragraph">
+<p>The <em>default</em> modifier is the most handy modifier,
+to declare a member with this kind of access the member shouldn&#8217;t have an access modifier at all.</p>
+</div>
+<div class="paragraph">
+<p>This modifier makes that the member can be accessed only by
+the members defined in the same module or submodules of the same suite,
+other modules can&#8217;t import or referencing the member.
+It keeps being secure, in the sense that it encapsulates the member in the declaring module.</p>
+</div>
+<div class="listingblock">
+<div class="title">file1.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let FOO = 1;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">file2.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module bar {
+  let BAZ = FOO + 1; // OK! `FOO` is accessible
+}
+let QUX = bar.BAZ + 1; // ERROR: `BAZ` is not accessible</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_share_modifier">Share Modifier</h4>
+<div class="paragraph">
+<p>The <code>share</code> modifier has two behaviours depending on the member:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Class members: allows the member to be available in any subclass no matter the suite.</p>
+</li>
+<li>
+<p>Other members: allows the importing and referencing of the member across the suite.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">file1.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module debug {
+  share function log(message String) { /* ... */ }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">file2.bm</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module foo {
+  import debug.log;
+
+  function bar() {
+    log("bar..."); // OK! `log` is accessible
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_export_modifier">Export Modifier</h4>
+<div class="paragraph">
+<p>The <code>export</code> modifier should only be used when the member needs to be exported outside the suite.
+Members declared in the same module or submodules have access to the declared member without importing it
+and the member can be imported in any module of any suite.</p>
+</div>
+<div class="listingblock">
+<div class="title">Suite 1 (foobar)</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">export function foo() { /* ... */ }
+
+share function bar() { /* ... */ }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Suite 2 (barqux)</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">import foobar.foo; // OK! `foo` is exported
+import foobar.bar; // ERROR! `bar` is not exported</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules">Modules</h3>
+<div class="paragraph">
+<p>A module is a <a href="#_containers">container</a> for <a href="#_fields">Fields</a>, <a href="#_functions">Functions</a>, <a href="#_classes">Classes</a>,
+<a href="#_properties">Properties</a>, <a href="#_enums">Enums</a>, <a href="#_interfaces">Interfaces</a>, <a href="#_extensions">Extensions</a> and more <a href="#_modules">Modules</a>.
+The access to the members is determined by its <a href="#Module Access">[Module Access]</a>
+and they are always available during the runtime.</p>
+</div>
+<div class="sect3">
+<h4 id="_global_module">Global Module</h4>
+<div class="paragraph">
+<p>The global module cannot be referenced inside of the suite,
+however, when using another suite as dependency,
+the global module of the other suite can be referenced by the name of the suite.</p>
+</div>
+<div class="listingblock">
+<div class="title">Library Suite "foobar"</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// the member is declared in the global module of the "foobar" suite
+export function doSomething() { /* ... */ }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Application Suite (depends on "foobar")</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// the global module of the library "foobar" is now "foobar"
+import foobar.doSomething;
+
+export function main() {
+  doSomething();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_explicit_modules">Explicit Modules</h4>
+<div class="paragraph">
+<p>The explicit modules are created by using the keyword <code>module</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module math {
+  // ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_implicit_modules">Implicit Modules</h4>
+<div class="paragraph">
+<p>Modules are defined at file system level by using directories.
+The root directory is considered the global module and all other modules are relative to it.
+The source files contained in a module define the corresponding members.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-plain" data-lang="plain">/some/path/
+|- awesome-app/              : Global module (root directory)
+|  |- math/                  : Module 'math'
+|  |  |- physics/            : Module 'math.physics'
+|  |  |  |- mechanics.bm
+|  |  |  |- fluids.bm
+|  |  \- geometry/           : Module 'math.geometry'
+|  |     |- topology.bm
+|  |     |- trigonometry.bm
+|  |- data/                  : Module 'data'
+|  |  \- local-storage.bm
+|  \- main.bm</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_imports">Imports</h3>
+<div class="paragraph">
+<p>Shared and exported members can be imported into another module.
+The imported members become also members of the module which is importing them.
+To avoid adding complexity, the imported members cannot be renamed.
+The module access rules applies as well as any other definition,
+this means that the <code>import</code> statements can be declared with a module access modifier:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Protected imports</strong>: are useful when it is required to use a member from another module or suite
+that it is not going to be widely used, so in order to use it, it must be imported in every container where is required.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">protect import math.max; // this member will only be used here
+
+export function validatePort(port Int) Bool {
+  return max(port, 0);
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Default imports</strong>: are useful to create the environment of the module by importing members that will be used in the module
+and submodules.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// following members will be widely used across the module
+import assert, log, inspect from debug;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Shared imports</strong>: are useful for composing a module or avoiding name collisions.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module impl {
+  // need to be shared to expose them outside this module
+  share import somelibrary.log;
+  share import otherlibrary.timestamp;
+}
+
+function log(message String) {
+  impl.log("${impl.timestamp()} - ${message}");
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Exported imports</strong>: are useful to re-distribute a member.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// need to be exported so `getTypeName` can be exported as well
+export import constants.Type;
+
+export function getTypeName(type Type) String { /* ... */ }</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_member_links">Member Links</h4>
+<div class="paragraph">
+<p>When importing a member it is just linked so no clones of the member are generated.
+At the end the real module owner of the member is where the member was defined, not where it was imported.
+This implies that the access rules depend on the real module, not the importing one.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module AAA {
+  share class Foo { let BAR = 1; }
+}
+
+module BBB { share import AAA.Foo; }
+
+module CCC {
+  function test() {
+    log(AAA.Foo.BAR); // ERROR let Foo.BAR is not shared
+    log(BBB.Foo.BAR); // ERROR let Foo.BAR is not shared
+  }
+}
+
+// Notice the module is the same than the owner of Foo
+module AAA {
+  function test() {
+    log(Foo.BAR); // exactly the same than the line below
+    log(AAA.Foo.BAR); // OK! it has access
+    log(BBB.Foo.BAR); // OK! it has access
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_import_syntax">Import Syntax</h4>
+<div class="paragraph">
+<p>Multiple members can be imported using the same sentence, if the module is indicated all imported members
+must be of the same module.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module A {
+  share module B {
+    share let X = 1;
+    share let Y = 2;
+    share let Z = 3;
+  }
+  share module C {
+    share let I = 1;
+    share let J = 2;
+    share let K = 3;
+  }
+}
+
+module example1 {
+  import A.B.X, A.B.Y, A.B.Z,
+         A.C.I, A.C.J, A.C.K;
+}
+
+module example2 {
+  import B.X, B.Y, B.Z
+         C.I, C.J, C.K from A;
+}
+
+module example3 {
+  import X, Y, Z from A.B;
+  import I, J, L from A.C;
+}
+
+module example4 {
+  import A.B, A.C;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_importing_modules">Importing Modules</h4>
+<div class="paragraph">
+<p>When a module is imported, all members of the module becomes members of the importing module.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extensions">Extensions</h3>
+<div class="paragraph">
+<p>Extensions allow to add members to existing types without modifying the existing definition or creating a new type.
+The way to define extensions is by prefixing the member name with the type reference followed by two colons (<code>::</code>),
+only members with logic can be used as extensions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_functions">Functions</a></p>
+</li>
+<li>
+<p><a href="#_properties">Properties</a></p>
+</li>
+<li>
+<p><a href="#_constructors">Constructors</a></p>
+</li>
+<li>
+<p><a href="#_operators">Operators</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The body of the extension member, just like Class Members, has access to <code>this</code> representing the instance
+and all other intance members will be available.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class User {
+  var name String = null;
+}
+
+function User::delete() {
+  Console.log("Deleting user ${name}"); // OK! `name` is available
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When an extension is defined in the same module and suite than the extended type,
+the extension member will be treated as a member of the type,
+so when the type is imported it will have the extension members available.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module lib {
+  share class Collection { /* ... */ }
+
+  share function Collection::clean() { /* ... */ }
+}
+module app {
+  import Collection from lib;
+
+  function test() {
+    Collection().clean(); // OK! `clean` is available
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the extension member is declared in a different module than the extended type,
+it needs to be imported explicitly so the type can have the extension member available.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module lib {
+  share class Collection { /* ... */ }
+
+  module actions {
+    share function Collection::clean() { /* ... */ }
+  }
+}
+module app {
+  import Collection from lib;
+  import User::clean from actions.lib; // this line is required for the extension
+  function test() {
+    Collection().clean(); // OK! `clean` is available
+    clean(); // ERROR: `clean` is not defined
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_templates">Templates</h3>
+<div class="paragraph">
+<p>Generic programming is implemented by adding a template signature to
+<a href="#_classes">Classes</a>, <a href="#_interfaces">Interfaces</a>, <a href="#_lambdas">Lambdas</a>, <a href="#_functions">Functions</a> and <a href="#_operators">Operators</a>.
+The template signature can define one or more Template Types associated with another type,
+when the associated type is not specified it is assumed to be <code>Any</code>.
+Template Types are considered valid types in the inner implementation.</p>
+</div>
+<div class="paragraph">
+<p>Template Members can only be used if the Template Arguments are clear, it can happen in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Explicit Template Arguments: Types that have a Template Signature must be referenced by using this mode which includes
+<a href="#_classes">Classes</a>, <a href="#_interfaces">Interfaces</a> and <a href="#_lambdas">Lambdas</a>.</p>
+</li>
+<li>
+<p>Inferred Template Arguments: <a href="#_functions">Functions</a> and <a href="#_operators">Operators</a> are referenced without arguments.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">interface Comparable&lt;T&gt; {
+  operator `==` (value! T) Bool;
+}
+
+interface Entity&lt;ID&gt; {
+  var id Comparable&lt;ID&gt;;
+}
+
+class User {
+  var id Int;
+}
+
+class Container&lt;ID&gt; {
+  function store(entity Entity&lt;ID&gt;) { /* ... */ }
+}
+
+lambda Storer&lt;T&gt;(item T);
+
+function createStorer&lt;ID&gt;() Storer&lt;ID&gt; {
+  let container = Container&lt;ID&gt;();
+
+  return container.store;
+}
+
+function main() {
+  let store Storer&lt;Int&gt;  // Explicit Template Arguments
+    = createStorer();    // Inferred Template Arguments
+  let user = User();
+
+  store(user);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_overloading">Overloading</h3>
+<div class="paragraph">
+<p>Members that accepts parameters can be overloaded, this means that
+more than one definition can be provided with the same name as long as
+the parameters at the same position are not compatibles with each other.
+There is no restriction on the number of parameters or if they are optional.</p>
+</div>
+<div class="listingblock">
+<div class="title">Invalid Overloads</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function print(value Any) { /* ... */ }
+function print(value String) { /* ... */ }
+// ERROR! `String` is compatible with `Any`.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Valid Overloads</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function max(a Int, b, Int) Int { /* ... */ }
+function max(a Single, b Single) Single { /* ... */ }
+// OK! `Int` and `Single` are not compatibles</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extended_functions">Extended Functions</h3>
+<div class="paragraph">
+<p>Overriding inherited functions in classes is disallowed, however the way of adding behaviour is by using <code>before</code> and <code>after</code>.</p>
+</div>
+<div class="paragraph">
+<p>Since in Bm is not possible to override an inherited function, an alternative might be to add aspects to the class
+so it can be possible to execute some block of code before or after the function is called.</p>
+</div>
+<div class="paragraph">
+<p>Aspects should be directly added only to inherited functions to avoid obscuring the logic of normal functions.</p>
+</div>
+<div class="paragraph">
+<p>The block of code to be executed before or after the function should not have return type,
+the parameters for <em>before</em> blocks, should be exactly the same than the target function and
+the parameters for <em>after</em> blocks, should be the same than the target function plus the return type only when it applies.
+In this way, aspects will be able to mutate the input and output of a function, but won&#8217;t be able to change the references.</p>
+</div>
+<div class="paragraph">
+<p>Only one aspect per <em>before</em> and <em>after</em> should be allowed in one class.
+The aspects added to functions which the superclasses already added aspects will be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Shape {
+  var x = 0;
+  var y = 0;
+
+  function moveTo(@x Int, @y Int) {
+    x = @x;
+    y = @y;
+  }
+}
+
+class Element {
+  function redraw() { /* ... */ }
+}
+
+class Oval inherits Element, Shape {
+
+  after moveTo(@x Int, @y Int) {
+    redraw();
+  }
+
+  var width = 0;
+  var height = 0;
+
+  function draw(g Graphics) {
+    g.drawOval(x, y, width, height);
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_initialization">Initialization</h3>
+<div class="paragraph">
+<p>All fields must be initialized explicitly by the developer, there is no concept of implicit default value like <code>0</code>, <code>false</code> or <code>null</code>.
+A field can be only initialized by using one of the three ways described below.</p>
+</div>
+<div class="sect3">
+<h4 id="_inline_initialization">Inline Initialization</h4>
+<div class="paragraph">
+<p>This is the simpler way, the value is specified immediately after the declaration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">var count = 0;
+let user = User.new("Mat");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_delegated_initialization">Delegated Initialization</h4>
+<div class="paragraph">
+<p>The initialization of the fields in a class can be delegated to the constructors.</p>
+</div>
+<div class="paragraph">
+<p>The initial value for the field can be omited in the field&#8217;s declaration,
+but the class must declare one or more constructors
+and each constructor must initialize the field.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Entity {
+  let id String; // initialization delegated
+
+  constructor new(@id String) {
+    id = @id; // initial value
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See <a href="#_constructors">Constructors</a> for more details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_function_parameter_initialization">Function Parameter Initialization</h4>
+<div class="paragraph">
+<p>Despite a function parameter can be considered as a field, the initialization is optional since
+the initial value is taken from the function invocation.</p>
+</div>
+<div class="paragraph">
+<p>However, initial values in function parameters are allowed but it indicates an <a href="#Optional Parameter">[Optional Parameter]</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function test(a String, b String = "bar") {
+  // do something
+}
+
+function main() {
+  // the initial values will be:
+  // a = "foo" and b = "bar"
+  test("foo");
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See <a href="#_function_parameters">Function Parameters</a> for more details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_type_system">Type System</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bm is a language statically typed, all values are resolved to a type at compiling time.
+The usage of iterfaces and templates makes possible to write code for abstract types,
+however, at compiling time the type abstractions are resolved to well-defined types.</p>
+</div>
+<div class="paragraph">
+<p>Following list shows the types that can be declared:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Class: Values can have, fields, properties, functions and operators. Can only be created by using constructors.</p>
+</li>
+<li>
+<p>Enum: Only a limited set of values that inherits from a class can exist.</p>
+</li>
+<li>
+<p>Interface: Describes how a value should look like. Cannot be created, but if some value matches the definition, it can be assigned.</p>
+</li>
+<li>
+<p>Lambda: Describes how a function should look like. Cannot be created, but if some function matches the definition, is can be assigned.</p>
+</li>
+<li>
+<p>Template: Allows an advanced use of interfaces to compose complex types.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_references">References</h3>
+<div class="paragraph">
+<p>In Bm all values are passed by reference, this means that if a value is passed to a function,
+the function is able to modify the received value without creating a copy.</p>
+</div>
+<div class="paragraph">
+<p>There is no way to indicate that the value should be passed by value instead of reference (creating a copy),
+however, the compiler, depending on the platform, can decide how to pass the value based on the mutability of the value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_null_values">Null Values</h3>
+<div class="paragraph">
+<p>In Bm all references can be null by default no matter the type of the field,
+the only way to avoid null values in a field is declaring it with the non-null modifier (<code>!</code>) after the name.
+When a field has a null value, it means that the field doesn&#8217;t have a valid value.
+If a field is declared as non-null, it is guaranteed to never hold a null value.
+Null value assignments to non-null fields will throw an error at runtime,
+compilation errors only happen if the assignment can be detected by the compiler.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_type_inference">Type Inference</h3>
+<div class="paragraph">
+<p>All values' types can be inferred at compiling time, but in some cases the type has to be declared explicitly
+to avoid generalities or specificity. The most generic value that can be assumed is <code>Any</code> and
+the most specific will depend on the initial value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// if the type is not specified it would be Any
+var name String = null;
+
+// if the type is not specified it would be bool
+var value Any = true;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_type_casting">Type Casting</h3>
+<div class="paragraph">
+<p>Type casting makes possible to treat a value as if it was of other type without creating another value.
+Syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">(TargetType)sourceValue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the type of the source value and the target type are not compatible an error is generated.
+TODO: Complete adding examples and indicating if it is generated at compiling time, runtime or both.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_natives">Natives</h3>
+<div class="paragraph">
+<p>TODO Explain that can be implemented by the compiler, list expected natives, explain how to pass values from bm.json to runtime.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_built_in_types">Built-in Types</h3>
+<div class="paragraph">
+<p>Bm is not oriented to a specific platform or hardware, however, in order to operate it defines a set of native classes
+which are assumed to exist and can be used to create more complex types.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Built-in Classes</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Size</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Smallest signed integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">−128 to +127</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UByte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Smallest unsigned integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 to 255</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium-sized signed integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">−32,768 to +32,767</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UShort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium-sized unsigned integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 to 65,535</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default signed integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">−2,147,483,648 to +2,147,483,647</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UInt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default unsigned integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 to 4,294,967,295</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Biggest signed integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">−9,223,372,036,854,775,808 to +9,223,372,036,854,775,807</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULong</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Biggest unsigned integer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 to 18,446,744,073,709,551,615</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single-precision floating-point number</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double-precision floating-point number</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> or <code>false</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Char</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any unicode character.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depends on the instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a sequence of Chars.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array&lt;T&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depends on the instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a sequence of values of the same type.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As well as specific classes are expected to exist, some interfaces are necessary to provide complete and decoupled
+support of some features of the language.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Built-in Interfaces</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents any value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tuple&lt;&#8230;&#8203;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a sequence of values of specific types per item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describes an error at runtime.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_literals">Literals</h3>
+<div class="paragraph">
+<p>Numbers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function main() {
+  let way1 = (Byte)127;
+  let way2 Byte = 127;
+  let way3 = (n Byte) =&gt; {};
+
+  way3(127);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classes">Classes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Classes are custom types that can be instantiated into values using constructors.
+All other members declared in the class than the construtors can only be accessed through an instance of the class.
+Only some <a href="#Built-in Classes">[Built-in Classes]</a> can be created using literals, without invoking a constructor.</p>
+</div>
+<div class="listingblock">
+<div class="title">Class Implementation</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class User {
+  let id Int;
+  var name String = null;
+  var email String = null;
+
+  constructor new(@id) { id = @id; }
+
+  function delete() { /* ... */ }
+
+  getter displayName String { return "${name} &lt;${email}&gt;"; }
+
+  operator == (other! User) Bool { return this.id == other.id; }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Equivalent Implementation</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class User {
+  let id Int;
+  var name String = null;
+  var email String = null;
+
+  constructor new(@id) { id = @id; }
+}
+
+function User_delete(user User) { /* ... */ }
+
+function User_get_displayName(user User) { return "${user.name} &lt;${user.email}&gt;"; }
+
+function User_equals(User left, User right) {
+  if left == null { return right == null; }
+  else if right == null { return false; }
+  else { return left.id == right.id; }
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_class_inheritance">Class inheritance</h3>
+<div class="paragraph">
+<p>Classes can inherit from one or more classes only following these rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The constructors in the base class must be chained to one constructor of each superclass.</p>
+</li>
+<li>
+<p>A class can&#8217;t define a member with a name already defined in some superclass,
+in other words, inherited members cannot be overridden.</p>
+</li>
+<li>
+<p>If two or more superclasses have a member with the same name it will cause an inheritance collision.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See <a href="#_type_system">Type System</a> for more details.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">// represents an identifiable thing
+class Entity {
+  export let id String;
+
+  share constructor new(@id String) {
+    id = @id;
+  }
+}
+
+// represents a record with control fields
+class Record {
+  export let createdAt Date;
+
+  share var $updatedAt Date = null;
+
+  share constructor new() {
+    createdAt = Date.now();
+  }
+
+  export getter updatedAt Date {
+    return $updatedAt;
+  }
+}
+
+// represents the user entity record
+class User inherits Entity, Record {
+
+  protect var $name String = null;
+
+  // must be chained to the superclasses' constructors
+  export constructor new(@id String)
+    : Entity.new(@id), Record.new() {}
+
+  export getter name { return $name; }
+
+  // non-protected superclasses' members can be accessed
+  export setter name(@name String) {
+    $name = @name;
+    $updatedAt = Date.now();
+  }
+}
+
+function test() {
+  let user = User.new("0001");
+  console.log(user.id);          // prints 0001
+  console.log(user.name);        // prints null
+  console.log(user.updatedAt);   // prints null
+  console.log(user.createdAt);   // prints a Date
+
+  user.name = "Mat";
+
+  console.log(user.name);        // prints Mat
+  console.log(user.updatedAt);   // prints a Date
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_class_extension">Class Extension</h3>
+<div class="paragraph">
+<p>TODO: Keyword <code>extends</code>. Only one superclass allowed. Inherits everything even the constructors.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interface_implementation">Interface implementation</h3>
+<div class="paragraph">
+<p>Despite it is not necessary, a class can explicitly implement one or more [interfaces](#interfaces).
+The compiler will verify that the class comply with the definition of the interfaces.
+The interfaces specified will obbey the <a href="#Interface Inheritance">[Interface Inheritance]</a> rules.
+If a function specified by an interface is not implemented, the class will be trated as <a href="#_incomplete_class">Incomplete Class</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">interface Drawable {
+  function draw(g Graphcs);
+}
+
+interface Shape {
+  getter origin Point;
+  getter size Size;
+}
+
+class Rectangle implements Drawable, Shape {
+  export var origin Point = null;
+  export var size Size = null;
+
+  export function draw(g Graphics) {
+    g.drawRect(origin.x, origin.y, size.width, size.height);
+  }
+
+  export constructor new() {}
+}
+
+class Oval {
+  export var origin Point = null;
+  export var size Size = null;
+
+  export function draw(g Graphics) {
+    g.drawOval(origin.x, origin.y, size.width, size.height);
+  }
+
+  export constructor new() {}
+}
+
+function test() {
+  let g = Graphics.new();
+  let shapes = ArrayList&lt;Shape&gt;.new();
+
+  shapes.add(Rectangle.new());
+
+  // next line is correct despite it was not explicit in the class definition
+  shapes.add(Oval.new());
+
+  for shapes : shape {
+    shape.draw(g);
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_incomplete_class">Incomplete Class</h3>
+<div class="paragraph">
+<p>Since classes can inherit from other classes, the complete definition can be delegated to subclasses.
+Rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only functions, getters, and setters can be defined as incomplete members.</p>
+</li>
+<li>
+<p>Classes with incomplete members can&#8217;t be instantiated since the complete definition is missing.</p>
+</li>
+<li>
+<p>Classes designed to be instantiated must define all incomplete members that were inherited.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interfaces">Interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Interfaces are descriptors of types.
+Any value can be trated as an interface without explicit casting
+as long as the type of the value matches with the definition of the interface.</p>
+</div>
+<div class="listingblock">
+<div class="title">Interface syntax example</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">interface Name inherits SuperInterface1, SuperInterface2 {
+  function doSomething(param1 ParamType) ReturnType;
+  getter someField Type;
+  setter someField(value Type);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Interfaces can only contain <a href="#_functions">Functions</a>, <a href="#_properties">Properties</a> and <a href="#_operators">Operators</a>.</p>
+</div>
+<div class="paragraph">
+<p>Interfaces can inherit from other interfaces, however if two or more superinterfaces have a member
+with the same name they must exactly match, otherwise it will cause an inheritance collision.</p>
+</div>
+<div class="paragraph">
+<p>Interfaces are resolved to classes at compiling time depending on the usage.
+The compiler will create an specific implementation per each usage.</p>
+</div>
+<div class="listingblock">
+<div class="title">Implementation with Interfaces</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">interface Sortable {
+  operator &lt; (value Sortable);
+}
+
+function sort(items Array&lt;Sortable&gt;) { /* ... */ }
+
+function main() {
+  let ids = [10, 54, 32];      // Array&lt;Int&gt;
+  let names = ["D", "B", "X"]; // Array&lt;String&gt;
+
+  // in order compile, `Int` and `String`
+  // must implement the `&lt;` operator.
+  sort(ids);
+  sort(names);
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Equivalent Implementation</div>
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function sort_Array_Int(items Array&lt;Int&gt;) { /* ... */ }
+function sort_Array_String(items Array&lt;String&gt;) { /* ... */ }
+
+function main() {
+  let ids = [10, 54, 32];
+  let names = ["D", "B", "X"];
+
+  sort_Array_Int(ids);
+  sort_Array_String(names);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lambdas">Lambdas</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lambdas are types that represents functions.
+When a field is declared with a lambda type, the field can be trated as a function.
+Any member that contain logic can be converted to a lambda value as long as it matches with the lambda type.
+Lambdas can also be created inline.</p>
+</div>
+<div class="sect2">
+<h3 id="_lambda_creation">Lambda Creation</h3>
+<div class="paragraph">
+<p>There are more than one way to create a lambda:</p>
+</div>
+<div class="sect3">
+<h4 id="_inline_lambdas">Inline Lambdas</h4>
+<div class="paragraph">
+<p>Inline lambdas are created inside intruction blocks,
+a <a href="#_closures">closure</a> is generated when fields are captured in the lambda:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">lambda Action();
+lambda Logger(message String);
+lambda Operation(a int, b int) int;
+
+function main() {
+  // receives one arguments doesn't return a result
+  let log Logger = (msg) -&gt; { /* ... */ };
+
+  // receives two arguments a returns a result
+  let sum Operation = (a, b) -&gt; a + b;
+  let div Operation = (num, den) -&gt; {
+    if den == 0 { throw Error.new(); }
+
+    return a / b;
+  };
+
+  // no arguments, no result
+  let test Action = () -&gt; {
+    log(sum(1, 2)); // 1 + 2 = 3
+    log(div(3, 3)); // 3 / 3 = 1
+  };
+
+  test();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_function_lambdas">Function Lambdas</h4>
+<div class="paragraph">
+<p>Functions can be converted to lambdas as long as they match with the type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">lambda Writer(message String);
+
+function print(message String) { /* ... */ }
+
+class Console {
+  function log(message String) { /* ... */ }
+}
+
+function main() {
+  let write1 Writer = print;
+  let write2 Writer = Console().log;
+
+  write1("test 1!");
+  write2("test 2!");
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_property_lambdas">Property Lambdas</h4>
+<div class="paragraph">
+<p>Since properties contain logic they can be converted to lambdas as well.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">var name = null;
+
+getter hasName Bool {
+  return name != null;
+}
+
+setter hasName(value Bool) {
+  if value and name == null { name = "Default"; }
+  else not value and name != null { name = null; }
+}
+
+lambda Getter() Bool;
+lambda Setter(value Bool);
+
+function test() {
+  let get Getter = hasName;
+  let set Setter = hasName;
+
+  console.log(name);  // null
+  console.log(get()); // false
+  set(true);
+  console.log(get()); // true
+  console.log(name);  // "Default"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_field_lambdas">Field Lambdas</h4>
+<div class="paragraph">
+<p>Since fields can be converted to properties, fields can be converted to lambdas in the same way than properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">var version = 1;
+
+lambda Getter() Int;
+lambda Setter(value Int);
+
+function main() {
+  let getVersion Getter = version;
+  let setVersion Setter = version;
+
+  console.log(getVersion()); // 1
+  setVersion(2);
+  console.log(getVersion()); // 2
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operator_lambdas">Operator Lambdas</h4>
+<div class="paragraph">
+<p>Since operators contains logic, they can be converted to lambdas.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Bag {
+  operator `+` (bag! Bag) Bag {
+    let merged = Bag();
+    // some magic to merge both bags here
+    return merged;
+  }
+}
+
+lambda Merger(bag! Bag) Bag;
+
+function main() {
+  let bag = Bag();
+  let merge Merger = bag.`+`;
+
+  // both lines are equivalent:
+  let r1 = merge(Bag());
+  let r2 = bag + Bag();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_closures">Closures</h3>
+<div class="paragraph">
+<p><a href="#_inline_lambdas">Inline Lambdas</a> can capture constant fields creating a closure.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">lambda Logger(message String);
+
+function createLogger(prefix String) Logger&lt;String&gt; {
+  return (message) -&gt; {
+    // Notice `prefix` is captured in this lambda.
+    console.log("${prefix} - ${message}");
+  };
+}
+
+function test() {
+  let warn = createLogger("[W]");
+  let info = createLogger("[I]");
+
+  warn("Danger! Danger!");           // [W] - Danger! Danger!
+  info("Don't talk to strangers.");  // [I] - Don't talk to strangers.
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enums">Enums</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enums are a custom type which can only have a limited set of existing values.</p>
+</div>
+<div class="paragraph">
+<p>Enums cannot have superclass.
+Enums cannot be initialized.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">enum Alignment {
+  LEFT,
+  RIGHT,
+  CENTER,
+  START,
+  END,
+}
+
+function test() {
+  var a Alignment = null;
+
+  a = Alignment.LEFT;    // OK
+  a = Alignment("LEFT"); // OK
+  a = Alignment(0);      // OK
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fields">Fields</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fields are variables or constants that have a value stored in the memory.
+All fields have a type which cannot be changed after the declaration and can be either explicitly declared or inferred through the initialization.</p>
+</div>
+<div class="paragraph">
+<p>Fields can be only owned by following members and the lifespan will depend on the owner:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_modules">Modules</a>: The field will be always living on runtime.</p>
+</li>
+<li>
+<p><a href="#_classes">Classes</a>: The field will live as long as the class instance lives.</p>
+</li>
+<li>
+<p><a href="#_function_parameters">Function Parameters</a>: The field will live during the execution of the function.</p>
+</li>
+<li>
+<p><a href="#Instruction Blocks">[Instruction Blocks]</a>: The field will live during the execution of the block.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">module math {
+  let PI = 3.1415;
+}
+
+class Point {
+  var x = 0;
+  var y = 0;
+}
+
+function swap(list List&lt;Any&gt;, index1 Int, index2 Int) {
+  let aux = list[index1];
+  list[index1] = list[index2];
+  list[index2] = aux;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_functions">Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Functions are invocable blocks of code which can receive arguments and optionally produce a result.</p>
+</div>
+<div class="paragraph">
+<p>Only when the function has a return type specifed, the function must use the <code>return</code> statement
+to complete the execution with a result.</p>
+</div>
+<div class="paragraph">
+<p>Functions can be only owned by following members and the way to invoke them will depend on the owner:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_modules">Modules</a>: Functions can be invoked directly.</p>
+</li>
+<li>
+<p><a href="#_classes">Classes</a>: Functions can only invoked through an instance.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function abs(n Number) Number {
+  return n &lt; 0 ? -n : n;
+}
+
+class Rectangle {
+  var width = 0.0;
+  var height = 0.0;
+
+  constructor new(@width int, @height int) {
+    width = @width;
+    height = @height;
+  }
+
+  function computeArea() float {
+    return width * height;
+  }
+}
+
+function main() {
+  // module functions can be invoked directly
+  console.log(abs(-1));             // output: 1
+
+  // class functions need an instance to be invoked
+  let rect = Rectangle.new(10, 20);
+  console.log(rect.computeArea());  // output: 200
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_function_parameters">Function Parameters</h3>
+<div class="paragraph">
+<p>Functions can receive any number of parameters which are considered as fields available only during the function execution.</p>
+</div>
+<div class="paragraph">
+<p>In order to improve readability, the keywords <code>var</code> and <code>let</code> are optional when declaring parameters and it is defaulted to <code>let</code>.</p>
+</div>
+<div class="paragraph">
+<p>Since parameters are passed by <a href="#_references">reference</a>, reassignments only affects the reference in the function&#8217;s body.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function test(name String, var index int!) {
+  name = "Mat";      // ERROR: The field can't be reasigned
+  index = index + 1; // OK! the field is explicitly `var`
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_parameters">Optional parameters</h3>
+<div class="paragraph">
+<p>Optional parameters are allowed by specifying the initial value when declaring them.
+Any parameter can be optional no matter the order, however, when invoking the function
+sending a list of arguments, optional parameters can&#8217;t be skipped.
+The only way to skip an optional parameter is by invoking the function
+using <a href="#_named_arguments">Named Arguments</a>.</p>
+</div>
+<div class="paragraph">
+<p>It doesn&#8217;t matter if the optional parameter is <code>let</code> or <code>var</code>, the initial value
+specified in the parameter declaration is only used when there is no value specified
+in the function invocation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function write(data List&lt;byte&gt;, offset int! = 0, length int = null) {
+  // ...
+}
+
+function test() {
+  let data = [1, 2, 3];     // Optional arguments received:
+  write(data);              //  offset = 0, length = null
+  write(data, 1);           //  offset = 1, length = null
+  write(data, 1, 2);        //  offset = 1, length = 2
+  write(data, length: 2);   //  offset = 0, length = 2
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_properties">Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unlike normal fields, properties aren&#8217;t allocated in memory, every time they are retrieved or assigned,
+the getter or setter logic is executed respectively.</p>
+</div>
+<div class="paragraph">
+<p>Despite properties are declared separately by using getters and setters, they must comply with following rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Properties can only be owned by <a href="#_modules">Modules</a> and <a href="#_classes">Classes</a>.</p>
+</li>
+<li>
+<p>In a class or module, there can only be one getter and one setter with the same name in order to conform a property.</p>
+</li>
+<li>
+<p>Getters must return a value and can&#8217;t receive any parameter.</p>
+</li>
+<li>
+<p>Setters must receive only one parameter and can&#8217;t return values.</p>
+</li>
+<li>
+<p>In a property, the return type of the getter must be exactly the same than the setter parameter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When using interfaces, fields can be treated as properties transparently.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class DefaultApplication {
+  export let version String = "1.0";
+
+  protect $baseTitle String = "Default Application";
+
+  export getter title() String {
+    return $baseTitle + " v${version}";
+  }
+
+  export setter title(@title String) {
+    $baseTitle = @title;
+  }
+}
+
+class CustomApplication {
+  export var title String = "Custom Application";
+
+  protect let $majorVersion int;
+  protect let $minorVersion int;
+
+  export constructor new(@maj int, @min int) {
+    $majorVersion = @maj;
+    $minorVersion = @min;
+  }
+
+  export getter version() String {
+    return $majorVersion + "." + $minorVersion;
+  }
+}
+
+interface Application {
+  let version String;
+  var title String;
+}
+
+function test() {
+  var app Application = null;
+
+  app = DefaultApplication();
+
+  console.log(app.title);   // "Default Application v1.0"
+  console.log(app.version); // "1.0"
+  app.title = "MyApp";
+  console.log(app.title);   // "MyApp v1.0"
+
+  app = CustomApplication.new(2, 3);
+
+  console.log(app.title);   // "Custom Application"
+  console.log(app.version); // "2.3"
+  app.title = "MyApp";
+  console.log(app.title);   // "MyApp"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_constructors">Constructors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Constructors are the only way to create an instance of a class, every class must have at least one constructor in order to be instantiable.
+Constructors can only be invoked through the class name, they don&#8217;t need an instance to be invoked.</p>
+</div>
+<div class="paragraph">
+<p>When a class is inheriting from another class with already defined constructors, the constructor must be chained.</p>
+</div>
+<div class="paragraph">
+<p>A class can be designed to be only extended and prevent it to have direct instances, this can be only reached through protected constructors.
+Protected constructors can only be invoked in subclasses.</p>
+</div>
+<div class="paragraph">
+<p>Constructors are not inherited so a constructor in a subclass can have the same name of a superclass constructor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Entity {
+  export let id String;
+
+  protect constructor new(@id String) {
+    id = @id;
+  }
+}
+
+class User inherits Entity {
+  export let name;
+
+  // `new` constructor can be declared since they are not inherited
+  export constructor new(@id String, @name String)
+    : Entity.new(@id) { // super-constructor can be accessed only here
+    name = @name;
+  }
+}
+
+function test() {
+  let entity = Entity.new("0001");         // constructor is not accessible here
+  let user = User.new("0001", "Mathison"); // accessible constructor
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operators">Operators</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Operators are special functions which can be overloaded.</p>
+</div>
+<div class="sect2">
+<h3 id="_operator_symbols">Operator Symbols</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symbol</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Usage</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>==</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Equality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this == other</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a <code>bool!</code> indicating if <code>this</code> is equal to the <code>other</code> value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Greater than</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this &gt; other</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a <code>bool!</code> indicating if <code>this</code> is greater than the <code>other</code> value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Less than</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this &lt; other</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a <code>bool!</code> indicating if <code>this</code> is less than the <code>other</code> value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Greater than or equal to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this &gt;= other</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a <code>bool!</code> indicating if <code>this</code> is greater than or equal to the <code>other</code> value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Less than or equal to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this &lt;= other</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a <code>bool!</code> indicating if <code>this</code> is less than or equal to the <code>other</code> value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>result = this[id]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns whatever is in the <code>id</code> position of <code>this</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[]=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array assignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>this[id] = value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assigns the <code>value</code> to the <code>id</code> position of <code>this</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">class Vector {
+  export var x = 0.0;
+  export var y = 0.0;
+  export var magnitude = 0.0;
+  export var direction = 0.0;
+
+  export constructor new(@x float, @y float, @m float, @d float) {
+    x = @x;
+    y = @y;
+    magnitude = @m;
+    direction = @d;
+  }
+
+  export operator + (other Vector) Vector {
+    let result = Vector.new();
+
+    // do fancy math here
+
+    return result;
+  }
+}
+
+function test() {
+  let vec1 = Vector.new(0, 0, 10, 0);
+  let vec2 = Vector.new(0, 0, 10, -180);
+  let sum = vec1 + vec2;
+
+  Console.log(sum); // { x: 0, y: 0, magnitude: 0, direction: 0 }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instructions">Instructions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_conditionals">Conditionals</h3>
+<div class="sect3">
+<h4 id="_if_else">If-Else</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">if condition1 {
+
+}
+else if condition2 {
+
+}
+else {
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_switch">Switch</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">switch value {
+  case A {
+
+  }
+  case B or C {
+
+  }
+  else {
+
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_loops">Loops</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_infinite_loop">Infinite (loop)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">loop {
+  // do things
+
+  if condition {
+    break;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conditional_while">Conditional (while)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let stack = Stack&lt;int&gt;.new([10, 20, 30]);
+
+while stack.length &gt; 0 {
+  let item = stack.pop();
+  console.log("item = ${item}");
+}
+
+// Output:
+// item = 30
+// item = 20
+// item = 10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_incremental_for_while_step">Incremental (for - while - step)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">for i = 0 while i &lt; count step i++ {
+  console.log("i = ${count}");
+}
+
+// Output:
+// i = 0
+// i = 1
+// ...
+// i = 9</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_iterative_for_in_else">Iterative (for - in - else)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">let list = [10, 20, 30];
+
+for item in list {
+  console.log("item = ${item}");
+}
+else {
+  console.log("No items found");
+}
+
+// Output:
+// item = 10
+// item = 20
+// item = 30</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_error_handling">Error Handling</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">function main() {
+  for i = 0 while i &lt; 100 step 1 {
+    if i == 23 {
+      raise RuntimeError.new("I don't like 23");
+    }
+
+    rescue e RuntimeError {
+      // I don't care
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_expressions">Expressions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TODO</p>
+</div>
+<div class="sect2">
+<h3 id="_literals_2">Literals</h3>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_auto_closing">Auto-Closing</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">using writer = path.createWriter();
+writer.write([10, 20, 30]);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_named_arguments">Named Arguments</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bm" data-lang="bm">find(text: "mat", fromIndex: 10);</code></pre>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script type="text/javascript">
+  hljs.registerLanguage('bm', hljs => {
+    var keywords = [
+      'and',
+      'as',
+      'break',
+      'catch',
+      'class',
+      'let',
+      'constructor',
+      'defer',
+      'do',
+      'else',
+      'enum',
+      'export',
+      'extension',
+      'for',
+      'from',
+      'function',
+      'getter',
+      'if',
+      'implements',
+      'import',
+      'inherits',
+      'interface',
+      'lambda',
+      'loop',
+      'module',
+      'native',
+      'not',
+      'of',
+      'operator',
+      'or',
+      'protect',
+      'return',
+      'setter',
+      'share',
+      'this',
+      'throw',
+      'using',
+      'var',
+      'while',
+    ];
+    var literals = [
+      'true', 'false', 'null',
+    ];
+    var built_ins = [
+      // interfaces
+      'Any',
+      'Error',
+      'List',
+      'String',
+
+      // types
+      'Int',
+      'Long',
+      'Bool',
+      'Single',
+      'Double',
+
+      // methods
+      'close',
+      'pull',
+      'peek',
+
+      // modules
+      'Console',
+    ];
+    return {
+      keywords: {
+        keyword: keywords.join(' '),
+        literal: literals.join(' '),
+        built_in: built_ins.join(' '),
+      },
+      contains: [
+        {
+          className: 'comment',
+          variants: [
+            { begin: /\/\//, end: /$/ },
+            { begin: /\/\*/, end: /\*\// }
+          ]
+        },
+        {
+          className: 'string',
+          variants: [
+            { begin: '\"', end: '\"' },
+            { begin: '\'', end: '\'' },
+            { begin: '`', end: '`' },
+            { begin: '```', end: '```' },
+            { begin: '\"\"\"', end: '\"\"\"' },
+          ],
+          contains: [
+            {
+              className: 'template',
+              begin: /\$\{/,
+              end: /\}/
+            }
+          ],
+        },
+        {
+          className: 'number',
+          variants: [
+            { begin: '[^a-zA-Z][0-9]+' },
+          ]
+        },
+      ]
+    };
+  });
+</script>
+
+<script type="text/javascript">
+  hljs.registerLanguage('cbnf', hljs => {
+    return {
+      contains: [
+        {
+          className: 'string',
+          variants: [
+            { begin: /\"/, end: /\"/ },
+          ]
+        },
+        {
+          className: 'comment',
+          variants: [
+            { begin: /\#/, end: /$/ }
+          ]
+        },
+        {
+          className: 'keyword',
+          begin: /[A-Za-z]+/,
+          end: /[A-Za-z0-9\-]*/
+        },
+      ]
+    };
+  });
+</script>
+
+<script type="text/javascript">
+  hljs.initHighlightingOnLoad();
+</script>
+
+<script type="text/javascript">
+  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
+    for (const element of document.getElementsByTagName(tag)) {
+      const content = element.innerText;
+      const id = element.getAttribute('id');
+      if (id) {
+        element.innerHTML = `<a href="#${id}">${content}</a>`;
+      }
+    }
+  });
+</script>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2019-06-29 23:19:56 -0500
+</div>
+</div>
+</body>
+</html>

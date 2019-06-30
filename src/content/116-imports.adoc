@@ -1,0 +1,128 @@
+== Imports
+
+Shared and exported members can be imported into another module.
+The imported members become also members of the module which is importing them.
+To avoid adding complexity, the imported members cannot be renamed.
+The module access rules applies as well as any other definition,
+this means that the `import` statements can be declared with a module access modifier:
+
+* *Protected imports*: are useful when it is required to use a member from another module or suite
+that it is not going to be widely used, so in order to use it, it must be imported in every container where is required.
++
+[source,bm]
+----
+protect import math.max; // this member will only be used here
+
+export function validatePort(port Int) Bool {
+  return max(port, 0);
+}
+----
++
+* *Default imports*: are useful to create the environment of the module by importing members that will be used in the module
+and submodules.
++
+[source,bm]
+----
+// following members will be widely used across the module
+import assert, log, inspect from debug;
+----
++
+* *Shared imports*: are useful for composing a module or avoiding name collisions.
++
+[source,bm]
+----
+module impl {
+  // need to be shared to expose them outside this module
+  share import somelibrary.log;
+  share import otherlibrary.timestamp;
+}
+
+function log(message String) {
+  impl.log("${impl.timestamp()} - ${message}");
+}
+----
++
+* *Exported imports*: are useful to re-distribute a member.
++
+[source,bm]
+----
+// need to be exported so `getTypeName` can be exported as well
+export import constants.Type;
+
+export function getTypeName(type Type) String { /* ... */ }
+----
+
+=== Member Links
+
+When importing a member it is just linked so no clones of the member are generated.
+At the end the real module owner of the member is where the member was defined, not where it was imported.
+This implies that the access rules depend on the real module, not the importing one.
+
+[source,bm]
+----
+module AAA {
+  share class Foo { let BAR = 1; }
+}
+
+module BBB { share import AAA.Foo; }
+
+module CCC {
+  function test() {
+    log(AAA.Foo.BAR); // ERROR let Foo.BAR is not shared
+    log(BBB.Foo.BAR); // ERROR let Foo.BAR is not shared
+  }
+}
+
+// Notice the module is the same than the owner of Foo
+module AAA {
+  function test() {
+    log(Foo.BAR); // exactly the same than the line below
+    log(AAA.Foo.BAR); // OK! it has access
+    log(BBB.Foo.BAR); // OK! it has access
+  }
+}
+----
+
+=== Import Syntax
+
+Multiple members can be imported using the same sentence, if the module is indicated all imported members
+must be of the same module.
+
+[source,bm]
+----
+module A {
+  share module B {
+    share let X = 1;
+    share let Y = 2;
+    share let Z = 3;
+  }
+  share module C {
+    share let I = 1;
+    share let J = 2;
+    share let K = 3;
+  }
+}
+
+module example1 {
+  import A.B.X, A.B.Y, A.B.Z,
+         A.C.I, A.C.J, A.C.K;
+}
+
+module example2 {
+  import B.X, B.Y, B.Z
+         C.I, C.J, C.K from A;
+}
+
+module example3 {
+  import X, Y, Z from A.B;
+  import I, J, L from A.C;
+}
+
+module example4 {
+  import A.B, A.C;
+}
+----
+
+=== Importing Modules
+
+When a module is imported, all members of the module becomes members of the importing module.

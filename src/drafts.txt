@@ -1,0 +1,95 @@
+
+https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+https://asciidoctor.org/docs/user-manual/
+https://raw.githubusercontent.com/asciidoctor/asciidoctor.org/master/docs/user-manual.adoc
+
+- Concurrency
+
+--------------------------------------------------------------------------------------------------------------
+class Test {
+  var x = 10;
+  function test(value Int) Int {
+    log("Test ${value}");
+    return value + x;
+  }
+}
+
+class ExtendedTest {
+  var y = 20;
+
+  before test(value Int) {
+    log("Before Test ${value}");
+  }
+
+  after test(value Int, result Int) {
+    log("After Test ${value} - ${result}");
+  }
+}
+
+function generate() Test {
+  return RANDOM > 0.5 ? Test() : ExtendedTest();
+}
+
+function main() {
+  let test = generate();
+
+  test.test();
+}
+
+--------------------------------------------------------------------------------------------------------------
+struct Test {
+  field x Int;
+}
+
+procedure Test_constructor() {
+  field instance Test = new Test;
+  instance.x = 10;
+  return instance;
+}
+
+procedure Test_function_test_Int_Int(this Test, value Int) Int {
+  log("Test " + this.value);
+  return value + 1;
+}
+
+struct ExtendedTest is Test {
+  field x Int;
+  field y Int;
+}
+
+procedure ExtendedTest_constructor() {
+  field instance = new ExtendedTest;
+  instance.x = 10;
+  instance.y = 20;
+  return instance;
+}
+
+procedure ExtendedTest_function_test_Int_Int(this ExtendedTest, value Int) {
+  log("Before Test " + value);
+  log("Test " + value);
+  field result = value + 1;
+  log("After Test " + value + " - " + result);
+  return result;
+}
+
+procedure generate() Test {
+  if RANDOM > 0.5 {
+    return Test_constructor();
+  }
+  else {
+    return ExtendedTest_constructor() as Test;
+  }
+}
+
+procedure main() {
+  field test Test;
+
+  test = generate();
+
+  if test is ExtendedTest {
+    ExtendedTest_function_test_Int_Int(test as ExtendedTest);
+  }
+  else {
+    Test_function_test_Int_Int(test);
+  }
+}

@@ -1,0 +1,169 @@
+= Lambdas
+
+Lambdas are types that represents functions.
+When a field is declared with a lambda type, the field can be trated as a function.
+Any member that contain logic can be converted to a lambda value as long as it matches with the lambda type.
+Lambdas can also be created inline.
+
+== Lambda Creation
+
+There are more than one way to create a lambda:
+
+=== Inline Lambdas
+
+Inline lambdas are created inside intruction blocks,
+a <<Closures,closure>> is generated when fields are captured in the lambda:
+
+[source,bm]
+----
+lambda Action();
+lambda Logger(message String);
+lambda Operation(a int, b int) int;
+
+function main() {
+  // receives one arguments doesn't return a result
+  let log Logger = (msg) -> { /* ... */ };
+
+  // receives two arguments a returns a result
+  let sum Operation = (a, b) -> a + b;
+  let div Operation = (num, den) -> {
+    if den == 0 { throw Error.new(); }
+
+    return a / b;
+  };
+
+  // no arguments, no result
+  let test Action = () -> {
+    log(sum(1, 2)); // 1 + 2 = 3
+    log(div(3, 3)); // 3 / 3 = 1
+  };
+
+  test();
+}
+----
+
+=== Function Lambdas
+
+Functions can be converted to lambdas as long as they match with the type.
+
+[source,bm]
+----
+lambda Writer(message String);
+
+function print(message String) { /* ... */ }
+
+class Console {
+  function log(message String) { /* ... */ }
+}
+
+function main() {
+  let write1 Writer = print;
+  let write2 Writer = Console().log;
+
+  write1("test 1!");
+  write2("test 2!");
+}
+----
+
+=== Property Lambdas
+
+Since properties contain logic they can be converted to lambdas as well.
+
+[source,bm]
+----
+var name = null;
+
+getter hasName Bool {
+  return name != null;
+}
+
+setter hasName(value Bool) {
+  if value and name == null { name = "Default"; }
+  else not value and name != null { name = null; }
+}
+
+lambda Getter() Bool;
+lambda Setter(value Bool);
+
+function test() {
+  let get Getter = hasName;
+  let set Setter = hasName;
+
+  console.log(name);  // null
+  console.log(get()); // false
+  set(true);
+  console.log(get()); // true
+  console.log(name);  // "Default"
+}
+----
+
+=== Field Lambdas
+
+Since fields can be converted to properties, fields can be converted to lambdas in the same way than properties.
+
+[source,bm]
+----
+var version = 1;
+
+lambda Getter() Int;
+lambda Setter(value Int);
+
+function main() {
+  let getVersion Getter = version;
+  let setVersion Setter = version;
+
+  console.log(getVersion()); // 1
+  setVersion(2);
+  console.log(getVersion()); // 2
+}
+----
+
+=== Operator Lambdas
+
+Since operators contains logic, they can be converted to lambdas.
+
+[source,bm]
+----
+class Bag {
+  operator `+` (bag! Bag) Bag {
+    let merged = Bag();
+    // some magic to merge both bags here
+    return merged;
+  }
+}
+
+lambda Merger(bag! Bag) Bag;
+
+function main() {
+  let bag = Bag();
+  let merge Merger = bag.`+`;
+
+  // both lines are equivalent:
+  let r1 = merge(Bag());
+  let r2 = bag + Bag();
+}
+----
+
+== Closures
+
+<<Inline Lambdas>> can capture constant fields creating a closure.
+
+[source,bm]
+----
+lambda Logger(message String);
+
+function createLogger(prefix String) Logger<String> {
+  return (message) -> {
+    // Notice `prefix` is captured in this lambda.
+    console.log("${prefix} - ${message}");
+  };
+}
+
+function test() {
+  let warn = createLogger("[W]");
+  let info = createLogger("[I]");
+
+  warn("Danger! Danger!");           // [W] - Danger! Danger!
+  info("Don't talk to strangers.");  // [I] - Don't talk to strangers.
+}
+----

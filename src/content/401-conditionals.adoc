@@ -1,0 +1,33 @@
+== Conditionals
+
+=== If-Else
+
+[source,bm]
+----
+if condition1 {
+
+}
+else if condition2 {
+
+}
+else {
+
+}
+----
+
+=== Switch
+
+[source,bm]
+----
+switch value {
+  case A {
+
+  }
+  case B or C {
+
+  }
+  else {
+
+  }
+}
+----

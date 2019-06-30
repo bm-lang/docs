@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
+body {
+  font-family: "PT Sans", sans-serif;
+  font-size: 12pt;
+  color: #222;
+  background-color: #EEE;
+  margin: 0;
+}
+
+a:link, a:visited {
+  color: #222;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: #00A;
+  text-decoration: none;
+}
+
+#header {
+  text-align: center;
+  padding: 10mm 10mm 0 10mm;
+}
+#header h1 {
+  font-size: 22pt;
+  margin: 0;
+}
+#header .details {
+  display: flex;
+  justify-content: center;
+}
+#header .details .email {
+  margin-left: 0.5em;
+}
+
+#toc {
+  text-align: left;
+}
+#toc ul {
+  list-style: none;
+  padding-left: 1em;
+}
+#toc ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#toc ul li a {
+  white-space: nowrap;
+}
+#toc > ul {
+  columns: 2;
+  margin-bottom: 0;
+}
+#toc .sectlevel1 > li > a {
+  font-weight: bold;
+  color: #222;
+}
+
+#content {
+  padding: 1em 10mm 10mm 10mm;
+}
+#content a {
+  font-weight: bold;
+}
+#content p {
+  text-align: justify;
+}
+#content blockquote {
+  font-size: smaller;
+  font-style: italic;
+  margin-inline-start: 1em;
+  margin-inline-end: 1em;
+}
+#content ul li p {
+  margin: 0;
+}
+#content p code, #content h1 code, #content h2 code, #content h3 code, #content h4 code, #content h5 code, #content h6 code {
+  font-family: "Source Code Pro", monospace;
+}
+#content .listingblock {
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 1em 0;
+}
+#content .listingblock .title {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: -5px;
+}
+#content .listingblock .content pre {
+  margin: 0;
+}
+
+#footer {
+  text-align: center;
+  padding: 60px 0 40px 0;
+}
+
+#header, #content, #footer {
+  background-color: #FFF;
+  max-width: 210mm;
+  box-sizing: border-box;
+  margin: 0 auto;
+  border-width: 1px;
+  border-color: #CCC;
+  border-style: none solid;
+}
+
+@media screen and (min-width: 1200px) {
+  #toc {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: calc((100% - 210mm)/2);
+    height: 100%;
+    overflow-y: scroll;
+    background: linear-gradient(90deg, #FFF 25%, transparent 100%);
+  }
+  #toc > ul {
+    columns: 1;
+    margin-bottom: 1em;
+  }
+}
+#content h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 2px;
+  border-bottom: 1px double #CCC;
+}
+#content h2, #content h2 > a:link, #content h2 > a:visited {
+  color: #222;
+}
+#content h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 0 1.4rem 0;
+  letter-spacing: 2px;
+}
+#content h3, #content h3 > a:link, #content h3 > a:visited {
+  color: #222;
+}
+#content h4 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 0 1.3rem 0;
+  letter-spacing: 2px;
+}
+#content h4, #content h4 > a:link, #content h4 > a:visited {
+  color: #222;
+}
+#content h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 1.2rem 0;
+  letter-spacing: 2px;
+}
+#content h5, #content h5 > a:link, #content h5 > a:visited {
+  color: #222;
+}
+#content h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 1.1rem 0;
+  letter-spacing: 2px;
+}
+#content h6, #content h6 > a:link, #content h6 > a:visited {
+  color: #222;
+}
+
+#content table.tableblock {
+  caption-side: bottom;
+  margin: 1em auto;
+}
+#content table.tableblock caption {
+  font-weight: bold;
+  text-align: center;
+}
+#content table.tableblock, #content table.tableblock th, #content table.tableblock td {
+  border-collapse: collapse;
+  border: 1px solid #CCC;
+}
+#content table.tableblock th, #content table.tableblock td {
+  padding: 2px 4px;
+}
+#content table.tableblock th.halign-left, #content table.tableblock td.halign-left {
+  text-align: left;
+}
+#content table.tableblock th.halign-center, #content table.tableblock td.halign-center {
+  text-align: center;
+}
+#content table.tableblock th.halign-right, #content table.tableblock td.halign-right {
+  text-align: right;
+}
+#content table.tableblock th.valign-top, #content table.tableblock td.valign-top {
+  vertical-align: top;
+}
+#content table.tableblock th.valign-bottom, #content table.tableblock td.valign-bottom {
+  vertical-align: bottom;
+}
+#content table.tableblock th code, #content table.tableblock td code {
+  white-space: nowrap;
+}
+#content table.tableblock th p, #content table.tableblock td p {
+  margin: 0;
+  text-align: inherit;
+  vertical-align: inherit;
+}
+#content table.tableblock thead tr,
+#content table.tableblock tbody tr:nth-child(even) {
+  background-color: #FBFBFB;
+}
+
+pre code {
+  display: block;
+  padding: 5px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 12pt;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ebeafa;
+  background-color: #fdfcfe;
+  overflow-x: scroll;
+}
+
+.hljs .hljs-keyword {
+  color: #2b69ba;
+  font-weight: bold;
+}
+.hljs .hljs-literal {
+  color: #8b30cf;
+}
+.hljs .hljs-number {
+  color: #8b30cf;
+}
+.hljs .hljs-built_in {
+  color: #3b30cf;
+}
+.hljs .hljs-comment {
+  color: #1c7c23;
+  font-style: italic;
+}
+.hljs .hljs-string {
+  color: #cf3b30;
+}
+.hljs .hljs-template {
+  color: #0b0929;
+}
+
+/*# sourceMappingURL=bm.css.map */

@@ -1,0 +1,58 @@
+= Interfaces
+
+Interfaces are descriptors of types.
+Any value can be trated as an interface without explicit casting
+as long as the type of the value matches with the definition of the interface.
+
+.Interface syntax example
+[source,bm]
+----
+interface Name inherits SuperInterface1, SuperInterface2 {
+  function doSomething(param1 ParamType) ReturnType;
+  getter someField Type;
+  setter someField(value Type);
+}
+----
+
+Interfaces can only contain <<Functions>>, <<Properties>> and <<Operators>>.
+
+Interfaces can inherit from other interfaces, however if two or more superinterfaces have a member
+with the same name they must exactly match, otherwise it will cause an inheritance collision.
+
+Interfaces are resolved to classes at compiling time depending on the usage.
+The compiler will create an specific implementation per each usage.
+
+.Implementation with Interfaces
+[source,bm]
+----
+interface Sortable {
+  operator < (value Sortable);
+}
+
+function sort(items Array<Sortable>) { /* ... */ }
+
+function main() {
+  let ids = [10, 54, 32];      // Array<Int>
+  let names = ["D", "B", "X"]; // Array<String>
+
+  // in order compile, `Int` and `String`
+  // must implement the `<` operator.
+  sort(ids);
+  sort(names);
+}
+----
+
+.Equivalent Implementation
+[source,bm]
+----
+function sort_Array_Int(items Array<Int>) { /* ... */ }
+function sort_Array_String(items Array<String>) { /* ... */ }
+
+function main() {
+  let ids = [10, 54, 32];
+  let names = ["D", "B", "X"];
+
+  sort_Array_Int(ids);
+  sort_Array_String(names);
+}
+----

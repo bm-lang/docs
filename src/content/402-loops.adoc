@@ -1,0 +1,65 @@
+= Loops
+
+== Infinite (loop)
+
+[source,bm]
+----
+loop {
+  // do things
+
+  if condition {
+    break;
+  }
+}
+----
+
+== Conditional (while)
+
+[source,bm]
+----
+let stack = Stack<int>.new([10, 20, 30]);
+
+while stack.length > 0 {
+  let item = stack.pop();
+  console.log("item = ${item}");
+}
+
+// Output:
+// item = 30
+// item = 20
+// item = 10
+----
+
+== Incremental (for - while - step)
+
+[source,bm]
+----
+for i = 0 while i < count step i++ {
+  console.log("i = ${count}");
+}
+
+// Output:
+// i = 0
+// i = 1
+// ...
+// i = 9
+----
+
+== Iterative (for - in - else)
+
+[source,bm]
+----
+let list = [10, 20, 30];
+
+for item in list {
+  console.log("item = ${item}");
+}
+else {
+  console.log("No items found");
+}
+
+// Output:
+// item = 10
+// item = 20
+// item = 30
+----

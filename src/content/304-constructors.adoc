@@ -1,0 +1,37 @@
+= Constructors
+
+Constructors are the only way to create an instance of a class, every class must have at least one constructor in order to be instantiable.
+Constructors can only be invoked through the class name, they don't need an instance to be invoked.
+
+When a class is inheriting from another class with already defined constructors, the constructor must be chained.
+
+A class can be designed to be only extended and prevent it to have direct instances, this can be only reached through protected constructors.
+Protected constructors can only be invoked in subclasses.
+
+Constructors are not inherited so a constructor in a subclass can have the same name of a superclass constructor.
+
+[source,bm]
+----
+class Entity {
+  export let id String;
+
+  protect constructor new(@id String) {
+    id = @id;
+  }
+}
+
+class User inherits Entity {
+  export let name;
+
+  // `new` constructor can be declared since they are not inherited
+  export constructor new(@id String, @name String)
+    : Entity.new(@id) { // super-constructor can be accessed only here
+    name = @name;
+  }
+}
+
+function test() {
+  let entity = Entity.new("0001");         // constructor is not accessible here
+  let user = User.new("0001", "Mathison"); // accessible constructor
+}
+----

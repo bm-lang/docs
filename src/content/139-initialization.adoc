@@ -1,0 +1,58 @@
+== Initialization
+
+All fields must be initialized explicitly by the developer, there is no concept of implicit default value like `0`, `false` or `null`.
+A field can be only initialized by using one of the three ways described below.
+
+=== Inline Initialization
+
+This is the simpler way, the value is specified immediately after the declaration.
+
+[source,bm]
+----
+var count = 0;
+let user = User.new("Mat");
+----
+
+
+=== Delegated Initialization
+
+The initialization of the fields in a class can be delegated to the constructors.
+
+The initial value for the field can be omited in the field's declaration,
+but the class must declare one or more constructors
+and each constructor must initialize the field.
+
+[source,bm]
+----
+class Entity {
+  let id String; // initialization delegated
+
+  constructor new(@id String) {
+    id = @id; // initial value
+  }
+}
+----
+
+NOTE: See <<Constructors>> for more details.
+
+=== Function Parameter Initialization
+
+Despite a function parameter can be considered as a field, the initialization is optional since
+the initial value is taken from the function invocation.
+
+However, initial values in function parameters are allowed but it indicates an <<Optional Parameter>>.
+
+[source,bm]
+----
+function test(a String, b String = "bar") {
+  // do something
+}
+
+function main() {
+  // the initial values will be:
+  // a = "foo" and b = "bar"
+  test("foo");
+}
+----
+
+NOTE: See <<Function Parameters>> for more details.

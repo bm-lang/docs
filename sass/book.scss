@@ -1,0 +1,149 @@
+@import "palette";
+
+body {
+  font-family: $font-normal;
+  font-size: $font-size;
+  color: $normal-text-color;
+  background-color: $general-background;
+  margin: 0;
+}
+
+a:link, a:visited {
+  color: $normal-text-color;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: $active-text-color;
+  text-decoration: none;
+}
+
+#header {
+  text-align: center;
+  padding: $content-padding $content-padding 0 $content-padding;
+
+  h1{
+    font-size: 22pt;
+    margin: 0;
+  }
+
+  .details{
+    display: flex;
+    justify-content: center;
+
+    .email {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+#toc {
+  text-align: left;
+  ul {
+    list-style: none;
+    padding-left: 1em;
+
+    li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  > ul{
+    columns: 2;
+    margin-bottom: 0;
+  }
+
+  .sectlevel1 > li > a {
+    font-weight: bold;
+    color: $normal-text-color;
+  }
+}
+
+#content{
+  padding: 1em $content-padding $content-padding $content-padding;
+
+  a {
+    font-weight: bold;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  blockquote{
+    font-size: smaller;
+    font-style: italic;
+    margin-inline-start: 1em;
+    margin-inline-end: 1em;
+  }
+
+  ul {
+    li {
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    code {
+      font-family: $font-monospace;
+    }
+  }
+
+  .listingblock{
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 1em 0;
+
+    .title{
+      font-weight: bold;
+      text-align: center;
+      margin-top: 2px;
+      margin-bottom: -5px;
+    }
+
+    .content{
+      pre{
+        margin: 0;
+      }
+    }
+  }
+}
+
+#footer {
+  text-align: center;
+  padding: 60px 0 40px 0;
+}
+
+#header, #content, #footer{
+  background-color: $content-background;
+  max-width: $content-width;
+  box-sizing: border-box;
+  margin: 0 auto;
+  border-width: 1px;
+  border-color: $normal-border-color;
+  border-style: none solid;
+}
+
+@media screen and (min-width: 1200px) {
+  #toc {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: calc((100% - #{$content-width})/2);
+    height: 100%;
+    overflow-y: scroll;
+    background: linear-gradient(90deg, $content-background 25%, transparent 100%);
+
+    > ul{
+      columns: 1;
+      margin-bottom: 1em;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+= Language
+
+Bm can be considered as a part of the C-family languages and influenced indeed by many other languages.
+Driven by the <<Readability>> principle, the syntax of Bm is aims to be free of ambiguities for the parser
+as well for the human who reads it.
+
+The code written in Bm is free-form, there is no pattern to follow regarding the source files,
+even so, the resulting code organization keeps being relatively simple
+since the language doesn't allow to create intricated designs:
+
+* <<Modules>> are the only members which can be nested.
+* <<Implicit Modules>> make explicit the module structure.
+* There is no concept of _Inner Classes_ or _Static Members_.

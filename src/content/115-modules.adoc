@@ -1,0 +1,63 @@
+== Modules
+
+A module is a <<Containers,container>> for <<Fields>>, <<Functions>>, <<Classes>>,
+<<Properties>>, <<Enums>>, <<Interfaces>>, <<Extensions>> and more <<Modules>>.
+The access to the members is determined by its <<Module Access>>
+and they are always available during the runtime.
+
+=== Global Module
+
+The global module cannot be referenced inside of the suite,
+however, when using another suite as dependency,
+the global module of the other suite can be referenced by the name of the suite.
+
+.Library Suite "foobar"
+[source,bm]
+----
+// the member is declared in the global module of the "foobar" suite
+export function doSomething() { /* ... */ }
+----
+
+.Application Suite (depends on "foobar")
+[source,bm]
+----
+// the global module of the library "foobar" is now "foobar"
+import foobar.doSomething;
+
+export function main() {
+  doSomething();
+}
+----
+
+=== Explicit Modules
+
+The explicit modules are created by using the keyword `module`.
+
+[source,bm]
+----
+module math {
+  // ...
+}
+----
+
+=== Implicit Modules
+
+Modules are defined at file system level by using directories.
+The root directory is considered the global module and all other modules are relative to it.
+The source files contained in a module define the corresponding members.
+
+[source,plain]
+----
+/some/path/
+|- awesome-app/              : Global module (root directory)
+|  |- math/                  : Module 'math'
+|  |  |- physics/            : Module 'math.physics'
+|  |  |  |- mechanics.bm
+|  |  |  |- fluids.bm
+|  |  \- geometry/           : Module 'math.geometry'
+|  |     |- topology.bm
+|  |     |- trigonometry.bm
+|  |- data/                  : Module 'data'
+|  |  \- local-storage.bm
+|  \- main.bm
+----
