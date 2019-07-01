@@ -1,13 +1,13 @@
 all: menu css html
 
 css:
-	sass ./sass/bm.scss ./docs/styles/bm.css
+	sass ./sass/bm.scss ./docs/assets/styles/bm.css
 
 html:
 	asciidoctor --verbose --warnings \
 		--backend html5 \
 		--doctype book \
-		--attribute stylesheet=./styles/bm.css \
+		--attribute stylesheet=./assets/styles/bm.css \
 		--attribute linkcss \
 		--attribute copycss! \
 		--source-dir ./src \
