@@ -27,6 +27,8 @@ The characters that are considered letters are
 from `a` to `z` (lowercase), from `A` to `Z` (uppercase), `_` (underscore), `$` (dollar sign) and `@` (at symbol).
 The delimited string follows the <<Character Escaping>> rules.
 
+TODO Add information for operators.
+
 === Member Path
 
 Since the name of a member is unique, members can be referenced unambiguously using the member path

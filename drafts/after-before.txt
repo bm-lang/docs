@@ -1,10 +1,4 @@
 
-https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
-https://asciidoctor.org/docs/user-manual/
-https://raw.githubusercontent.com/asciidoctor/asciidoctor.org/master/docs/user-manual.adoc
-
-- Concurrency
-
 --------------------------------------------------------------------------------------------------------------
 class Test {
   var x = 10;
@@ -37,32 +31,47 @@ function main() {
 }
 
 --------------------------------------------------------------------------------------------------------------
-struct Test {
-  field x Int;
-}
+TYPE Test
+BEGIN
+  DECLARE x AS int32
+END
 
-procedure Test_constructor() {
-  field instance Test = new Test;
-  instance.x = 10;
-  return instance;
-}
+PROCEDURE Test_constructor
+RETURNS Test
+BEGIN
+  DECLARE instance AS Test
+  SET instance REF NEW Test
+  SET instance.x REF LITERAL 10 AS int32
+  RETURN instance
+END
 
-procedure Test_function_test_Int_Int(this Test, value Int) Int {
-  log("Test " + this.value);
-  return value + 1;
-}
+PROCEDURE Test_function_test_Int_Int
+PARAMS(this AS Test, value AS int32)
+RETURNS int32
+BEGIN
+  CALL log(
+    CALL String_join(
+      LITERAL "Test " AS String,
+      CALL int32_to_string(this.value)
+    )
+  )
+  RETURN ADD(value, LITERAL 1 AS INT32);
+END
 
-struct ExtendedTest is Test {
-  field x Int;
-  field y Int;
-}
+TYPE ExtendedTest
+EXTENDS(Test)
+BEGIN
+  DECLARE y AS int32
+END
 
-procedure ExtendedTest_constructor() {
+PROCEDURE ExtendedTest_constructor
+RETURNS ExtendedTest
+BEGIN
   field instance = new ExtendedTest;
   instance.x = 10;
   instance.y = 20;
   return instance;
-}
+END
 
 procedure ExtendedTest_function_test_Int_Int(this ExtendedTest, value Int) {
   log("Before Test " + value);

@@ -1,0 +1,4 @@
+= Intermediate Representation
+
+Compiler transforms the Bm code into an intermediate representation, which consists of types, procedures and basic operations and control flow.
+

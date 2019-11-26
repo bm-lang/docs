@@ -23,19 +23,26 @@ The following meta-data can be defined in the suite file:
 
 |`id`
 |String
-|It is an UUID identifying the suite, it is like the fingerpirnt, it should remain the same across all versions of the suite.
+|It is an UUID identifying the suite, it analogous to a fingerprint. This value should never be changed.
 
 |`name`
 |String
-|The code name of the suite, it follows the <<Naming Rules>>, together with the ID the suite can be identified globally.
+|The code name of the suite following the <<Naming Rules>>.
 
 |`version`
 |String
-|The version of the suite in the format _major.minor.patch_.
+|See <<Suite Version>>.
+
+|`dependencies`
+|Object
+|Each attribute represents a dependency of the suite.
 
 |===
 
-=== Suite Version
+==== Suite Version
+
+The suite version is a value composed by three numbers in the following format: _major.minor.patch_.
+The numbers between a versions should be incremented by following these criteria:
 
 * _Major_ changes break backward-compatibility.
 * _Minor_ changes introduce new features.

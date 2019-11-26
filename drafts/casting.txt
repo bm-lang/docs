@@ -1,0 +1,25 @@
+
+let value1 = generate_value()
+let value2 = generate_value()
+
+
+with value1 as Int, value2 as String {
+
+}
+with value1 as Single, value2 as Double {
+
+}
+else {
+
+}
+
+
+if value1 is String and value2 is Int {
+  print("the string is ${value1}, the int is ${value2}")
+}
+else if value1 is Int and value2 is String {
+  print("the string is ${value2}, the int is ${value1}")
+}
+else {
+  print("who knows?")
+}

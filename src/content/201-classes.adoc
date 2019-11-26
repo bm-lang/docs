@@ -46,6 +46,8 @@ function User_equals(User left, User right) {
 
 == Class inheritance
 
+TODO remove multi-inheritance and allow interfaces to have defined functions (but not initialized fields)
+
 Classes can inherit from one or more classes only following these rules:
 
 - The constructors in the base class must be chained to one constructor of each superclass.

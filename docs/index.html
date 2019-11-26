@@ -39,7 +39,6 @@
 <li><a href="#_suites">Suites</a>
 <ul class="sectlevel3">
 <li><a href="#_suite_file">Suite File</a></li>
-<li><a href="#_suite_version">Suite Version</a></li>
 <li><a href="#_entry_point">Entry Point</a></li>
 </ul>
 </li>
@@ -711,23 +710,31 @@ The following meta-data can be defined in the suite file:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It is an UUID identifying the suite, it is like the fingerpirnt, it should remain the same across all versions of the suite.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is an UUID identifying the suite, it analogous to a fingerprint. This value should never be changed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The code name of the suite, it follows the <a href="#_naming_rules">Naming Rules</a>, together with the ID the suite can be identified globally.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The code name of the suite following the <a href="#_naming_rules">Naming Rules</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The version of the suite in the format <em>major.minor.patch</em>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">See <a href="#_suite_version">Suite Version</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dependencies</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each attribute represents a dependency of the suite.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect4">
+<h5 id="_suite_version">Suite Version</h5>
+<div class="paragraph">
+<p>The suite version is a value composed by three numbers in the following format: <em>major.minor.patch</em>.
+The numbers between a versions should be incremented by following these criteria:</p>
 </div>
-<div class="sect3">
-<h4 id="_suite_version">Suite Version</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -740,6 +747,7 @@ The following meta-data can be defined in the suite file:</p>
 <p><em>Patch</em> changes solve bugs.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -814,6 +822,9 @@ this results in <a href="#_shadowing_disallowance">Shadowing Disallowance</a>.</
 <p>The characters that are considered letters are
 from <code>a</code> to <code>z</code> (lowercase), from <code>A</code> to <code>Z</code> (uppercase), <code>_</code> (underscore), <code>$</code> (dollar sign) and <code>@</code> (at symbol).
 The delimited string follows the <a href="#Character Escaping">[Character Escaping]</a> rules.</p>
+</div>
+<div class="paragraph">
+<p>TODO Add information for operators.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1864,6 +1875,9 @@ function User_equals(User left, User right) {
 </div>
 <div class="sect2">
 <h3 id="_class_inheritance">Class inheritance</h3>
+<div class="paragraph">
+<p>TODO remove multi-inheritance and allow interfaces to have defined functions (but not initialized fields)</p>
+</div>
 <div class="paragraph">
 <p>Classes can inherit from one or more classes only following these rules:</p>
 </div>
@@ -3038,7 +3052,7 @@ writer.write([10, 20, 30]);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-11-23 12:23:44 -0600
+Last updated 2019-07-01 16:10:52 -0500
 </div>
 </div>
 </body>

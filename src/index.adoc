@@ -2,7 +2,7 @@
 Sergio Pedraza <https://github.com/sergiouph[@sergiouph]>
 :toc:
 :toc-title:
-:toclevels: 4
+:toclevels: 3
 
 :leveloffset: +1
 
