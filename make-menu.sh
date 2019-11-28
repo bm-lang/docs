@@ -2,7 +2,8 @@
 
 rm src/menu.adoc
 
-ls -1 src/content | while read -r file; do
-  echo "include::content/$file[]" >> src/menu.adoc;
-  echo "" >> src/menu.adoc
+cd src
+find content -type f | sort | while read -r file; do
+  echo "include::$file[]" >> menu.adoc;
+  echo "" >> menu.adoc
 done;
