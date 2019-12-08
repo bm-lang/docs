@@ -4,39 +4,32 @@ Bm has a simple structure to organize the logic: Members and Containers.
 Some containers are also members and some members only contain logic.
 
 |===
-|Item|Is Container?|Is Member?
+|Item|Is Container?|Is Member?|Only logic?
 
-|<<source-file,Source File>>  |✅|❌
-|<<Modules,Module>>           |✅|✅
-|<<Classes,Class>>            |✅|✅
-|<<Interfaces,Interface>>     |✅|✅
-|<<Enums,Enum>>               |✅|✅
-|<<Lambdas,Lambda>>           |❌|✅
-|<<Fields,Field>>             |❌|✅
-|<<Imports,Import>>           |❌|✅
-|<<Functions,Function>>       |❌|✅
-|<<Properties,Property>>      |❌|✅
-|<<Operators,Operator>>       |❌|✅
-|<<Constructors,Constructor>> |❌|✅
+|<<source-file,Source File>>  |✅|❌|❌
+|<<Modules,Module>>           |✅|✅|❌
+|<<Classes,Class>>            |✅|✅|❌
+|<<Interfaces,Interface>>     |✅|✅|❌
+|<<Enums,Enum>>               |✅|✅|❌
+|<<Lambdas,Lambda>>           |❌|✅|❌
+|<<Fields,Field>>             |❌|✅|❌
+|<<Imports,Import>>           |❌|✅|❌
+|<<Functions,Function>>       |❌|✅|✅
+|<<Properties,Property>>      |❌|✅|✅
+|<<Operators,Operator>>       |❌|✅|✅
+|<<Constructors,Constructor>> |❌|✅|✅
 
 |===
 
 === Members
 
-A member represents an unique named item that belongs to a container.
-A member definition is not necessarily unique, some members can be composed by more than one definition:
+A member represents an unique named item that belongs to a container,
+however, some members can be composed by more than one definition:
 
 * <<Functions>>, <<Constructors>> and <<Operators>>:
 since the <<Overloading>> of a member is allowed, each overload counts as one definition that composes the same member.
 * <<Properties>>: a `getter` or `setter` definitions with the same name in a container, compose a single property.
 * <<Modules>>: all module definitions with the same <<member-path,Member Path>> found in a suite, compose the same module.
-
-The only members that can implement logic are:
-
-* <<Functions,Function>>
-* <<Properties,Property>>
-* <<Operators,Operator>>
-* <<Constructors,Constructor>>
 
 === Containers
 
