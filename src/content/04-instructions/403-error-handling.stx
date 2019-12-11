@@ -1,0 +1,16 @@
+= Error Handling
+
+@source[bm]
+```
+function main() {
+  for i = 0 while i < 100 step 1 {
+    if i == 23 {
+      raise RuntimeError.new("I don't like 23");
+    }
+
+    rescue e RuntimeError {
+      // I don't care
+    }
+  }
+}
+```

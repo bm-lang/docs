@@ -1,0 +1,6 @@
+#stylesheet[assets/styles/bm.css]
+#stylesheet[assets/styles/bm-hljs.css]
+
+#include[content]
+
+#include[html/scripts.html]

@@ -1,0 +1,76 @@
+== Structure
+
+Bm has a simple structure to organize the logic: Members and Containers.
+Some containers are also members and some members only contain logic.
+
+|=Item|Is Container?|Is Member?|Only logic?|
+
+|[Source File](source-file)  |✅|❌|❌|
+|[Module](Modules)           |✅|✅|❌|
+|[Class](Classes)            |✅|✅|❌|
+|[Interface](Interfaces)     |✅|✅|❌|
+|[Enum](Enums)               |✅|✅|❌|
+|[Lambda](Lambdas)           |❌|✅|❌|
+|[Field](Fields)             |❌|✅|❌|
+|[Import](Imports)           |❌|✅|❌|
+|[Function](Functions)       |❌|✅|✅|
+|[Property](Properties)      |❌|✅|✅|
+|[Operator](Operators)       |❌|✅|✅|
+|[Constructor](Constructors) |❌|✅|✅|
+
+=== Members
+
+A member represents an unique named item that belongs to a container,
+however, some members can be composed by more than one definition:
+
+- [Functions], [Constructors] and [Operators]:
+since the [Overloading] of a member is allowed, each overload counts as one definition that composes the same member.
+- [Properties]: a `getter` or `setter` definitions with the same name in a container, compose a single property.
+- [Modules]: all module definitions with the same [Member Path] found in a suite, compose the same module.
+
+=== Containers
+
+The containers are used to group members, all members have an owner which must be a container
+(the [Global Module] is the only member that doesn't have owner since it is the root).
+
+The owner of a member is not necessarily the container where it was defined:
+
+- The [*Source Files*] are containers but the actual owner of the members defined inside is the
+[Implicit Module] which represents the directory of the file.
+- When [importing](Imports) a member, the actual owner of the member is where is was first defined,
+the owner doesn't change becase it was imported into another module.
+
+The fact that the containers can hold members already defined in other containers helps to build the [Reference System].
+
+> Relationship between containers and members which can own
+
+|=Container|Members|
+
+|[Module](Modules)
+|[Class](Classes),
+ [Interface](Interfaces),
+ [Function](Functions),
+ [Field](Fields),
+ [Property](Properties),
+ [Lambda](Lambdas),
+ [Enum](Enums),
+ [Import](Imports),
+ [Module](Modules)|
+
+|[Class](Classes)
+|[Field](Fields),
+ [Property](Properties),
+ [Function](Functions),
+ [Operator](Operators),
+ [Constructor](Constructors)|
+
+|[Interface](Interfaces)
+|[Field](Fields),
+ [Function](Functions),
+ [Operator](Operators)|
+
+|[Enum](Enums)
+|[Field](Fields)|
+
+
+

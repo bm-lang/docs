@@ -1,0 +1,173 @@
+= Type System
+
+Bm is a language statically typed, all values are resolved to a type at compiling time.
+The usage of iterfaces and templates makes possible to write code for abstract types,
+however, at compiling time the type abstractions are resolved to well-defined types.
+
+Following list shows the types that can be declared:
+
+- Class: Values can have, fields, properties, functions and operators. Can only be created by using constructors.
+- Enum: Only a limited set of values that inherits from a class can exist.
+- Interface: Describes how a value should look like. Cannot be created, but if some value matches the definition, it can be assigned.
+- Lambda: Describes how a function should look like. Cannot be created, but if some function matches the definition, is can be assigned.
+- Template: Allows an advanced use of interfaces to compose complex types.
+
+== References
+
+In Bm all values are passed by reference, this means that if a value is passed to a function,
+the function is able to modify the received value without creating a copy.
+
+There is no way to indicate that the value should be passed by value instead of reference (creating a copy),
+however, the compiler, depending on the platform, can decide how to pass the value based on the mutability of the value.
+
+== Null Values
+
+In Bm all references can be null by default no matter the type of the field,
+the only way to avoid null values in a field is declaring it with the non-null modifier (`!`) after the name.
+When a field has a null value, it means that the field doesn't have a valid value.
+If a field is declared as non-null, it is guaranteed to never hold a null value.
+Null value assignments to non-null fields will throw an error at runtime,
+compilation errors only happen if the assignment can be detected by the compiler.
+
+== Type Inference
+
+All values' types can be inferred at compiling time, but in some cases the type has to be declared explicitly
+to avoid generalities or specificity. The most generic value that can be assumed is `Any` and
+the most specific will depend on the initial value.
+
+@source[bm]
+```
+// if the type is not specified it would be Any
+var name String = null;
+
+// if the type is not specified it would be bool
+var value Any = true;
+```
+
+== Type Casting
+
+Type casting makes possible to treat a value as if it was of other type without creating another value.
+Syntax:
+
+@source[bm]
+```
+(TargetType)sourceValue
+```
+
+When the type of the source value and the target type are not compatible an error is generated.
+
+TODO: Complete adding examples and indicating if it is generated at compiling time, runtime or both.
+
+== Natives
+
+TODO Explain that can be implemented by the compiler, list expected natives, explain how to pass values from bm.json to runtime.
+
+== Built-in Types
+
+Bm is not oriented to a specific platform or hardware, however, in order to operate it defines a set of native classes
+which are assumed to exist and can be used to create more complex types.
+
+> Built-in Classes
+|=Type|Size|Description|Range|
+
+|Byte
+|8 bits
+|Smallest signed integer.
+|−128 to +127|
+
+|UByte
+|8 bits
+|Smallest unsigned integer.
+|0 to 255|
+
+|Short
+|16 bits
+|Medium-sized signed integer.
+|−32,768 to +32,767|
+
+|UShort
+|16 bits
+|Medium-sized unsigned integer.
+|0 to 65,535|
+
+|Int
+|32 bits
+|Default signed integer.
+|−2,147,483,648 to +2,147,483,647|
+
+|UInt
+|32 bits
+|Default unsigned integer.
+|0 to 4,294,967,295|
+
+|Long
+|64 bits
+|Biggest signed integer.
+|−9,223,372,036,854,775,808 to +9,223,372,036,854,775,807|
+
+|ULong
+|64 bits
+|Biggest unsigned integer.
+|0 to 18,446,744,073,709,551,615|
+
+|Single
+|32 bits
+|Single-precision floating-point number
+||
+
+|Double
+|64 bits
+|Double-precision floating-point number
+||
+
+|Bool
+|8 bits
+|`true` or `false`
+||
+
+|Char
+|16 bits
+|Any unicode character.
+||
+
+|String
+|Depends on the instance.
+|Stores a sequence of Chars.
+||
+
+|Array<T>
+|Depends on the instance.
+|Stores a sequence of values of the same type.
+||
+
+As well as specific classes are expected to exist, some interfaces are necessary to provide complete and decoupled
+support of some features of the language.
+
+> Built-in Interfaces
+
+|=Type|Description|
+
+|Any
+|Represents any value.|
+
+|Tuple<...>
+|Stores a sequence of values of specific types per item.|
+
+|Error
+|Describes an error at runtime.|
+
+== Literals
+
+Numbers:
+
+@source[bm]
+```
+function main() {
+  let way1 = (Byte)127;
+  let way2 Byte = 127;
+  let way3 = (n Byte) => {};
+
+  way3(127);
+}
+```
+

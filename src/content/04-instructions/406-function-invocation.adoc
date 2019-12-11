@@ -1,6 +1,0 @@
-= Named Arguments
-
-[source,bm]
-----
-find(text: "mat", fromIndex: 10);
-----

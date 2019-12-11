@@ -1,0 +1,48 @@
+== Templates
+
+Generic programming is implemented by adding a template signature to
+[Classes], [Interfaces], [Lambdas], [Functions] and [Operators].
+The template signature can define one or more Template Types associated with another type,
+when the associated type is not specified it is assumed to be `Any`.
+Template Types are considered valid types in the inner implementation.
+
+Template Members can only be used if the Template Arguments are clear, it can happen in two ways:
+
+- Explicit Template Arguments: Types that have a Template Signature must be referenced by using this mode which includes
+  [Classes], [Interfaces] and [Lambdas].
+- Inferred Template Arguments: [Functions] and [Operators] are referenced without arguments.
+
+@source[bm]
+```
+interface Comparable<T> {
+  operator `==` (value! T) Bool;
+}
+
+interface Entity<ID> {
+  var id Comparable<ID>;
+}
+
+class User {
+  var id Int;
+}
+
+class Container<ID> {
+  function store(entity Entity<ID>) { /* ... */ }
+}
+
+lambda Storer<T>(item T);
+
+function createStorer<ID>() Storer<ID> {
+  let container = Container<ID>();
+
+  return container.store;
+}
+
+function main() {
+  let store Storer<Int>  // Explicit Template Arguments
+    = createStorer();    // Inferred Template Arguments
+  let user = User();
+
+  store(user);
+}
+```

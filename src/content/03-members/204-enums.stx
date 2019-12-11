@@ -1,0 +1,25 @@
+= Enums
+
+Enums are a custom type which can only have a limited set of existing values.
+
+Enums cannot have superclass.
+Enums cannot be initialized.
+
+@source[bm]
+```
+enum Alignment {
+  LEFT,
+  RIGHT,
+  CENTER,
+  START,
+  END,
+}
+
+function test() {
+  var a Alignment = null;
+
+  a = Alignment.LEFT;    // OK
+  a = Alignment("LEFT"); // OK
+  a = Alignment(0);      // OK
+}
+```

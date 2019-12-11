@@ -137,7 +137,11 @@
 </script>
 
 <script type="text/javascript">
-  hljs.initHighlightingOnLoad();
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  });
 </script>
 
 <script type="text/javascript">

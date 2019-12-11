@@ -1,0 +1,7 @@
+= Auto-Closing
+
+@source[bm]
+```
+using writer = path.createWriter();
+writer.write([10, 20, 30]);
+```

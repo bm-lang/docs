@@ -1,0 +1,66 @@
+== Extensions
+
+Extensions allow to add members to existing types without modifying the existing definition or creating a new type.
+The way to define extensions is by prefixing the member name with the type reference followed by two colons (`::`),
+only members with logic can be used as extensions:
+
+- [Functions]
+- [Properties]
+- [Constructors]
+- [Operators]
+
+The body of the extension member, just like Class Members, has access to `this` representing the instance
+and all other intance members will be available.
+
+@source[bm]
+```
+class User {
+  var name String = null;
+}
+
+function User::delete() {
+  Console.log("Deleting user ${name}"); // OK! `name` is available
+}
+```
+
+When an extension is defined in the same module and suite than the extended type,
+the extension member will be treated as a member of the type,
+so when the type is imported it will have the extension members available.
+
+@source[bm]
+```
+module lib {
+  share class Collection { /* ... */ }
+
+  share function Collection::clean() { /* ... */ }
+}
+module app {
+  import Collection from lib;
+
+  function test() {
+    Collection().clean(); // OK! `clean` is available
+  }
+}
+```
+
+If the extension member is declared in a different module than the extended type,
+it needs to be imported explicitly so the type can have the extension member available.
+
+@source[bm]
+```
+module lib {
+  share class Collection { /* ... */ }
+
+  module actions {
+    share function Collection::clean() { /* ... */ }
+  }
+}
+module app {
+  import Collection from lib;
+  import User::clean from actions.lib; // this line is required for the extension
+  function test() {
+    Collection().clean(); // OK! `clean` is available
+    clean(); // ERROR: `clean` is not defined
+  }
+}
+```

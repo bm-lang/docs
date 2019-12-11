@@ -1,0 +1,63 @@
+== Suites
+
+Suites are distributable containers for all members that define an Application or a Library.
+The concepts of Application and Library are only important if the suite is expected to be executed.
+Only suites that contain an [Entry Point] can be executed and called _Applications_
+otherwise they can be considered only _Libraries_.
+At the end, all suites can be dependencies of other suites.
+
+The suites can be stored in two formats:
+
+- *Source suite*: Is a directory with a [Suite File] that contains the source files that can be compiled.
+- *Compiled suite*: Is a `.bms` file that can be distributed, it contains the necessary information to be imported in other suites or executed in any plattform.
+
+=== Suite File
+
+A suite file defines a source suite, the parent directory of the file is considered the [Global Module].
+The file should be named `bm.json` (JSON format) or `bm.yml` (YAML format).
+The following meta-data can be defined in the suite file:
+
+|=Name|Type|Description|
+
+|`id`
+|String
+|It is an UUID identifying the suite, it analogous to a fingerprint. This value should never be changed.|
+
+|`name`
+|String
+|The code name of the suite following the [Naming Rules].|
+
+|`version`
+|String
+|See [Suite Version].|
+
+|`dependencies`
+|Object
+|Each attribute represents a dependency of the suite.|
+
+==== Suite Version
+
+The suite version is a value composed by three numbers in the following format: _major.minor.patch_.
+The numbers between a versions should be incremented by following these criteria:
+
+- _Major_ changes break backward-compatibility.
+- _Minor_ changes introduce new features.
+- _Patch_ changes solve bugs.
+
+=== Entry Point
+
+Since the all logic of the programs is contained in a member,
+the default entry point of a program is the function `main` that must be located in the [Global Module].
+In order to access to the arguments,
+the function may declare an array of strings (`Array<String>`) as the only argument.
+
+@source[bm]
+```
+import Array, String from bm;
+
+function main(args Array<String>) {
+  // program logic
+}
+```
+
+< main.bm
