@@ -1,0 +1,48 @@
+bm:
+    comment |
+    keyword |
+    built-in |
+    literal
+
+
+comment = "//" {!"\n"} "\n"
+
+keyword =
+    "assert" |
+    "compose" |
+    "constructor" |
+    "class" |
+    "export" |
+    "for" |
+    "function" |
+    "from" |
+    "getter" |
+    "implements" |
+    "import" |
+    "interface" |
+    "let" |
+    "module" |
+    "operation" |
+    "protect" |
+    "setter" |
+    "share" |
+    "step" |
+    "var" |
+    "while"
+
+built-in =
+    "Int" |
+    "String" |
+    "Bool" |
+    "Array" |
+    "Any"
+
+literal =
+    "true" |
+    "false" |
+    string |
+    number
+
+string: "\"" {!"\""} "\""
+
+number: {1 `0-9` }

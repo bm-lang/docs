@@ -1,0 +1,17 @@
+[data-code-language=bm] .keyword{
+    color: blue;
+    font-weight: bold;
+}
+
+[data-code-language=bm] .literal{
+    color: darkred;
+}
+
+[data-code-language=bm] .built-in{
+    color: darkcyan;
+}
+
+[data-code-language=bm] .comment{
+    color: gray;
+    font-style: italic;
+}

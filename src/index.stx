@@ -12,7 +12,6 @@
     theme: classic
 )
 
-#output(
-    format: json,
-    target: ../docs/index.json
-)
+#grammar(lang: bm, file: grammars/bm.gmt, rule: bm)
+
+#stylesheets(assets/styles/bm-grammar.css)

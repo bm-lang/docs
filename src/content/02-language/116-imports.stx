@@ -12,7 +12,7 @@ this means that the `import` statements can be declared with a module access mod
 
   +++ code:bm
   protect import math.max; // this member will only be used here
-  
+
   export function validatePort(port Int) Bool {
     return max(port, 0);
   }
@@ -34,7 +34,7 @@ this means that the `import` statements can be declared with a module access mod
     share import somelibrary.log;
     share import otherlibrary.timestamp;
   }
-  
+
   function log(message String) {
     impl.log("${impl.timestamp()} - ${message}");
   }
@@ -45,7 +45,7 @@ this means that the `import` statements can be declared with a module access mod
   +++ code:bm
   // need to be exported so `getTypeName` can be exported as well
   export import constants.Type;
-  
+
   export function getTypeName(type Type) String { /* ... */ }
   +++
 

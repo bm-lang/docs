@@ -17,11 +17,11 @@ module entities {
 
 // file: storage.bm
 module storage {
-  share interface Item&lt;ID> {
+  share interface Item<ID> {
     let key ID
   }
-  share class Container&lt;ID> {
-    function save(item Item&lt;ID>) { 
+  share class Container<ID> {
+    function save(item Item<ID>) { 
       // It only requires something with a key so it can be saved.
     }
   }
@@ -31,7 +31,7 @@ module storage {
 import Container from storage
 import User from entities
 function main() {
-  let container = Container&lt;String>()
+  let container = Container<String>()
   let user = User("3e3b3142")
   container.save(user)
 }
@@ -76,13 +76,13 @@ interface Item {
   operation gt(other Item) Bool
 }
 
-interface Sortable&lt;T Item> {
+interface Sortable<T Item> {
   let length Int
   operation get(index Int) T
   operation set(index Int, value T)
   function bubble_sort() {
-    for i = 0 while i &lt; length step i++ {
-      for j = 1 while j &lt; (length-i) step j++ {
+    for i = 0 while i < length step i++ {
+      for j = 1 while j < (length-i) step j++ {
         if this[j-1] > this[j] {
           let aux = this[j-1]
           this[j-1] = this[j]
@@ -93,10 +93,10 @@ interface Sortable&lt;T Item> {
   }
 }
 
-compose Array&lt;T> implements Sortable&lt;T>
+compose Array<T> implements Sortable<T>
 
 function main() {
-  let items = [3, 1, 2]  // Produces an Array&lt;Int>
+  let items = [3, 1, 2]  // Produces an Array<Int>
 
   items.bubble_sort()
 
