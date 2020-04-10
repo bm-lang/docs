@@ -1,11 +1,11 @@
+@ref:class
 = Classes
 
 Classes are custom types that can be instantiated into values using constructors.
-All other members declared in the class than the construtors can only be accessed through an instance of the class.
+All other members declared in the class than the constructors can only be accessed through an instance of the class.
 Only some [Built-in Classes] can be created using literals, without invoking a constructor.
 
-@source[bm]
-```
++++ code:bm
 class User {
   let id Int;
   var name String = null;
@@ -19,11 +19,10 @@ class User {
 
   operator == (other! User) Bool { return this.id == other.id; }
 }
-```
-< Class Implementation
++++
+:^ Class Implementation
 
-@source[bm]
-```
++++ code:bm
 class User {
   let id Int;
   var name String = null;
@@ -41,8 +40,8 @@ function User_equals(User left, User right) {
   else if right == null { return false; }
   else { return left.id == right.id; }
 }
-```
-< Equivalent Implementation
++++
+:^ Equivalent Implementation
 
 == Class inheritance
 
@@ -57,8 +56,7 @@ Classes can inherit from one or more classes only following these rules:
 
 NOTE: See [Type System] for more details.
 
-@source[bm]
-```
++++ code:bm
 // represents an identifiable thing
 class Entity {
   export let id String;
@@ -113,7 +111,7 @@ function test() {
   console.log(user.name);        // prints Mat
   console.log(user.updatedAt);   // prints a Date
 }
-```
++++
 
 == Class Extension
 
@@ -126,10 +124,9 @@ The compiler will verify that the class comply with the definition of the interf
 The interfaces specified will obbey the [Interface Inheritance] rules.
 If a function specified by an interface is not implemented, the class will be trated as [Incomplete Class].
 
-@source[bm]
-```
++++ code:bm
 interface Drawable {
-  function draw(g Graphcs);
+  function draw(g Graphics);
 }
 
 interface Shape {
@@ -172,7 +169,7 @@ function test() {
     shape.draw(g);
   }
 }
-```
++++
 
 == Incomplete Class
 

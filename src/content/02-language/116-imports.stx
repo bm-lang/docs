@@ -1,3 +1,4 @@
+@ref:import
 == Imports
 
 Shared and exported members can be imported into another module.
@@ -9,48 +10,44 @@ this means that the `import` statements can be declared with a module access mod
 - *Protected imports*: are useful when it is required to use a member from another module or suite
   that it is not going to be widely used, so in order to use it, it must be imported in every container where is required.
 
-  @source[bm]
-  ```
+  +++ code:bm
   protect import math.max; // this member will only be used here
-
+  
   export function validatePort(port Int) Bool {
     return max(port, 0);
   }
-  ```
+  +++
 
 - *Default imports*: are useful to create the environment of the module by importing members that will be used in the module
   and submodules.
 
-  @source[bm]
-  ```
+  +++ code:bm
   // following members will be widely used across the module
   import assert, log, inspect from debug;
-  ```
+  +++
 
 - *Shared imports*: are useful for composing a module or avoiding name collisions.
 
-  @source[bm]
-  ```
+  +++ code:bm
   module impl {
     // need to be shared to expose them outside this module
     share import somelibrary.log;
     share import otherlibrary.timestamp;
   }
-
+  
   function log(message String) {
     impl.log("${impl.timestamp()} - ${message}");
   }
-  ```
+  +++
 
 - *Exported imports*: are useful to re-distribute a member.
 
-  @source[bm]
-  ```
+  +++ code:bm
   // need to be exported so `getTypeName` can be exported as well
   export import constants.Type;
-
+  
   export function getTypeName(type Type) String { /* ... */ }
-  ```
+  +++
 
 === Member Links
 
@@ -58,8 +55,7 @@ When importing a member it is just linked so no clones of the member are generat
 At the end the real module owner of the member is where the member was defined, not where it was imported.
 This implies that the access rules depend on the real module, not the importing one.
 
-@source[bm]
-```
++++ code:bm
 module AAA {
   share class Foo { let BAR = 1; }
 }
@@ -81,15 +77,14 @@ module AAA {
     log(BBB.Foo.BAR); // OK! it has access
   }
 }
-```
++++
 
 === Import Syntax
 
 Multiple members can be imported using the same sentence, if the module is indicated all imported members
 must be of the same module.
 
-@source[bm]
-```
++++ code:bm
 module A {
   share module B {
     share let X = 1;
@@ -121,7 +116,7 @@ module example3 {
 module example4 {
   import A.B, A.C;
 }
-```
++++
 
 === Importing Modules
 

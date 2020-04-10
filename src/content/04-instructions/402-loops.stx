@@ -2,8 +2,7 @@
 
 == Infinite (loop)
 
-@source[bm]
-```
++++ code:bm
 loop {
   // do things
 
@@ -11,12 +10,11 @@ loop {
     break;
   }
 }
-```
++++
 
 == Conditional (while)
 
-@source[bm]
-```
++++ code:bm
 let stack = Stack<int>.new([10, 20, 30]);
 
 while stack.length > 0 {
@@ -28,12 +26,11 @@ while stack.length > 0 {
 // item = 30
 // item = 20
 // item = 10
-```
++++
 
 == Incremental (for - while - step)
 
-@source[bm]
-```
++++ code:bm
 for i = 0 while i < count step i++ {
   console.log("i = ${count}");
 }
@@ -43,12 +40,11 @@ for i = 0 while i < count step i++ {
 // i = 1
 // ...
 // i = 9
-```
++++
 
 == Iterative (for - in - else)
 
-@source[bm]
-```
++++ code:bm
 let list = [10, 20, 30];
 
 for item in list {
@@ -62,4 +58,4 @@ else {
 // item = 10
 // item = 20
 // item = 30
-```
++++

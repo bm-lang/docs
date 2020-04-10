@@ -1,4 +1,7 @@
+@ref:constructor
 = Constructors
+
+TODO: Default constructors are available only when no other constructor is defined.
 
 Constructors are the only way to create an instance of a class, every class must have at least one constructor in order to be instantiable.
 Constructors can only be invoked through the class name, they don't need an instance to be invoked.
@@ -10,8 +13,7 @@ Protected constructors can only be invoked in subclasses.
 
 Constructors are not inherited so a constructor in a subclass can have the same name of a superclass constructor.
 
-@source[bm]
-```
++++ code:bm
 class Entity {
   export let id String;
 
@@ -34,4 +36,4 @@ function test() {
   let entity = Entity.new("0001");         // constructor is not accessible here
   let user = User.new("0001", "Mathison"); // accessible constructor
 }
-```
++++

@@ -1,48 +1,50 @@
+@ref:operator
 = Operators
+
+TODO: Change to operation?
 
 Operators are special functions which can be overloaded.
 
 == Operator Symbols
 
-|= Symbol | Name | Usage | Description |
+|= Symbol | Name | Usage | Description
 
-| `==`
-| Equality
-| `this == other`
-| Returns a `bool!` indicating if `this` is equal to the `other` value. |
+|-`==`
+  | Equality
+  | `this == other`
+  | Returns a `bool!` indicating if `this` is equal to the `other` value.
 
-| `>`
-| Greater than
-| `this > other`
-| Returns a `bool!` indicating if `this` is greater than the `other` value. |
+|-`>`
+  | Greater than
+  | `this > other`
+  | Returns a `bool!` indicating if `this` is greater than the `other` value.
 
-| `<`
-| Less than
-| `this < other`
-| Returns a `bool!` indicating if `this` is less than the `other` value. |
+|-`\<`
+  | Less than
+  | `this \< other`
+  | Returns a `bool!` indicating if `this` is less than the `other` value.
 
-| `>=`
-| Greater than or equal to
-| `this >= other`
-| Returns a `bool!` indicating if `this` is greater than or equal to the `other` value. |
+|-`>=`
+  | Greater than or equal to
+  | `this >= other`
+  | Returns a `bool!` indicating if `this` is greater than or equal to the `other` value.
 
-| `\<=`
-| Less than or equal to
-| `this \<= other`
-| Returns a `bool!` indicating if `this` is less than or equal to the `other` value. |
+|-`\<=`
+  | Less than or equal to
+  | `this \<= other`
+  | Returns a `bool!` indicating if `this` is less than or equal to the `other` value.
 
-| `\[]`
-| Array access
-| `result = this[id]`
-| Returns whatever is in the `id` position of `this`. |
+|-`\[]`
+  | Array access
+  | `result = this\[id]`
+  | Returns whatever is in the `id` position of `this`.
 
-| `[]=`
-| Array assignment
-| `this[id] = value`
-| Assigns the `value` to the `id` position of `this`. |
+|-`\[]=`
+  | Array assignment
+  | `this\[id] = value`
+  | Assigns the `value` to the `id` position of `this`.
 
-@source[bm]
-```
++++ code:bm
 class Vector {
   export var x = 0.0;
   export var y = 0.0;
@@ -72,4 +74,4 @@ function test() {
 
   Console.log(sum); // { x: 0, y: 0, magnitude: 0, direction: 0 }
 }
-```
++++

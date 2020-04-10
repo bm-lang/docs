@@ -1,3 +1,4 @@
+@ref:function
 = Functions
 
 Functions are invocable blocks of code which can receive arguments and optionally produce a result.
@@ -10,8 +11,7 @@ Functions can be only owned by following members and the way to invoke them will
 - [Modules]: Functions can be invoked directly.
 - [Classes]: Functions can only invoked through an instance.
 
-@source[bm]
-```
++++ code:bm
 function abs(n Number) Number {
   return n < 0 ? -n : n;
 }
@@ -38,7 +38,7 @@ function main() {
   let rect = Rectangle.new(10, 20);
   console.log(rect.computeArea());  // output: 200
 }
-```
++++
 
 == Function Parameters
 
@@ -46,16 +46,16 @@ Functions can receive any number of parameters which are considered as fields av
 
 In order to improve readability, the keywords `var` and `let` are optional when declaring parameters and it is defaulted to `let`.
 
-Since parameters are passed by [reference], reassignments only affects the reference in the function's body.
+Since parameters are passed by reference, reassignments only affects the reference in the function's body.
 
-@source[bm]
-```
++++ code:bm
 function test(name String, var index int!) {
   name = "Mat";      // ERROR: The field can't be reasigned
   index = index + 1; // OK! the field is explicitly `var`
 }
-```
++++
 
+@ref:`optional parameter`
 == Optional parameters
 
 Optional parameters are allowed by specifying the initial value when declaring them.
@@ -68,8 +68,7 @@ It doesn't matter if the optional parameter is `let` or `var`, the initial value
 specified in the parameter declaration is only used when there is no value specified
 in the function invocation.
 
-@source[bm]
-```
++++ code:bm
 function write(data List<byte>, offset int! = 0, length int = null) {
   // ...
 }
@@ -81,4 +80,4 @@ function test() {
   write(data, 1, 2);        //  offset = 1, length = 2
   write(data, length: 2);   //  offset = 0, length = 2
 }
-```
++++

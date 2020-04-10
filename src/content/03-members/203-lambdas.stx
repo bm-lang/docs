@@ -1,7 +1,8 @@
+@ref:lambda
 = Lambdas
 
 Lambdas are types that represents functions.
-When a field is declared with a lambda type, the field can be trated as a function.
+When a field is declared with a lambda type, the field can be treated as a function.
 Any member that contain logic can be converted to a lambda value as long as it matches with the lambda type.
 Lambdas can also be created inline.
 
@@ -11,11 +12,10 @@ There are more than one way to create a lambda:
 
 === Inline Lambdas
 
-Inline lambdas are created inside intruction blocks,
+Inline lambdas are created inside instruction blocks,
 a [closure] is generated when fields are captured in the lambda:
 
-@source[bm]
-```
++++ code:bm
 lambda Action();
 lambda Logger(message String);
 lambda Operation(a int, b int) int;
@@ -40,14 +40,13 @@ function main() {
 
   test();
 }
-```
++++
 
 === Function Lambdas
 
 Functions can be converted to lambdas as long as they match with the type.
 
-@source[bm]
-```
++++ code:bm
 lambda Writer(message String);
 
 function print(message String) { /* ... */ }
@@ -63,14 +62,13 @@ function main() {
   write1("test 1!");
   write2("test 2!");
 }
-```
++++
 
 === Property Lambdas
 
 Since properties contain logic they can be converted to lambdas as well.
 
-@source[bm]
-```
++++ code:bm
 var name = null;
 
 getter hasName Bool {
@@ -95,14 +93,13 @@ function test() {
   console.log(get()); // true
   console.log(name);  // "Default"
 }
-```
++++
 
 === Field Lambdas
 
 Since fields can be converted to properties, fields can be converted to lambdas in the same way than properties.
 
-@source[bm]
-```
++++ code:bm
 var version = 1;
 
 lambda Getter() Int;
@@ -116,14 +113,13 @@ function main() {
   setVersion(2);
   console.log(getVersion()); // 2
 }
-```
++++
 
 === Operator Lambdas
 
 Since operators contains logic, they can be converted to lambdas.
 
-@source[bm]
-```
++++ code:bm
 class Bag {
   operator `+` (bag! Bag) Bag {
     let merged = Bag();
@@ -142,14 +138,14 @@ function main() {
   let r1 = merge(Bag());
   let r2 = bag + Bag();
 }
-```
++++
 
+@ref:closure
 == Closures
 
 [Inline Lambdas] can capture constant fields creating a closure.
 
-@source[bm]
-```
++++ code:bm
 lambda Logger(message String);
 
 function createLogger(prefix String) Logger<String> {
@@ -166,4 +162,4 @@ function test() {
   warn("Danger! Danger!");           // [W] - Danger! Danger!
   info("Don't talk to strangers.");  // [I] - Don't talk to strangers.
 }
-```
++++

@@ -1,0 +1,42 @@
+=== Trackable Origin
+
+Every symbol in the code is defined in some place which can be found using simple rules.
+
+A [member] can't be used if it is not explicitly imported or defined,
+even the primitive data types are not ""automatically imported"" to the modules, 
+this forces the developer to import and track what specifically is used in a [suite].
+Despite this may sound tedious and against the [readability] principle, 
+the developer may leverage the [access system] and create a source file exclusively for 
+importing the most used members across the suite, this may significantly improve the 
+developer experience since some members can be used in an "auto-imported" fashion and
+be trackable at the same time.
+
++++ code:bm
+import Int from bm
+
+let a Int = 0      // OK
+let b String = ""  // ERROR! `String` is not defined
++++
+:^ Assuming this is the only source file in a suite, the
+   type `String` is not defined since it is not imported.
+
+Since [shadowing is disallowed](Shadowing Disallowance), the references can't be ambiguous.
+
++++ code:bm
+let enabled = true
+
+class Test {
+  let enabled = false  // ERROR: `enabled` is already defined
+}
++++
+:^ Since `enabled` was defined in an upper level, the 
+   class `Test` cannot define a member with the same name.
+
+Fields must be [initialized](Initialization), there are no default values.
+
++++ code:bm
+class User {
+  var id Int  // ERROR! `id` needs to be initialized
+}
++++
+:^ The member `id` causes a compilation error because it requires an initial value.

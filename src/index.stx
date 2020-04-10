@@ -1,6 +1,18 @@
-#stylesheet[assets/styles/bm.css]
-#stylesheet[assets/styles/bm-hljs.css]
+#title(`Bm Language`)
+#author(`Sergio Pedraza`)
+#format(`html5`)
 
-#include[content]
+<toc>
 
-#include[html/scripts.html]
+#include(`content`)
+
+#output(
+    format: html,
+    target: ../docs/index.html,
+    theme: classic
+)
+
+#output(
+    format: json,
+    target: ../docs/index.json
+)

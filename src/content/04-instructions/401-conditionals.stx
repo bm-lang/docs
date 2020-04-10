@@ -2,8 +2,7 @@
 
 === If-Else
 
-@source[bm]
-```
++++ code:bm
 if condition1 {
 
 }
@@ -13,12 +12,11 @@ else if condition2 {
 else {
 
 }
-```
++++
 
 === Switch
 
-@source[bm]
-```
++++ code:bm
 switch value {
   case A {
 
@@ -30,4 +28,4 @@ switch value {
 
   }
 }
-```
++++

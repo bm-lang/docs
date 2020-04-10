@@ -83,7 +83,7 @@ pre + figcaption{
   margin-top: 0.5em;
 }
 
-main {
+section[data-type="book"] {
   padding: 1em;
   width: 210mm;
   background-color: #FFF;
@@ -137,18 +137,13 @@ pre {
 }
 
 
-nav.toc ol{
+nav.toc ul{
   list-style: none;
 }
 
 /* Layout */
 
 body {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
 }
 
 body nav {
@@ -156,20 +151,37 @@ body nav {
   flex-grow: 0;
 }
 
-.toc ol {
+.toc ul {
   padding: 0;
   margin: 0;
 }
 
-.toc li > ol {
+.toc li > ul {
   padding-left: 1em;
 }
 
-body main {
+section[data-type="book"] {
   flex-grow: 0;
 }
 
 .toc a {
   font-weight: normal;
   font-size: 14px;
+}
+
+a.sect-mark, a.sect-mark:hover, a.sect-mark:active {
+  display: none;
+  color: #EEE;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+h1:hover a.sect-mark, 
+h2:hover a.sect-mark,
+h3:hover a.sect-mark,
+h4:hover a.sect-mark,
+h5:hover a.sect-mark,
+h6:hover a.sect-mark{
+  display: inline;
 }

@@ -1,29 +1,29 @@
+@ref:interface
 = Interfaces
 
 Interfaces are descriptors of types.
-Any value can be trated as an interface without explicit casting
+Any value can be treated as an interface without explicit casting
 as long as the type of the value matches with the definition of the interface.
 
-@source[bm]
-```
++++ code:bm
 interface Name inherits SuperInterface1, SuperInterface2 {
   function doSomething(param1 ParamType) ReturnType;
   getter someField Type;
   setter someField(value Type);
 }
-```
-< Interface syntax example
++++
+:^ Interface syntax example
 
 Interfaces can only contain [Functions], [Properties] and [Operators].
 
+@ref:`interface inheritance`
 Interfaces can inherit from other interfaces, however if two or more superinterfaces have a member
 with the same name they must exactly match, otherwise it will cause an inheritance collision.
 
 Interfaces are resolved to classes at compiling time depending on the usage.
 The compiler will create an specific implementation per each usage.
 
-@source[bm]
-```
++++ code:bm
 interface Sortable {
   operator < (value Sortable);
 }
@@ -39,11 +39,10 @@ function main() {
   sort(ids);
   sort(names);
 }
-```
-< Implementation with Interfaces
++++
+:^ Implementation with Interfaces
 
-@source[bm]
-```
++++ code:bm
 function sort_Array_Int(items Array<Int>) { /* ... */ }
 function sort_Array_String(items Array<String>) { /* ... */ }
 
@@ -54,5 +53,5 @@ function main() {
   sort_Array_Int(ids);
   sort_Array_String(names);
 }
-```
-< Equivalent Implementation
++++
+:^ Equivalent Implementation

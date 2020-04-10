@@ -5,18 +5,16 @@ more than one definition can be provided with the same name as long as
 the parameters at the same position are not compatibles with each other.
 There is no restriction on the number of parameters or if they are optional.
 
-@source[bm]
-```
++++ code:bm
 function print(value Any) { /* ... */ }
 function print(value String) { /* ... */ }
 // ERROR! `String` is compatible with `Any`.
-```
-< Invalid Overloads
++++
+:^ Invalid Overloads
 
-@source[bm]
-```
++++ code:bm
 function max(a Int, b, Int) Int { /* ... */ }
 function max(a Single, b Single) Single { /* ... */ }
 // OK! `Int` and `Single` are not compatibles
-```
-< Valid Overloads
++++
+:^ Valid Overloads

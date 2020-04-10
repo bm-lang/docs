@@ -1,17 +1,16 @@
+@ref:`module access`
 == Access System
 
 This system refers to how the members are accessed through the modules.
 This is controlled by using a set of keywords called access modifiers
 which define the rules to access to some member from a certain module.
 
-|=Who can access to the member? | `protect` | _(default)_ | `share` | `export` |
-
-|Same declaring container          | ✅ | ✅ | ✅ | ✅|
-|Same module in the same suite     | ❌ | ✅ | ✅ | ✅|
-|Any module in the same suite      | ❌ | ❌ | ✅ | ✅|
-|Any module in any suite           | ❌ | ❌ | ❌ | ✅|
-< How access modifiers work
-
+:: How access modifiers work
+|= Who can access to the member?     | `protect` | _(default)_ | `share` | `export`
+|- Same declaring container          | ✅ | ✅ | ✅ | ✅
+|- Same module in the same suite     | ❌ | ✅ | ✅ | ✅
+|- Any module in the same suite      | ❌ | ❌ | ✅ | ✅
+|- Any module in any suite           | ❌ | ❌ | ❌ | ✅
 
 === Protect Modifier
 
@@ -19,25 +18,23 @@ The `protect` modifier is the most secure modifier, the access to members declar
 is limited only to the container where the member was declared,
 they can't be imported or accessed by other source files.
 
-@source[bm]
-```
++++ code:bm
 class Foo {
   protect let BAR = 1;
 }
 
 protect let BAZ = Foo().BAR + 1; // ERROR: `BAR` is not accessible
-```
-< file1.bm
++++
+:^ file1.bm
 
-@source[bm]
-```
++++ code:bm
 protect let QUX = BAZ + 1; // ERROR: `BAZ` is not accessible
 
 module abc {
   let XYZ = QUX + 1; // OK! `QUX` is accessible
 }
-```
-< file2.bm
++++
+:^ file2.bm
 
 === Default Modifier
 
@@ -49,21 +46,18 @@ the members defined in the same module or submodules of the same suite,
 other modules can't import or referencing the member.
 It keeps being secure, in the sense that it encapsulates the member in the declaring module.
 
-
-@source[bm]
-```
++++ code:bm
 let FOO = 1;
-```
-< file1.bm
++++
+:^ file1.bm
 
-@source[bm]
-```
++++ code:bm
 module bar {
   let BAZ = FOO + 1; // OK! `FOO` is accessible
 }
 let QUX = bar.BAZ + 1; // ERROR: `BAZ` is not accessible
-```
-< file2.bm
++++
+:^ file2.bm
 
 === Share Modifier
 
@@ -72,16 +66,14 @@ The `share` modifier has two behaviours depending on the member:
 - Class members: allows the member to be available in any subclass no matter the suite.
 - Other members: allows the importing and referencing of the member across the suite.
 
-@source[bm]
-```
++++ code:bm
 module debug {
   share function log(message String) { /* ... */ }
 }
-```
-< file1.bm
++++
+:^ file1.bm
 
-@source[bm]
-```
++++ code:bm
 module foo {
   import debug.log;
 
@@ -89,8 +81,8 @@ module foo {
     log("bar..."); // OK! `log` is accessible
   }
 }
-```
-< file2.bm
++++
+:^ file2.bm
 
 === Export Modifier
 
@@ -98,17 +90,15 @@ The `export` modifier should only be used when the member needs to be exported o
 Members declared in the same module or submodules have access to the declared member without importing it
 and the member can be imported in any module of any suite.
 
-@source[bm]
-```
++++ code:bm
 export function foo() { /* ... */ }
 
 share function bar() { /* ... */ }
-```
-< Suite 1 (foobar)
++++
+:^ Suite 1 (foobar)
 
-@source[bm]
-```
++++ code:bm
 import foobar.foo; // OK! `foo` is exported
 import foobar.bar; // ERROR! `bar` is not exported
-```
-< Suite 2 (barqux)
++++
+:^ Suite 2 (barqux)

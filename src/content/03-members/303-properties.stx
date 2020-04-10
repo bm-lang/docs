@@ -1,3 +1,4 @@
+@ref:property
 = Properties
 
 Unlike normal fields, properties aren't allocated in memory, every time they are retrieved or assigned,
@@ -13,8 +14,7 @@ Despite properties are declared separately by using getters and setters, they mu
 
 When using interfaces, fields can be treated as properties transparently.
 
-@source[bm]
-```
++++ code:bm
 class DefaultApplication {
   export let version String = "1.0";
 
@@ -67,4 +67,4 @@ function test() {
   app.title = "MyApp";
   console.log(app.title);   // "MyApp"
 }
-```
++++

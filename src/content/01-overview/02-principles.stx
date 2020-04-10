@@ -1,0 +1,5 @@
+== Principles
+
+The design of the Bm Language is driven by a set of principles explained in this section.
+The principles were not just _picked_ from the best-practices, they were synthesized
+organically from the evolution of the design of the language.

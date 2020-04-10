@@ -1,3 +1,4 @@
+@ref:field
 = Fields
 
 Fields are variables or constants that have a value stored in the memory.
@@ -10,8 +11,7 @@ Fields can be only owned by following members and the lifespan will depend on th
 - [Function Parameters]: The field will live during the execution of the function.
 - [Instruction Blocks]: The field will live during the execution of the block.
 
-@source[bm]
-```
++++ code:bm
 module math {
   let PI = 3.1415;
 }
@@ -26,4 +26,4 @@ function swap(list List<Any>, index1 Int, index2 Int) {
   list[index1] = list[index2];
   list[index2] = aux;
 }
-```
++++

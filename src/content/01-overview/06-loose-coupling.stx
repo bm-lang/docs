@@ -1,0 +1,107 @@
+=== Loose Coupling
+
+[Interfaces] help to describe how a value should look like without specifying a real type 
+and [templates] help to inject types as parameters that can be used to write generic code.
+Both features may help to reduce the dependencies used in a suite.
+
++++ code:bm
+// file: entities.bm
+module entities {
+  share class User {
+    let key String
+    constructor new(@key String) {
+      key = @key
+    }
+  }
+}
+
+// file: storage.bm
+module storage {
+  share interface Item&lt;ID> {
+    let key ID
+  }
+  share class Container&lt;ID> {
+    function save(item Item&lt;ID>) { 
+      // It only requires something with a key so it can be saved.
+    }
+  }
+}
+
+// file: main.bm
+import Container from storage
+import User from entities
+function main() {
+  let container = Container&lt;String>()
+  let user = User("3e3b3142")
+  container.save(user)
+}
++++
+:^ Modules `entities` and `storage` don't share anything, however, they can be used together.
+
+[Extensions] make possible to add features to existing [classes] and [interfaces] without 
+changing the original definition. The extension member is recognized as a normal member of the
+type as long as it can be accessed from the module where it is going to be used.
+
++++ code:bm
+// file: entities.bm
+module entities {
+  share class Artist {
+    var firstName String
+    var lastName String
+  }
+}
+
+// file: main.bm
+import Artist from entities
+
+getter Artist.fullName String {
+  return "${this.firstName} ${this.lastName}"
+}
+
+function main() {
+  let a = Artist(firstName: "John", lastName: "Coltrane")
+  assert a.fullName == "John Coltrane"
+}
++++
+:^ The `fullName` field is recognized despite it was defined in a different module.
+
+Even though multiple inheritance is disallowed, a class or interface can be composed 
+_explicitly_ with any amount of other interfaces. This can be done when the type is
+being defined or after the definition using the `compose` feature.
+
++++ code:bm
+import Array from bm
+
+interface Item {
+  operation gt(other Item) Bool
+}
+
+interface Sortable&lt;T Item> {
+  let length Int
+  operation get(index Int) T
+  operation set(index Int, value T)
+  function bubble_sort() {
+    for i = 0 while i &lt; length step i++ {
+      for j = 1 while j &lt; (length-i) step j++ {
+        if this[j-1] > this[j] {
+          let aux = this[j-1]
+          this[j-1] = this[j]
+          this[j] = aux
+        }
+      }  
+    }  
+  }
+}
+
+compose Array&lt;T> implements Sortable&lt;T>
+
+function main() {
+  let items = [3, 1, 2]  // Produces an Array&lt;Int>
+
+  items.bubble_sort()
+
+  assert items == [1, 2, 3]
+}
++++
+:^ The function `bubble\_sort` is recognized since the class `Array` was 
+   composed with the `Sortable` interface.

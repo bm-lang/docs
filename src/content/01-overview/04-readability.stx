@@ -1,0 +1,49 @@
+=== Readability
+
+The written code must be easy to read and the developer must write the minimum amount of code.
+
+The [type inference] allows to omit the type in most cases. When the type is not specified, 
+it is determined by the initial value. The inconvenient with omitting the type is that sometimes
+the inferred type can be too wide.
+
++++ code:bm
+let count = 0;                           // type: Int
+let name = "Mat";                        // type: String
+let rect = Rectangle.new(0, 0, 10, 10);  // type: Rectangle
+let a = null;                            // type: Any
++++
+:^ The type of the fields were automatically determined by the initial value.
+
+Parenthesis after an `if`, `for`, `while`, etc., and separators between instructions 
+are not required.
+
++++ code:bm
+function main(args Array<String>) {
+  if args.length == 0 {
+    println("Missing arguments")
+  }
+}
++++
+:^ The `if` block doesn't require parenthesis for the condition.
+
+[Extensions] allow to have large class definitions and even so have small files.
+
++++ code:bm
+// file: user.bm
+class User {
+  let id Int
+  constructor new(@id Int) {
+    id = @id
+  }
+}
+
+// file: user.delete.bm
+function User.delete() { /* ... */ }
+
+// file: main.bm
+function main() {
+  User.new(10).delete();
+}
++++
+:^ The function `delete` is a member of the `User` class 
+   despite they are defined in different files.

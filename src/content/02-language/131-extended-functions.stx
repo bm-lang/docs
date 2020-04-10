@@ -15,8 +15,7 @@ In this way, aspects will be able to mutate the input and output of a function, 
 Only one aspect per _before_ and _after_ should be allowed in one class.
 The aspects added to functions which the superclasses already added aspects will be chained.
 
-@source[bm]
-```
++++ code:bm
 class Shape {
   var x = 0;
   var y = 0;
@@ -45,4 +44,4 @@ class Oval inherits Element, Shape {
   }
 
 }
-```
++++

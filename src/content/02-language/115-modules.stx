@@ -1,8 +1,9 @@
+@ref:module
 == Modules
 
 A module is a [container] for [Fields], [Functions], [Classes],
 [Properties], [Enums], [Interfaces], [Extensions] and more [Modules].
-The access to the members is determined by its [Module Access]
+The access to the members is determined by its [module access]
 and they are always available during the runtime.
 
 === Global Module
@@ -11,43 +12,40 @@ The global module cannot be referenced inside of the suite,
 however, when using another suite as dependency,
 the global module of the other suite can be referenced by the name of the suite.
 
-@source[bm]
-```
++++ code:bm
 // the member is declared in the global module of the "foobar" suite
 export function doSomething() { /* ... */ }
-```
-< Library Suite "foobar"
++++
+:^ Library Suite "foobar"
 
-@source[bm]
-```
++++ code:bm
 // the global module of the library "foobar" is now "foobar"
 import foobar.doSomething;
 
 export function main() {
   doSomething();
 }
-```
-< Application Suite (depends on "foobar")
++++
+:^ Application Suite (depends on "foobar")
 
 === Explicit Modules
 
 The explicit modules are created by using the keyword `module`.
 
-@source[bm]
-```
++++ code:bm
 module math {
   // ...
 }
-```
++++
 
+@ref:`implicit modules`
 === Implicit Modules
 
 Modules are defined at file system level by using directories.
 The root directory is considered the global module and all other modules are relative to it.
 The source files contained in a module define the corresponding members.
 
-@source[plain]
-```
++++ code
 /some/path/
 |- awesome-app/              : Global module (root directory)
 |  |- math/                  : Module 'math'
@@ -60,4 +58,4 @@ The source files contained in a module define the corresponding members.
 |  |- data/                  : Module 'data'
 |  |  \- local-storage.bm
 |  \- main.bm
-```
++++

@@ -1,7 +1,7 @@
 = Type System
 
 Bm is a language statically typed, all values are resolved to a type at compiling time.
-The usage of iterfaces and templates makes possible to write code for abstract types,
+The usage of interfaces and templates makes possible to write code for abstract types,
 however, at compiling time the type abstractions are resolved to well-defined types.
 
 Following list shows the types that can be declared:
@@ -22,6 +22,8 @@ however, the compiler, depending on the platform, can decide how to pass the val
 
 == Null Values
 
+TODO: Values can be null only if they are optional.
+
 In Bm all references can be null by default no matter the type of the field,
 the only way to avoid null values in a field is declaring it with the non-null modifier (`!`) after the name.
 When a field has a null value, it means that the field doesn't have a valid value.
@@ -35,24 +37,22 @@ All values' types can be inferred at compiling time, but in some cases the type 
 to avoid generalities or specificity. The most generic value that can be assumed is `Any` and
 the most specific will depend on the initial value.
 
-@source[bm]
-```
++++ code:bm
 // if the type is not specified it would be Any
 var name String = null;
 
 // if the type is not specified it would be bool
 var value Any = true;
-```
++++
 
 == Type Casting
 
 Type casting makes possible to treat a value as if it was of other type without creating another value.
 Syntax:
 
-@source[bm]
-```
++++ code(bm)
 (TargetType)sourceValue
-```
++++
 
 When the type of the source value and the target type are not compatible an error is generated.
 
@@ -67,101 +67,38 @@ TODO Explain that can be implemented by the compiler, list expected natives, exp
 Bm is not oriented to a specific platform or hardware, however, in order to operate it defines a set of native classes
 which are assumed to exist and can be used to create more complex types.
 
-> Built-in Classes
-|=Type|Size|Description|Range|
-
-|Byte
-|8 bits
-|Smallest signed integer.
-|−128 to +127|
-
-|UByte
-|8 bits
-|Smallest unsigned integer.
-|0 to 255|
-
-|Short
-|16 bits
-|Medium-sized signed integer.
-|−32,768 to +32,767|
-
-|UShort
-|16 bits
-|Medium-sized unsigned integer.
-|0 to 65,535|
-
-|Int
-|32 bits
-|Default signed integer.
-|−2,147,483,648 to +2,147,483,647|
-
-|UInt
-|32 bits
-|Default unsigned integer.
-|0 to 4,294,967,295|
-
-|Long
-|64 bits
-|Biggest signed integer.
-|−9,223,372,036,854,775,808 to +9,223,372,036,854,775,807|
-
-|ULong
-|64 bits
-|Biggest unsigned integer.
-|0 to 18,446,744,073,709,551,615|
-
-|Single
-|32 bits
-|Single-precision floating-point number
-||
-
-|Double
-|64 bits
-|Double-precision floating-point number
-||
-
-|Bool
-|8 bits
-|`true` or `false`
-||
-
-|Char
-|16 bits
-|Any unicode character.
-||
-
-|String
-|Depends on the instance.
-|Stores a sequence of Chars.
-||
-
-|Array<T>
-|Depends on the instance.
-|Stores a sequence of values of the same type.
-||
+:: Built-in Classes
+|= Type     | Size    | Description|Range|
+|- Byte     | 8 bits  | Smallest signed integer. |−128 to +127
+|- UByte    | 8 bits  | Smallest unsigned integer. |0 to 255
+|- Short    | 16 bits | Medium-sized signed integer. |−32,768 to +32,767
+|- UShort   | 16 bits | Medium-sized unsigned integer. |0 to 65,535
+|- Int      | 32 bits | Default signed integer.|−2,147,483,648 to +2,147,483,647
+|- UInt     | 32 bits | Default unsigned integer.|0 to 4,294,967,295
+|- Long     | 64 bits | Biggest signed integer.|−9,223,372,036,854,775,808 to +9,223,372,036,854,775,807
+|- ULong    | 64 bits | Biggest unsigned integer.|0 to 18,446,744,073,709,551,615
+|- Single   | 32 bits | Single-precision floating-point number|
+|- Double   | 64 bits | Double-precision floating-point number|
+|- Bool     | 8 bits  | `true` or `false`|
+|- Char     | 16 bits | Any unicode character.|
+|- String   | Depends on the instance. | Stores a sequence of Chars.|
+|- Array\<T> | Depends on the instance. | Stores a sequence of values of the same type.|
 
 As well as specific classes are expected to exist, some interfaces are necessary to provide complete and decoupled
 support of some features of the language.
 
-> Built-in Interfaces
+:: Built-in Interfaces
 
-|=Type|Description|
-
-|Any
-|Represents any value.|
-
-|Tuple<...>
-|Stores a sequence of values of specific types per item.|
-
-|Error
-|Describes an error at runtime.|
+|= Type       | Description
+|- Any        | Represents any value.
+|- Tuple\<...> | Stores a sequence of values of specific types per item.
+|- Error      | Describes an error at runtime.
 
 == Literals
 
 Numbers:
 
-@source[bm]
-```
++++ code:bm
 function main() {
   let way1 = (Byte)127;
   let way2 Byte = 127;
@@ -169,5 +106,4 @@ function main() {
 
   way3(127);
 }
-```
-
++++

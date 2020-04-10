@@ -1,6 +1,5 @@
 = Named Arguments
 
-@source[bm]
-```
++++ code:bm
 find(text: "mat", fromIndex: 10);
-```
++++

@@ -1,6 +1,6 @@
-= Bm Language
-
 By Sergio Pedraza [@sergiouph](https://github.com/sergiouph)
+
+= Overview
 
 Bm is a general purpose programming language designed to be simple to write, read and maintain.
 It can be considered a multi-paradigm language since it is focused to provide robust solutions

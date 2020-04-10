@@ -7,11 +7,10 @@ A field can be only initialized by using one of the three ways described below.
 
 This is the simpler way, the value is specified immediately after the declaration.
 
-@source[bm]
-```
++++ code:bm
 var count = 0;
 let user = User.new("Mat");
-```
++++
 
 
 === Delegated Initialization
@@ -22,8 +21,7 @@ The initial value for the field can be omited in the field's declaration,
 but the class must declare one or more constructors
 and each constructor must initialize the field.
 
-@source[bm]
-```
++++ code:bm
 class Entity {
   let id String; // initialization delegated
 
@@ -31,9 +29,11 @@ class Entity {
     id = @id; // initial value
   }
 }
-```
++++
 
-NOTE: See [Constructors] for more details.
+{{{ information
+See [Constructors] for more details.
+}}}
 
 === Function Parameter Initialization
 
@@ -42,8 +42,7 @@ the initial value is taken from the function invocation.
 
 However, initial values in function parameters are allowed but it indicates an [Optional Parameter].
 
-@source[bm]
-```
++++ code:bm
 function test(a String, b String = "bar") {
   // do something
 }
@@ -53,6 +52,8 @@ function main() {
   // a = "foo" and b = "bar"
   test("foo");
 }
-```
++++
 
-NOTE: See [Function Parameters] for more details.
+{{{ information
+See [Function Parameters] for more details.
+}}}

@@ -1,3 +1,4 @@
+@ref:enum
 = Enums
 
 Enums are a custom type which can only have a limited set of existing values.
@@ -5,8 +6,7 @@ Enums are a custom type which can only have a limited set of existing values.
 Enums cannot have superclass.
 Enums cannot be initialized.
 
-@source[bm]
-```
++++ code:bm
 enum Alignment {
   LEFT,
   RIGHT,
@@ -22,4 +22,4 @@ function test() {
   a = Alignment("LEFT"); // OK
   a = Alignment(0);      // OK
 }
-```
++++

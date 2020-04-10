@@ -1,7 +1,6 @@
 = Error Handling
 
-@source[bm]
-```
++++ code:bm
 function main() {
   for i = 0 while i < 100 step 1 {
     if i == 23 {
@@ -13,4 +12,4 @@ function main() {
     }
   }
 }
-```
++++ 

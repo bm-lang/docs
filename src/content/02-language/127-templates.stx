@@ -12,8 +12,8 @@ Template Members can only be used if the Template Arguments are clear, it can ha
   [Classes], [Interfaces] and [Lambdas].
 - Inferred Template Arguments: [Functions] and [Operators] are referenced without arguments.
 
-@source[bm]
-```
+
++++ code:bm
 interface Comparable<T> {
   operator `==` (value! T) Bool;
 }
@@ -45,4 +45,4 @@ function main() {
 
   store(user);
 }
-```
++++

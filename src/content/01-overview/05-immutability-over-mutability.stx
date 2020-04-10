@@ -1,0 +1,69 @@
+=== Immutability over mutability
+
+The language helps to reduce the amount of mutable members 
+by forcing the developer to indicate it explicitly.
+
+Parameters in functions are constant by default, variable parameters are allowed only by declaring
+them with the `var` modifier. When the modifier is omitted it is assumed to be `let`.
+
++++ code:bm
+function test(a Int, var b Int) {
+  a += 1  // ERROR: `a` cannot be reassigned
+  b += 1  // OK: it was declared with `var`
+}
++++
+:^ The `a` parameter can't be reassigned unlike `b` that 
+   was explicitly declared to hold a variable value.
+
+[Interfaces] may help to control if a field is mutable or not. When a type is treated as some 
+interface, `var` fields in the original implementation can fit in `let` fields (disallowing
+the assignment), in contrast, `let` fields wouldn't fit in `var` fields causing a compilation error.
+
++++ code:bm
+class Human {
+  var name = "Mathison"  // It can be reassigned
+}
+
+interface Dog {
+  let name String        // Cannot be reassigned
+}
+
+function test() {
+  let h = Human()
+  let d Dog = h          // Now it is a Dog! Not a Human
+  d.name = "Amy"         // ERROR: `name` cannot be reassigned 
+}
++++
+:^ The interface `Dog` disallowed the reassignment of the field `name` 
+   despite the original implementation allows to be reassigned.
+
+When a constant field is defined in a class, the [initialization] 
+can be delegated to the constructor. This allows to have constant fields
+with computed values instead of variable fields initialized with some value and
+then reassigned in the constructor with the computed value.
+
++++ code:bm
+class Cat {
+  let name String  // OK: initialization is delegated to the constructor
+  constructor new(@name) {
+    name = @name   // OK: assignment must happen only in this block
+  }
+}
++++
+:^ The `name` field was initialized in the constructor.
+
+Declaring constants is as simple as declaring variables since they require the same amount of
+characters: `let` for constants and `var` for variables. This matters — some languages require
+extra effort to declare constants.
+
+:: Comparison between variable and constant declarations across different languages.
+|= Language    | Variable example           | Constant example
+|- Bm, Swift   | `var c = 0`                | `let c = 0`
+|- Rust        | `let mut c = 0;`           | `let c = 0;`
+|- Go          | `var c = 0`                | `const c = 0`
+|- JavaScript,
+   TypeScript  | `let c = 0`                | `const c = 0`
+|- C, 
+   Objective-C | `int c = 0;`               | `#define c 0`
+|- C++, C#     | `int c = 0;`               | `const int c = 0;`
+|- Java        | `int c = 0;`               | `final int c = 0;`

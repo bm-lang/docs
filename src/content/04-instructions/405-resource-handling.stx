@@ -1,7 +1,6 @@
 = Auto-Closing
 
-@source[bm]
-```
++++ code:bm
 using writer = path.createWriter();
 writer.write([10, 20, 30]);
-```
++++
