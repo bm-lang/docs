@@ -15,3 +15,7 @@
     color: gray;
     font-style: italic;
 }
+
+[data-code-language=bm] .interpolation{
+    color: darkblue;
+}

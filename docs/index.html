@@ -304,7 +304,7 @@ div[data-type=information] p {
 [data-type=layout] figure {
     margin-top: 0;
     margin-bottom: 0;
-}</style><link rel="stylesheet" type="text/css" href="assets/styles/bm-grammar.css"></head><body data-type="book"><h1>Bm Language</h1><p><nav data-type="toc"><ol><li><a href="#overview" data-type="xref" data-number="1.">Overview</a><ol><li><a href="#principles" data-type="xref" data-number="1.1.">Principles</a><ol><li><a href="#trackable-origin" data-type="xref" data-number="1.1.1.">Trackable Origin</a></li><li><a href="#readability" data-type="xref" data-number="1.1.2.">Readability</a></li><li><a href="#immutability-over-mutability" data-type="xref" data-number="1.1.3.">Immutability over mutability</a></li><li><a href="#loose-coupling" data-type="xref" data-number="1.1.4.">Loose Coupling</a></li></ol></li></ol></li><li><a href="#language" data-type="xref" data-number="2.">Language</a><ol><li><a href="#structure" data-type="xref" data-number="2.1.">Structure</a><ol><li><a href="#member" data-type="xref" data-number="2.1.1.">Members</a></li><li><a href="#container" data-type="xref" data-number="2.1.2.">Containers</a></li></ol></li><li><a href="#suite" data-type="xref" data-number="2.2.">Suites</a><ol><li><a href="#suite-file" data-type="xref" data-number="2.2.1.">Suite File</a><ol><li><a href="#suite-version" data-type="xref" data-number="2.2.1.1.">Suite Version</a></li></ol></li><li><a href="#entry-point" data-type="xref" data-number="2.2.2.">Entry Point</a></li></ol></li><li><a href="#reference-system" data-type="xref" data-number="2.3.">Reference System</a><ol><li><a href="#naming-rules" data-type="xref" data-number="2.3.1.">Naming Rules</a></li><li><a href="#member-path" data-type="xref" data-number="2.3.2.">Member Path</a></li><li><a href="#shadowing-disallowance" data-type="xref" data-number="2.3.3.">Shadowing Disallowance</a></li></ol></li><li><a href="#module-access" data-type="xref" data-number="2.4.">Access System</a><ol><li><a href="#protect-modifier" data-type="xref" data-number="2.4.1.">Protect Modifier</a></li><li><a href="#default-modifier" data-type="xref" data-number="2.4.2.">Default Modifier</a></li><li><a href="#share-modifier" data-type="xref" data-number="2.4.3.">Share Modifier</a></li><li><a href="#export-modifier" data-type="xref" data-number="2.4.4.">Export Modifier</a></li></ol></li><li><a href="#module" data-type="xref" data-number="2.5.">Modules</a><ol><li><a href="#global-module" data-type="xref" data-number="2.5.1.">Global Module</a></li><li><a href="#explicit-modules" data-type="xref" data-number="2.5.2.">Explicit Modules</a></li><li><a href="#implicit-modules" data-type="xref" data-number="2.5.3.">Implicit Modules</a></li></ol></li><li><a href="#import" data-type="xref" data-number="2.6.">Imports</a><ol><li><a href="#member-links" data-type="xref" data-number="2.6.1.">Member Links</a></li><li><a href="#import-syntax" data-type="xref" data-number="2.6.2.">Import Syntax</a></li><li><a href="#importing-modules" data-type="xref" data-number="2.6.3.">Importing Modules</a></li></ol></li><li><a href="#extensions" data-type="xref" data-number="2.7.">Extensions</a></li><li><a href="#templates" data-type="xref" data-number="2.8.">Templates</a></li><li><a href="#overloading" data-type="xref" data-number="2.9.">Overloading</a></li><li><a href="#extended-functions" data-type="xref" data-number="2.10.">Extended Functions</a></li><li><a href="#initialization" data-type="xref" data-number="2.11.">Initialization</a><ol><li><a href="#inline-initialization" data-type="xref" data-number="2.11.1.">Inline Initialization</a></li><li><a href="#delegated-initialization" data-type="xref" data-number="2.11.2.">Delegated Initialization</a></li><li><a href="#function-parameter-initialization" data-type="xref" data-number="2.11.3.">Function Parameter Initialization</a></li></ol></li></ol></li><li><a href="#type-system" data-type="xref" data-number="3.">Type System</a><ol><li><a href="#references" data-type="xref" data-number="3.1.">References</a></li><li><a href="#null-values" data-type="xref" data-number="3.2.">Null Values</a></li><li><a href="#type-inference" data-type="xref" data-number="3.3.">Type Inference</a></li><li><a href="#type-casting" data-type="xref" data-number="3.4.">Type Casting</a></li><li><a href="#natives" data-type="xref" data-number="3.5.">Natives</a></li><li><a href="#built-in-types" data-type="xref" data-number="3.6.">Built-in Types</a></li><li><a href="#literals" data-type="xref" data-number="3.7.">Literals</a></li></ol></li><li><a href="#class" data-type="xref" data-number="4.">Classes</a><ol><li><a href="#class-inheritance" data-type="xref" data-number="4.1.">Class inheritance</a></li><li><a href="#class-extension" data-type="xref" data-number="4.2.">Class Extension</a></li><li><a href="#interface-implementation" data-type="xref" data-number="4.3.">Interface implementation</a></li><li><a href="#incomplete-class" data-type="xref" data-number="4.4.">Incomplete Class</a></li></ol></li><li><a href="#interface" data-type="xref" data-number="5.">Interfaces</a></li><li><a href="#lambda" data-type="xref" data-number="6.">Lambdas</a><ol><li><a href="#lambda-creation" data-type="xref" data-number="6.1.">Lambda Creation</a><ol><li><a href="#inline-lambdas" data-type="xref" data-number="6.1.1.">Inline Lambdas</a></li><li><a href="#function-lambdas" data-type="xref" data-number="6.1.2.">Function Lambdas</a></li><li><a href="#property-lambdas" data-type="xref" data-number="6.1.3.">Property Lambdas</a></li><li><a href="#field-lambdas" data-type="xref" data-number="6.1.4.">Field Lambdas</a></li><li><a href="#operator-lambdas" data-type="xref" data-number="6.1.5.">Operator Lambdas</a></li></ol></li><li><a href="#closure" data-type="xref" data-number="6.2.">Closures</a></li></ol></li><li><a href="#enum" data-type="xref" data-number="7.">Enums</a></li><li><a href="#field" data-type="xref" data-number="8.">Fields</a></li><li><a href="#function" data-type="xref" data-number="9.">Functions</a><ol><li><a href="#function-parameters" data-type="xref" data-number="9.1.">Function Parameters</a></li><li><a href="#optional-parameter" data-type="xref" data-number="9.2.">Optional parameters</a></li></ol></li><li><a href="#property" data-type="xref" data-number="10.">Properties</a></li><li><a href="#constructor" data-type="xref" data-number="11.">Constructors</a></li><li><a href="#operator" data-type="xref" data-number="12.">Operators</a><ol><li><a href="#operator-symbols" data-type="xref" data-number="12.1.">Operator Symbols</a></li></ol></li><li><a href="#instructions" data-type="xref" data-number="13.">Instructions</a><ol><li><a href="#conditionals" data-type="xref" data-number="13.1.">Conditionals</a><ol><li><a href="#if-else" data-type="xref" data-number="13.1.1.">If-Else</a></li><li><a href="#switch" data-type="xref" data-number="13.1.2.">Switch</a></li></ol></li></ol></li><li><a href="#loops" data-type="xref" data-number="14.">Loops</a><ol><li><a href="#infinite-loop-" data-type="xref" data-number="14.1.">Infinite (loop)</a></li><li><a href="#conditional-while-" data-type="xref" data-number="14.2.">Conditional (while)</a></li><li><a href="#incremental-for-while-step-" data-type="xref" data-number="14.3.">Incremental (for - while - step)</a></li><li><a href="#iterative-for-in-else-" data-type="xref" data-number="14.4.">Iterative (for - in - else)</a></li></ol></li><li><a href="#error-handling" data-type="xref" data-number="15.">Error Handling</a></li><li><a href="#expressions" data-type="xref" data-number="16.">Expressions</a><ol><li><a href="#literals-1" data-type="xref" data-number="16.1.">Literals</a></li></ol></li><li><a href="#auto-closing" data-type="xref" data-number="17.">Auto-Closing</a></li><li><a href="#named-arguments" data-type="xref" data-number="18.">Named Arguments</a></li></ol></nav>
+}</style><link rel="stylesheet" type="text/css" href="assets/styles/bm-grammar.css"></head><body data-type="book"><h1>Bm Language</h1><p><nav data-type="toc"><ol><li><a href="#overview" data-type="xref" data-number="1.">Overview</a><ol><li><a href="#principles" data-type="xref" data-number="1.1.">Principles</a><ol><li><a href="#trackable-origin" data-type="xref" data-number="1.1.1.">Trackable Origin</a></li><li><a href="#readability" data-type="xref" data-number="1.1.2.">Readability</a></li><li><a href="#immutability-over-mutability" data-type="xref" data-number="1.1.3.">Immutability over mutability</a></li><li><a href="#loose-coupling" data-type="xref" data-number="1.1.4.">Loose Coupling</a></li></ol></li></ol></li><li><a href="#language" data-type="xref" data-number="2.">Language</a><ol><li><a href="#structure" data-type="xref" data-number="2.1.">Structure</a><ol><li><a href="#container" data-type="xref" data-number="2.1.1.">Containers</a></li><li><a href="#member" data-type="xref" data-number="2.1.2.">Members</a></li></ol></li><li><a href="#suite" data-type="xref" data-number="2.2.">Suites</a><ol><li><a href="#suite-file" data-type="xref" data-number="2.2.1.">Suite File</a><ol><li><a href="#suite-version" data-type="xref" data-number="2.2.1.1.">Suite Version</a></li></ol></li><li><a href="#entry-point" data-type="xref" data-number="2.2.2.">Entry Point</a></li></ol></li><li><a href="#reference-system" data-type="xref" data-number="2.3.">Reference System</a><ol><li><a href="#naming-rules" data-type="xref" data-number="2.3.1.">Naming Rules</a></li><li><a href="#member-path" data-type="xref" data-number="2.3.2.">Member Path</a></li><li><a href="#shadowing-disallowance" data-type="xref" data-number="2.3.3.">Shadowing Disallowance</a></li></ol></li><li><a href="#module-access" data-type="xref" data-number="2.4.">Access System</a><ol><li><a href="#protect-modifier" data-type="xref" data-number="2.4.1.">Protect Modifier</a></li><li><a href="#default-modifier" data-type="xref" data-number="2.4.2.">Default Modifier</a></li><li><a href="#share-modifier" data-type="xref" data-number="2.4.3.">Share Modifier</a></li><li><a href="#export-modifier" data-type="xref" data-number="2.4.4.">Export Modifier</a></li></ol></li><li><a href="#module" data-type="xref" data-number="2.5.">Modules</a><ol><li><a href="#global-module" data-type="xref" data-number="2.5.1.">Global Module</a></li><li><a href="#explicit-modules" data-type="xref" data-number="2.5.2.">Explicit Modules</a></li><li><a href="#implicit-modules" data-type="xref" data-number="2.5.3.">Implicit Modules</a></li></ol></li><li><a href="#import" data-type="xref" data-number="2.6.">Imports</a><ol><li><a href="#member-links" data-type="xref" data-number="2.6.1.">Member Links</a></li><li><a href="#import-syntax" data-type="xref" data-number="2.6.2.">Import Syntax</a></li><li><a href="#importing-modules" data-type="xref" data-number="2.6.3.">Importing Modules</a></li></ol></li><li><a href="#extensions" data-type="xref" data-number="2.7.">Extensions</a></li><li><a href="#templates" data-type="xref" data-number="2.8.">Templates</a></li><li><a href="#overloading" data-type="xref" data-number="2.9.">Overloading</a></li><li><a href="#extended-functions" data-type="xref" data-number="2.10.">Extended Functions</a></li><li><a href="#initialization" data-type="xref" data-number="2.11.">Initialization</a><ol><li><a href="#inline-initialization" data-type="xref" data-number="2.11.1.">Inline Initialization</a></li><li><a href="#delegated-initialization" data-type="xref" data-number="2.11.2.">Delegated Initialization</a></li><li><a href="#function-parameter-initialization" data-type="xref" data-number="2.11.3.">Function Parameter Initialization</a></li></ol></li></ol></li><li><a href="#type-system" data-type="xref" data-number="3.">Type System</a><ol><li><a href="#references" data-type="xref" data-number="3.1.">References</a></li><li><a href="#null-values" data-type="xref" data-number="3.2.">Null Values</a></li><li><a href="#type-inference" data-type="xref" data-number="3.3.">Type Inference</a></li><li><a href="#type-casting" data-type="xref" data-number="3.4.">Type Casting</a></li><li><a href="#natives" data-type="xref" data-number="3.5.">Natives</a></li><li><a href="#built-in-types" data-type="xref" data-number="3.6.">Built-in Types</a></li><li><a href="#literals" data-type="xref" data-number="3.7.">Literals</a></li></ol></li><li><a href="#class" data-type="xref" data-number="4.">Classes</a><ol><li><a href="#class-inheritance" data-type="xref" data-number="4.1.">Class inheritance</a></li><li><a href="#class-extension" data-type="xref" data-number="4.2.">Class Extension</a></li><li><a href="#interface-implementation" data-type="xref" data-number="4.3.">Interface implementation</a></li><li><a href="#incomplete-class" data-type="xref" data-number="4.4.">Incomplete Class</a></li></ol></li><li><a href="#interface" data-type="xref" data-number="5.">Interfaces</a></li><li><a href="#lambda" data-type="xref" data-number="6.">Lambdas</a><ol><li><a href="#lambda-creation" data-type="xref" data-number="6.1.">Lambda Creation</a><ol><li><a href="#inline-lambdas" data-type="xref" data-number="6.1.1.">Inline Lambdas</a></li><li><a href="#function-lambdas" data-type="xref" data-number="6.1.2.">Function Lambdas</a></li><li><a href="#property-lambdas" data-type="xref" data-number="6.1.3.">Property Lambdas</a></li><li><a href="#field-lambdas" data-type="xref" data-number="6.1.4.">Field Lambdas</a></li><li><a href="#operator-lambdas" data-type="xref" data-number="6.1.5.">Operator Lambdas</a></li></ol></li><li><a href="#closure" data-type="xref" data-number="6.2.">Closures</a></li></ol></li><li><a href="#enum" data-type="xref" data-number="7.">Enums</a></li><li><a href="#field" data-type="xref" data-number="8.">Fields</a></li><li><a href="#function" data-type="xref" data-number="9.">Functions</a><ol><li><a href="#function-parameters" data-type="xref" data-number="9.1.">Function Parameters</a></li><li><a href="#optional-parameter" data-type="xref" data-number="9.2.">Optional parameters</a></li></ol></li><li><a href="#property" data-type="xref" data-number="10.">Properties</a></li><li><a href="#constructor" data-type="xref" data-number="11.">Constructors</a></li><li><a href="#operator" data-type="xref" data-number="12.">Operators</a><ol><li><a href="#operator-symbols" data-type="xref" data-number="12.1.">Operator Symbols</a></li></ol></li><li><a href="#instructions" data-type="xref" data-number="13.">Instructions</a><ol><li><a href="#conditionals" data-type="xref" data-number="13.1.">Conditionals</a><ol><li><a href="#if-else" data-type="xref" data-number="13.1.1.">If-Else</a></li><li><a href="#switch" data-type="xref" data-number="13.1.2.">Switch</a></li></ol></li></ol></li><li><a href="#loops" data-type="xref" data-number="14.">Loops</a><ol><li><a href="#infinite-loop-" data-type="xref" data-number="14.1.">Infinite (loop)</a></li><li><a href="#conditional-while-" data-type="xref" data-number="14.2.">Conditional (while)</a></li><li><a href="#incremental-for-while-step-" data-type="xref" data-number="14.3.">Incremental (for - while - step)</a></li><li><a href="#iterative-for-in-else-" data-type="xref" data-number="14.4.">Iterative (for - in - else)</a></li></ol></li><li><a href="#error-handling" data-type="xref" data-number="15.">Error Handling</a></li><li><a href="#expressions" data-type="xref" data-number="16.">Expressions</a><ol><li><a href="#literals-1" data-type="xref" data-number="16.1.">Literals</a></li></ol></li><li><a href="#auto-closing" data-type="xref" data-number="17.">Auto-Closing</a></li><li><a href="#named-arguments" data-type="xref" data-number="18.">Named Arguments</a></li></ol></nav>
 </p><p>By Sergio Pedraza <a href="https://github.com/sergiouph">@sergiouph</a>
 </p><section id="overview"><h1 data-number="1.">Overview
 </h1><p>Bm is a general purpose programming language designed to be simple to write, read and maintain.
@@ -348,7 +348,7 @@ the inferred type can be too wide.
 </p><figure id="the-type-of-the-fields-were-automatically"><pre data-type="programlisting" data-code-language="bm"><span class="keyword">let</span> count = <span class="literal">0</span>;                           <span class="comment">// type: Int
 </span><span class="keyword">let</span> name = <span class="literal">&quot;Mat&quot;</span>;                        <span class="comment">// type: String
 </span><span class="keyword">let</span> rect = Rectangle.new(<span class="literal">0</span>, <span class="literal">0</span>, <span class="literal">10</span>, <span class="literal">10</span>);  <span class="comment">// type: Rectangle
-</span><span class="keyword">let</span> a = null;                            <span class="comment">// type: Any
+</span><span class="keyword">let</span> a = <span class="literal">null</span>;                            <span class="comment">// type: Any
 </span></pre><figcaption data-number="4.">The type of the fields were automatically determined by the initial value.
 </figcaption></figure><p>Parenthesis after an <code>if</code>, <code>for</code>, <code>while</code>, etc., and separators between instructions 
 are not required.
@@ -478,7 +478,7 @@ type as long as it can be accessed from the module where it is going to be used.
 </span><span class="keyword">import</span> Artist <span class="keyword">from</span> entities
 
 <span class="keyword">getter</span> Artist.fullName <span class="built-in">String</span> {
-  return <span class="literal">&quot;${this.firstName} ${this.lastName}&quot;</span>
+  return <span class="literal">&quot;<span class="interpolation">${this.firstName}</span> <span class="interpolation">${this.lastName}</span>&quot;</span>
 }
 
 <span class="keyword">function</span> main() {
@@ -497,8 +497,11 @@ being defined or after the definition using the <code>compose</code> feature.
 
 <span class="keyword">interface</span> Sortable&lt;T Item&gt; {
   <span class="keyword">let</span> length <span class="built-in">Int</span>
+  
   <span class="keyword">operation</span> get(index <span class="built-in">Int</span>) T
+
   <span class="keyword">operation</span> set(index <span class="built-in">Int</span>, value T)
+
   <span class="keyword">function</span> bubble_sort() {
     <span class="keyword">for</span> i = <span class="literal">0</span> <span class="keyword">while</span> i &lt; length <span class="keyword">step</span> i++ {
       <span class="keyword">for</span> j = <span class="literal">1</span> <span class="keyword">while</span> j &lt; (length-i) <span class="keyword">step</span> j++ {
@@ -523,73 +526,58 @@ being defined or after the definition using the <code>compose</code> feature.
 }
 </pre><figcaption data-number="12.">The function <code>bubble_sort</code> is recognized since the class <code>Array</code> was 
 composed with the <code>Sortable</code> interface.</figcaption></figure></section></section></section><section id="language"><h1 data-number="2.">Language
-</h1><p>Bm can be considered as a part of the C-family languages and influenced indeed by many other languages.
-Driven by the <a href="#readability" data-type="xref">Readability</a> principle, the syntax of Bm is aims to be free of ambiguities for the parser
-as well for the human who reads it.
-</p><p>The code written in Bm is free-form, there is no pattern to follow regarding the source files,
-even so, the resulting code organization keeps being relatively simple
-since the language doesn&apos;t allow to create intricated designs:
-</p><ul><li><a href="#modules" data-type="xref">Modules</a> are the only members which can be recursively nested.
-</li><li><a href="#implicit-modules" data-type="xref">Implicit Modules</a> make explicit the module structure.
-</li><li>There is no concept of <em>Inner Classes</em> or <em>Static Members</em>.</li></ul><section id="structure"><h2 data-number="2.1.">Structure
-</h2><p>Bm has a simple structure to organize the logic: Members and Containers.
-Some containers are also members and some members only contain logic.
-</p><table id="itemis-container-is-member-only-logic-source"><tr><th>Item</th><th>Is Container?</th><th>Is Member?</th><th>Only logic?
-</th></tr><tr><td>Source File
-</td><td>✅
-</td><td>❌
-</td><td>❌
-</td></tr><tr><td><a href="#module" data-type="xref">Module</a>      </td><td>✅</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#class" data-type="xref">Class</a>       </td><td>✅</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#interface" data-type="xref">Interface</a>   </td><td>✅</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#enum" data-type="xref">Enum</a>        </td><td>✅</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#lambda" data-type="xref">Lambda</a>      </td><td>❌</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#field" data-type="xref">Field</a>       </td><td>❌</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#import" data-type="xref">Import</a>      </td><td>❌</td><td>✅</td><td>❌
-</td></tr><tr><td><a href="#function" data-type="xref">Function</a>    </td><td>❌</td><td>✅</td><td>✅
-</td></tr><tr><td><a href="#property" data-type="xref">Property</a>    </td><td>❌</td><td>✅</td><td>✅
-</td></tr><tr><td><a href="#operator" data-type="xref">Operator</a>    </td><td>❌</td><td>✅</td><td>✅
-</td></tr><tr><td><a href="#constructor" data-type="xref">Constructor</a> </td><td>❌</td><td>✅</td><td>✅
-</td></tr></table><a id="members"></a><section id="member"><h3 data-number="2.1.1.">Members
-</h3><p>A member represents an unique named item that belongs to a container,
-however, some members can be composed by more than one definition:
-</p><ul><li><a href="#functions" data-type="xref">Functions</a>, <a href="#constructors" data-type="xref">Constructors</a> and <a href="#operators" data-type="xref">Operators</a>:
-since the <a href="#overloading" data-type="xref">Overloading</a> of a member is allowed, each overload counts as one definition that composes the same member.
-</li><li><a href="#properties" data-type="xref">Properties</a>: a <code>getter</code> or <code>setter</code> definitions with the same name in a container, compose a single property.
-</li><li><a href="#modules" data-type="xref">Modules</a>: all module definitions with the same <a href="#member-path" data-type="xref">Member Path</a> found in a suite, compose the same module.
-</li></ul></section><a id="containers"></a><section id="container"><h3 data-number="2.1.2.">Containers
-</h3><p>The containers are used to group members, all members have an owner which must be a container
-(the <a href="#global-module" data-type="xref">Global Module</a> is the only member that doesn&apos;t have owner since it is the root).
-</p><p>The owner of a member is not necessarily the container where it was defined:
-</p><ul><li>The <a href="#source-files" data-type="xref" data-status="invalid"><strong>Source Files</strong></a> are containers but the actual owner of the members defined inside is the
-<a href="#implicit-module" data-type="xref" data-status="invalid">Implicit Module</a> which represents the directory of the file.
-</li><li>When <a href="#imports" data-type="xref">importing</a> a member, the actual owner of the member is where is was first defined,
-the owner doesn&apos;t change because it was imported into another module.
-</li></ul><p>The fact that the containers can hold members already defined in other containers helps to build the <a href="#reference-system" data-type="xref">Reference System</a>.
-</p><table id="relationship-between-containers-and-members"><caption data-number="3.">Relationship between containers and members which can own
-</caption><tr><th>Container </th><th>Members
-</th></tr><tr><td><a href="#modules" data-type="xref">Module</a>
-</td><td><a href="#classes" data-type="xref">Class</a>,
-<a href="#interfaces" data-type="xref">Interface</a>,
-<a href="#functions" data-type="xref">Function</a>,
-<a href="#fields" data-type="xref">Field</a>,
-<a href="#properties" data-type="xref">Property</a>,
-<a href="#lambdas" data-type="xref">Lambda</a>,
-<a href="#enums" data-type="xref">Enum</a>,
-<a href="#imports" data-type="xref">Import</a>,
-<a href="#modules" data-type="xref">Module</a>
-</td></tr><tr><td><a href="#classes" data-type="xref">Class</a>
-</td><td><a href="#fields" data-type="xref">Field</a>,
-<a href="#properties" data-type="xref">Property</a>,
-<a href="#functions" data-type="xref">Function</a>,
-<a href="#operators" data-type="xref">Operator</a>,
-<a href="#constructors" data-type="xref">Constructor</a>
-</td></tr><tr><td><a href="#interfaces" data-type="xref">Interface</a>
-</td><td><a href="#fields" data-type="xref">Field</a>,
-<a href="#functions" data-type="xref">Function</a>,
-<a href="#operators" data-type="xref">Operator</a>
-</td></tr><tr><td><a href="#enums" data-type="xref">Enum</a>
-</td><td><a href="#fields" data-type="xref">Field</a></td></tr></table></section></section><a id="suites"></a><section id="suite"><h2 data-number="2.2.">Suites
+</h1><p>Bm can be considered as a part of the C-family languages, the code written in 
+Bm is free-form, there is no pattern to follow regarding the organization of the
+source files.</p><section id="structure"><h2 data-number="2.1.">Structure
+</h2><p>Bm projects, also named <a href="#suites" data-type="xref">Suites</a>, can be organized using two concepts: <a href="#members" data-type="xref">Members</a> and <a href="#containers" data-type="xref">Containers</a>.
+Some containers are also members and some members are flat.
+</p><p>The definition of the members and containers of a suite depends on the directory
+organization and the content of the files. All files and directories are used for
+defining the suite.
+</p><a id="containers"></a><section id="container"><h3 data-number="2.1.1.">Containers
+</h3><p>The containers are used for collecting members, all containers have a name, but not 
+all containers can be referenced in the code.
+</p><p>The root container for all members and containers is the <a href="#suite" data-type="xref">suite</a>, which can be considered
+as a <a href="#module" data-type="xref">module</a> that cannot be referenced. A directory containing at least the <a href="#suite-file" data-type="xref">suite file</a>
+is considered a valid suite definition.
+</p><p>Besides the suites, there are other containers defined by using the file system:
+</p><ul><li><a href="#source-file" data-type="xref" data-status="invalid">Source File</a> (*.bm): Any kind of member can be defined in a source file. 
+The filename is not relevant since they cannot be referenced. 
+At compilation time, it doesn&apos;t matter the amount or the order of the source files 
+in a directory, they can be considered as a single content.
+</li><li><a href="#module" data-type="xref">Module</a> (implicit): Any directory inside a suite define a module with the same name, 
+naturally they only can contain files and more directories, however, the members 
+defined in the source files are owned by the module and the directories are considered 
+sub-modules.
+</li></ul><p>There are other containers that can only be defined by writing Bm code:
+</p><ul><li><a href="#module" data-type="xref">Module</a> (explicit): They are defined with the <code>module</code> keyword and can contain any kind of member. 
+Module definitions are not unique, the members are merged when any other kind of
+module definitions are found.
+</li><li><a href="#class" data-type="xref">Class</a>: Can contain <a href="#fields" data-type="xref">Fields</a>, <a href="#functions" data-type="xref">Functions</a>, <a href="#getters" data-type="xref" data-status="invalid">Getters</a>, <a href="#setters" data-type="xref" data-status="invalid">Setters</a>, <a href="#operations" data-type="xref" data-status="invalid">Operations</a> and <a href="#constructors" data-type="xref">Constructors</a>.
+The <a href="#fields" data-type="xref">Fields</a> of a class are the only members that cannot be added by using <a href="#extensions" data-type="xref">extensions</a>.
+</li><li><a href="#interface" data-type="xref">Interface</a>: Can contain the same members than a class, except fields. Members of an interface
+can be defined by using extensions as well.
+</li><li><a href="#enum" data-type="xref">Enum</a>: Can only contain enumerated fields, however, <a href="#functions" data-type="xref">Functions</a>, <a href="#getters" data-type="xref" data-status="invalid">Getters</a>, 
+<a href="#setters" data-type="xref" data-status="invalid">Setters</a> and <a href="#operations" data-type="xref" data-status="invalid">Operations</a> can be added only by using extensions.
+</li></ul></section><a id="members"></a><section id="member"><h3 data-number="2.1.2.">Members
+</h3><p>Members are owned by a container and have a name. The name of a member in a container 
+must be unique, however, two or more members can be grouped using the same name
+when they are <a href="#overloaded" data-type="xref" data-status="invalid">overloaded</a> or when they are a <a href="#getter" data-type="xref" data-status="invalid">getter</a> and <a href="#setter" data-type="xref" data-status="invalid">setter</a> pair.
+</p><p><a href="#classes" data-type="xref">Classes</a>, <a href="#interfaces" data-type="xref">interfaces</a>, <a href="#enums" data-type="xref">enums</a> and <a href="#modules" data-type="xref">modules</a> are members that are <a href="#containers" data-type="xref">containers</a> as well.
+The modules are the only members that can be nested indefinitely. Classes, interfaces and
+enums are owned exclusively by modules.
+</p><p>Members listed below can be overloaded, in other words, multiple definitions can 
+share the same name as long as the <a href="#overloading" data-type="xref">overloading</a> rules are followed:
+</p><ul><li><a href="#functions" data-type="xref">Functions</a>: Can be defined in <a href="#modules" data-type="xref">modules</a> and <a href="#classes" data-type="xref">classes</a>. Naturally, when defined 
+in classes, an instance is required so they can be invoked.
+</li><li><a href="#constructors" data-type="xref">Constructors</a>: Can be defined directly inside a class but in a module, they can be 
+defined only through extensions.
+</li><li><a href="#operations" data-type="xref" data-status="invalid">Operations</a>: Have the same definition rules than the constructors but the name 
+is restricted to the <a href="#allowed-operations" data-type="xref" data-status="invalid">allowed operations</a>.
+</li></ul><p><a href="#fields" data-type="xref">Fields</a> are the most simple members since they can&apos;t receive parameters or have
+a body. They can be defined in modules and classes, behaving just like the <a href="#functions" data-type="xref">functions</a>.
+</p><p><a href="#getters" data-type="xref" data-status="invalid">Getters</a> and <a href="#setters" data-type="xref" data-status="invalid">Setters</a> can share the same name since, together, they can be treated 
+like a field. They can be defined in <a href="#modules" data-type="xref">modules</a> and <a href="#classes" data-type="xref">classes</a> as well.</p></section></section><a id="suites"></a><section id="suite"><h2 data-number="2.2.">Suites
 </h2><p>Suites are distributable containers for all members that define an Application or a Library.
 The concepts of Application and Library are only important if the suite is expected to be executed.
 Only suites that contain an <a href="#entry-point" data-type="xref">Entry Point</a> can be executed and called <em>Applications</em>
@@ -674,14 +662,14 @@ containers without name are ignored.
 </span>  <span class="keyword">var</span> y = <span class="literal">0</span>;
 
   <span class="keyword">function</span> moveTo(@x, y) { <span class="comment">// ERROR: The member &quot;y&quot; is already defined in the class &quot;Point&quot;.
-</span>    <span class="keyword">let</span> Point = null; <span class="comment">// ERROR: The member &quot;Point&quot; is already defined in the parent module.
+</span>    <span class="keyword">let</span> Point = <span class="literal">null</span>; <span class="comment">// ERROR: The member &quot;Point&quot; is already defined in the parent module.
 </span>  }
 }
 </pre></section></section><a id="access-system"></a><section id="module-access"><h2 data-number="2.4.">Access System
 </h2><p>This system refers to how the members are accessed through the modules.
 This is controlled by using a set of keywords called access modifiers
 which define the rules to access to some member from a certain module.
-</p><table id="how-access-modifiers-work"><caption data-number="5.">How access modifiers work
+</p><table id="how-access-modifiers-work"><caption data-number="3.">How access modifiers work
 </caption><tr><th>Who can access to the member?     </th><th><code>protect</code> </th><th><em>(default)</em> </th><th><code>share</code> </th><th><code>export</code>
 </th></tr><tr><td>Same declaring container          </td><td>✅ </td><td>✅ </td><td>✅ </td><td>✅
 </td></tr><tr><td>Same module in the same suite     </td><td>❌ </td><td>✅ </td><td>✅ </td><td>✅
@@ -808,7 +796,7 @@ and submodules.
 }
 
 <span class="keyword">function</span> log(message <span class="built-in">String</span>) {
-  impl.log(<span class="literal">&quot;${impl.timestamp()} - ${message}&quot;</span>);
+  impl.log(<span class="literal">&quot;<span class="interpolation">${impl.timestamp()}</span> - <span class="interpolation">${message}</span>&quot;</span>);
 }
 </pre></li><li><p><strong>Exported imports</strong>: are useful to re-distribute a member.
 </p><pre data-type="programlisting" data-code-language="bm"><span class="comment">// need to be exported so `getTypeName` can be exported as well
@@ -886,11 +874,11 @@ only members with logic can be used as extensions:
 </li></ul><p>The body of the extension member, just like Class Members, has access to <code>this</code> representing the instance
 and all other instance members will be available.
 </p><pre data-type="programlisting" data-code-language="bm"><span class="keyword">class</span> User {
-  <span class="keyword">var</span> name <span class="built-in">String</span> = null;
+  <span class="keyword">var</span> name <span class="built-in">String</span> = <span class="literal">null</span>;
 }
 
 <span class="keyword">function</span> User::de<span class="keyword">let</span>e() {
-  Console.log(<span class="literal">&quot;Deleting user ${name}&quot;</span>); <span class="comment">// OK! `name` is available
+  Console.log(<span class="literal">&quot;Deleting user <span class="interpolation">${name}</span>&quot;</span>); <span class="comment">// OK! `name` is available
 </span>}
 </pre><p>When an extension is defined in the same module and suite than the extended type,
 the extension member will be treated as a member of the type,
@@ -1078,7 +1066,7 @@ compilation errors only happen if the assignment can be detected by the compiler
 to avoid generalities or specificity. The most generic value that can be assumed is <code>Any</code> and
 the most specific will depend on the initial value.
 </p><pre data-type="programlisting" data-code-language="bm"><span class="comment">// if the type is not specified it would be Any
-</span><span class="keyword">var</span> name <span class="built-in">String</span> = null;
+</span><span class="keyword">var</span> name <span class="built-in">String</span> = <span class="literal">null</span>;
 
 <span class="comment">// if the type is not specified it would be bool
 </span><span class="keyword">var</span> value <span class="built-in">Any</span> = <span class="literal">true</span>;
@@ -1093,7 +1081,7 @@ Syntax:
 </p></section><section id="built-in-types"><h2 data-number="3.6.">Built-in Types
 </h2><p>Bm is not oriented to a specific platform or hardware, however, in order to operate it defines a set of native classes
 which are assumed to exist and can be used to create more complex types.
-</p><table id="built-in-classes"><caption data-number="6.">Built-in Classes
+</p><table id="built-in-classes"><caption data-number="4.">Built-in Classes
 </caption><tr><th>Type     </th><th>Size    </th><th>Description</th><th>Range</th><th></tr><tr><td>Byte     </td><td>8 bits  </td><td>Smallest signed integer. </td><td>−128 to +127
 </td></tr><tr><td>UByte    </td><td>8 bits  </td><td>Smallest unsigned integer. </td><td>0 to 255
 </td></tr><tr><td>Short    </td><td>16 bits </td><td>Medium-sized signed integer. </td><td>−32,768 to +32,767
@@ -1104,7 +1092,7 @@ which are assumed to exist and can be used to create more complex types.
 </td></tr><tr><td>ULong    </td><td>64 bits </td><td>Biggest unsigned integer.</td><td>0 to 18,446,744,073,709,551,615
 </td></tr><tr><td>Single   </td><td>32 bits </td><td>Single-precision floating-point number</td><td></tr><tr><td>Double   </td><td>64 bits </td><td>Double-precision floating-point number</td><td></tr><tr><td>Bool     </td><td>8 bits  </td><td><code>true</code> or <code>false</code></td><td></tr><tr><td>Char     </td><td>16 bits </td><td>Any unicode character.</td><td></tr><tr><td>String   </td><td>Depends on the instance. </td><td>Stores a sequence of Chars.</td><td></tr><tr><td>Array&lt;T&gt; </td><td>Depends on the instance. </td><td>Stores a sequence of values of the same type.</td><td></tr></table><p>As well as specific classes are expected to exist, some interfaces are necessary to provide complete and decoupled
 support of some features of the language.
-</p><table id="built-in-interfaces"><caption data-number="7.">Built-in Interfaces
+</p><table id="built-in-interfaces"><caption data-number="5.">Built-in Interfaces
 </caption><tr><th>Type       </th><th>Description
 </th></tr><tr><td>Any        </td><td>Represents any value.
 </td></tr><tr><td>Tuple&lt;…&gt; </td><td>Stores a sequence of values of specific types per item.
@@ -1124,33 +1112,33 @@ All other members declared in the class than the constructors can only be access
 Only some <a href="#built-in-classes" data-type="xref">Built-in Classes</a> can be created using literals, without invoking a constructor.
 </p><figure id="class-implementation"><pre data-type="programlisting" data-code-language="bm"><span class="keyword">class</span> User {
   <span class="keyword">let</span> id <span class="built-in">Int</span>;
-  <span class="keyword">var</span> name <span class="built-in">String</span> = null;
-  <span class="keyword">var</span> email <span class="built-in">String</span> = null;
+  <span class="keyword">var</span> name <span class="built-in">String</span> = <span class="literal">null</span>;
+  <span class="keyword">var</span> email <span class="built-in">String</span> = <span class="literal">null</span>;
 
   <span class="keyword">constructor</span> new(@id) { id = @id; }
 
   <span class="keyword">function</span> de<span class="keyword">let</span>e() { /* ... */ }
 
-  <span class="keyword">getter</span> displayName <span class="built-in">String</span> { return <span class="literal">&quot;${name} &lt;${email}&gt;&quot;</span>; }
+  <span class="keyword">getter</span> displayName <span class="built-in">String</span> { return <span class="literal">&quot;<span class="interpolation">${name}</span> &lt;<span class="interpolation">${email}</span>&gt;&quot;</span>; }
 
   operator == (other! User) <span class="built-in">Bool</span> { return this.id == other.id; }
 }
 </pre><figcaption data-number="27.">Class Implementation
 </figcaption></figure><figure id="equivalent-implementation"><pre data-type="programlisting" data-code-language="bm"><span class="keyword">class</span> User {
   <span class="keyword">let</span> id <span class="built-in">Int</span>;
-  <span class="keyword">var</span> name <span class="built-in">String</span> = null;
-  <span class="keyword">var</span> email <span class="built-in">String</span> = null;
+  <span class="keyword">var</span> name <span class="built-in">String</span> = <span class="literal">null</span>;
+  <span class="keyword">var</span> email <span class="built-in">String</span> = <span class="literal">null</span>;
 
   <span class="keyword">constructor</span> new(@id) { id = @id; }
 }
 
 <span class="keyword">function</span> User_de<span class="keyword">let</span>e(user User) { /* ... */ }
 
-<span class="keyword">function</span> User_get_displayName(user User) { return <span class="literal">&quot;${user.name} &lt;${user.email}&gt;&quot;</span>; }
+<span class="keyword">function</span> User_get_displayName(user User) { return <span class="literal">&quot;<span class="interpolation">${user.name}</span> &lt;<span class="interpolation">${user.email}</span>&gt;&quot;</span>; }
 
 <span class="keyword">function</span> User_equals(User left, User right) {
-  if left == null { return right == null; }
-  else if right == null { return <span class="literal">false</span>; }
+  if left == <span class="literal">null</span> { return right == <span class="literal">null</span>; }
+  else if right == <span class="literal">null</span> { return <span class="literal">false</span>; }
   else { return left.id == right.id; }
 }
 </pre><figcaption data-number="28.">Equivalent Implementation
@@ -1175,7 +1163,7 @@ in other words, inherited members cannot be overridden.
 </span><span class="keyword">class</span> Record {
   <span class="keyword">export</span> <span class="keyword">let</span> createdAt Date;
 
-  <span class="keyword">share</span> <span class="keyword">var</span> $updatedAt Date = null;
+  <span class="keyword">share</span> <span class="keyword">var</span> $updatedAt Date = <span class="literal">null</span>;
 
   <span class="keyword">share</span> <span class="keyword">constructor</span> new() {
     createdAt = Date.now();
@@ -1189,7 +1177,7 @@ in other words, inherited members cannot be overridden.
 <span class="comment">// represents the user entity record
 </span><span class="keyword">class</span> User inherits Entity, Record {
 
-  <span class="keyword">protect</span> <span class="keyword">var</span> $name <span class="built-in">String</span> = null;
+  <span class="keyword">protect</span> <span class="keyword">var</span> $name <span class="built-in">String</span> = <span class="literal">null</span>;
 
   <span class="comment">// must be chained to the superclasses&apos; constructors
 </span>  <span class="keyword">export</span> <span class="keyword">constructor</span> new(@id <span class="built-in">String</span>)
@@ -1233,8 +1221,8 @@ If a function specified by an interface is not implemented, the class will be tr
 }
 
 <span class="keyword">class</span> Rectangle <span class="keyword">implements</span> Drawable, Shape {
-  <span class="keyword">export</span> <span class="keyword">var</span> origin Point = null;
-  <span class="keyword">export</span> <span class="keyword">var</span> size Size = null;
+  <span class="keyword">export</span> <span class="keyword">var</span> origin Point = <span class="literal">null</span>;
+  <span class="keyword">export</span> <span class="keyword">var</span> size Size = <span class="literal">null</span>;
 
   <span class="keyword">export</span> <span class="keyword">function</span> draw(g Graphics) {
     g.drawRect(origin.x, origin.y, size.width, size.height);
@@ -1244,8 +1232,8 @@ If a function specified by an interface is not implemented, the class will be tr
 }
 
 <span class="keyword">class</span> Oval {
-  <span class="keyword">export</span> <span class="keyword">var</span> origin Point = null;
-  <span class="keyword">export</span> <span class="keyword">var</span> size Size = null;
+  <span class="keyword">export</span> <span class="keyword">var</span> origin Point = <span class="literal">null</span>;
+  <span class="keyword">export</span> <span class="keyword">var</span> size Size = <span class="literal">null</span>;
 
   <span class="keyword">export</span> <span class="keyword">function</span> draw(g Graphics) {
     g.drawOval(origin.x, origin.y, size.width, size.height);
@@ -1366,15 +1354,15 @@ lambda Operation(a int, b int) int;
 }
 </pre></section><section id="property-lambdas"><h3 data-number="6.1.3.">Property Lambdas
 </h3><p>Since properties contain logic they can be converted to lambdas as well.
-</p><pre data-type="programlisting" data-code-language="bm"><span class="keyword">var</span> name = null;
+</p><pre data-type="programlisting" data-code-language="bm"><span class="keyword">var</span> name = <span class="literal">null</span>;
 
 <span class="keyword">getter</span> hasName <span class="built-in">Bool</span> {
-  return name != null;
+  return name != <span class="literal">null</span>;
 }
 
 <span class="keyword">setter</span> hasName(value <span class="built-in">Bool</span>) {
-  if value and name == null { name = <span class="literal">&quot;Default&quot;</span>; }
-  else not value and name != null { name = null; }
+  if value and name == <span class="literal">null</span> { name = <span class="literal">&quot;Default&quot;</span>; }
+  else not value and name != <span class="literal">null</span> { name = <span class="literal">null</span>; }
 }
 
 lambda Getter() <span class="built-in">Bool</span>;
@@ -1432,7 +1420,7 @@ lambda Merger(bag! Bag) Bag;
 <span class="keyword">function</span> createLogger(prefix <span class="built-in">String</span>) Logger&lt;<span class="built-in">String</span>&gt; {
   return (message) -&gt; {
     <span class="comment">// Notice `prefix` is captured in this lambda.
-</span>    console.log(<span class="literal">&quot;${prefix} - ${message}&quot;</span>);
+</span>    console.log(<span class="literal">&quot;<span class="interpolation">${prefix}</span> - <span class="interpolation">${message}</span>&quot;</span>);
   };
 }
 
@@ -1456,7 +1444,7 @@ Enums cannot be initialized.
 }
 
 <span class="keyword">function</span> test() {
-  <span class="keyword">var</span> a Alignment = null;
+  <span class="keyword">var</span> a Alignment = <span class="literal">null</span>;
 
   a = Alignment.LEFT;    <span class="comment">// OK
 </span>  a = Alignment(<span class="literal">&quot;LEFT&quot;</span>); <span class="comment">// OK
@@ -1534,7 +1522,7 @@ using <a href="#named-arguments" data-type="xref">Named Arguments</a>.
 </p><p>It doesn&apos;t matter if the optional parameter is <code>let</code> or <code>var</code>, the initial value
 specified in the parameter declaration is only used when there is no value specified
 in the function invocation.
-</p><pre data-type="programlisting" data-code-language="bm"><span class="keyword">function</span> write(data List&lt;byte&gt;, offset int! = <span class="literal">0</span>, length int = null) {
+</p><pre data-type="programlisting" data-code-language="bm"><span class="keyword">function</span> write(data List&lt;byte&gt;, offset int! = <span class="literal">0</span>, length int = <span class="literal">null</span>) {
   <span class="comment">// ...
 </span>}
 
@@ -1561,7 +1549,7 @@ the getter or setter logic is executed respectively.
   <span class="keyword">protect</span> $baseTitle <span class="built-in">String</span> = <span class="literal">&quot;Default Application&quot;</span>;
 
   <span class="keyword">export</span> <span class="keyword">getter</span> title() <span class="built-in">String</span> {
-    return $baseTitle + <span class="literal">&quot; v${version}&quot;</span>;
+    return $baseTitle + <span class="literal">&quot; v<span class="interpolation">${version}</span>&quot;</span>;
   }
 
   <span class="keyword">export</span> <span class="keyword">setter</span> title(@title <span class="built-in">String</span>) {
@@ -1591,7 +1579,7 @@ the getter or setter logic is executed respectively.
 }
 
 <span class="keyword">function</span> test() {
-  <span class="keyword">var</span> app Application = null;
+  <span class="keyword">var</span> app Application = <span class="literal">null</span>;
 
   app = DefaultApplication();
 
@@ -1737,7 +1725,7 @@ else {
 
 <span class="keyword">while</span> stack.length &gt; <span class="literal">0</span> {
   <span class="keyword">let</span> item = stack.pop();
-  console.log(<span class="literal">&quot;item = ${item}&quot;</span>);
+  console.log(<span class="literal">&quot;item = <span class="interpolation">${item}</span>&quot;</span>);
 }
 
 <span class="comment">// Output:
@@ -1746,7 +1734,7 @@ else {
 </span><span class="comment">// item = 10
 </span></pre></section><section id="incremental-for-while-step-"><h2 data-number="14.3.">Incremental (for - while - step)
 </h2><pre data-type="programlisting" data-code-language="bm"><span class="keyword">for</span> i = <span class="literal">0</span> <span class="keyword">while</span> i &lt; count <span class="keyword">step</span> i++ {
-  console.log(<span class="literal">&quot;i = ${count}&quot;</span>);
+  console.log(<span class="literal">&quot;i = <span class="interpolation">${count}</span>&quot;</span>);
 }
 
 <span class="comment">// Output:
@@ -1758,7 +1746,7 @@ else {
 </h2><pre data-type="programlisting" data-code-language="bm"><span class="keyword">let</span> list = [<span class="literal">10</span>, <span class="literal">20</span>, <span class="literal">30</span>];
 
 <span class="keyword">for</span> item in list {
-  console.log(<span class="literal">&quot;item = ${item}&quot;</span>);
+  console.log(<span class="literal">&quot;item = <span class="interpolation">${item}</span>&quot;</span>);
 }
 else {
   console.log(<span class="literal">&quot;No items found&quot;</span>);

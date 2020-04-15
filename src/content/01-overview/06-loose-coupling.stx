@@ -78,8 +78,11 @@ interface Item {
 
 interface Sortable<T Item> {
   let length Int
+  
   operation get(index Int) T
+
   operation set(index Int, value T)
+
   function bubble_sort() {
     for i = 0 while i < length step i++ {
       for j = 1 while j < (length-i) step j++ {

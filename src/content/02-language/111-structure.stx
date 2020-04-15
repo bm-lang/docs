@@ -1,82 +1,69 @@
 == Structure
 
-Bm has a simple structure to organize the logic: Members and Containers.
-Some containers are also members and some members only contain logic.
+Bm projects, also named [Suites], can be organized using two concepts: [Members] and [Containers].
+Some containers are also members and some members are flat.
 
-|= Item|Is Container?|Is Member?|Only logic?
-
-|- Source File
-   |✅
-   |❌
-   |❌
-
-|-[Module]      |✅|✅|❌
-|-[Class]       |✅|✅|❌
-|-[Interface]   |✅|✅|❌
-|-[Enum]        |✅|✅|❌
-|-[Lambda]      |❌|✅|❌
-|-[Field]       |❌|✅|❌
-|-[Import]      |❌|✅|❌
-|-[Function]    |❌|✅|✅
-|-[Property]    |❌|✅|✅
-|-[Operator]    |❌|✅|✅
-|-[Constructor] |❌|✅|✅
-
-@ref:member
-=== Members
-
-A member represents an unique named item that belongs to a container,
-however, some members can be composed by more than one definition:
-
-- [Functions], [Constructors] and [Operators]:
-  since the [Overloading] of a member is allowed, each overload counts as one definition that composes the same member.
-- [Properties]: a `getter` or `setter` definitions with the same name in a container, compose a single property.
-- [Modules]: all module definitions with the same [Member Path] found in a suite, compose the same module.
+The definition of the members and containers of a suite depends on the directory
+organization and the content of the files. All files and directories are used for
+defining the suite.
 
 @ref:container
 === Containers
 
-The containers are used to group members, all members have an owner which must be a container
-(the [Global Module] is the only member that doesn't have owner since it is the root).
+The containers are used for collecting members, all containers have a name, but not 
+all containers can be referenced in the code.
 
-The owner of a member is not necessarily the container where it was defined:
+The root container for all members and containers is the [suite], which can be considered
+as a [module] that cannot be referenced. A directory containing at least the [suite file]
+is considered a valid suite definition.
 
-- The [*Source Files*] are containers but the actual owner of the members defined inside is the
-  [Implicit Module] which represents the directory of the file.
-- When [importing](Imports) a member, the actual owner of the member is where is was first defined,
-  the owner doesn't change because it was imported into another module.
+Besides the suites, there are other containers defined by using the file system:
 
-The fact that the containers can hold members already defined in other containers helps to build the [Reference System].
+- [Source File] (\*.bm): Any kind of member can be defined in a source file. 
+  The filename is not relevant since they cannot be referenced. 
+  At compilation time, it doesn't matter the amount or the order of the source files 
+  in a directory, they can be considered as a single content.
+- [Module] (implicit): Any directory inside a suite define a module with the same name, 
+  naturally they only can contain files and more directories, however, the members 
+  defined in the source files are owned by the module and the directories are considered 
+  sub-modules.
 
-:: Relationship between containers and members which can own
+There are other containers that can only be defined by writing Bm code:
 
-|= Container | Members
+- [Module] (explicit): They are defined with the `module` keyword and can contain any kind of member. 
+  Module definitions are not unique, the members are merged when any other kind of
+  module definitions are found.
+- [Class]: Can contain [Fields], [Functions], [Getters], [Setters], [Operations] and [Constructors].
+  The [Fields] of a class are the only members that cannot be added by using [extensions].
+- [Interface]: Can contain the same members than a class, except fields. Members of an interface
+  can be defined by using extensions as well.
+- [Enum]: Can only contain enumerated fields, however, [Functions], [Getters], 
+  [Setters] and [Operations] can be added only by using extensions.
 
-|- [Module](Modules)
-   | [Class](Classes),
-     [Interface](Interfaces),
-     [Function](Functions),
-     [Field](Fields),
-     [Property](Properties),
-     [Lambda](Lambdas),
-     [Enum](Enums),
-     [Import](Imports),
-     [Module](Modules)
+@ref:member
+=== Members
 
-|- [Class](Classes)
-   | [Field](Fields),
-     [Property](Properties),
-     [Function](Functions),
-     [Operator](Operators),
-     [Constructor](Constructors)
+Members are owned by a container and have a name. The name of a member in a container 
+must be unique, however, two or more members can be grouped using the same name
+when they are [overloaded] or when they are a [getter] and [setter] pair.
 
-|- [Interface](Interfaces)
-   | [Field](Fields),
-     [Function](Functions),
-     [Operator](Operators)
+[Classes], [interfaces], [enums] and [modules] are members that are [containers] as well.
+The modules are the only members that can be nested indefinitely. Classes, interfaces and
+enums are owned exclusively by modules.
 
-|- [Enum](Enums)
-   | [Field](Fields)
+Members listed below can be overloaded, in other words, multiple definitions can 
+share the same name as long as the [overloading] rules are followed:
 
+- [Functions]: Can be defined in [modules] and [classes]. Naturally, when defined 
+  in classes, an instance is required so they can be invoked.
+- [Constructors]: Can be defined directly inside a class but in a module, they can be 
+  defined only through extensions.
+- [Operations]: Have the same definition rules than the constructors but the name 
+  is restricted to the [allowed operations].
 
+[Fields] are the most simple members since they can't receive parameters or have
+a body. They can be defined in modules and classes, behaving just like the [functions].
+
+[Getters] and [Setters] can share the same name since, together, they can be treated 
+like a field. They can be defined in [modules] and [classes] as well.
 

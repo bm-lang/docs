@@ -40,9 +40,12 @@ built-in =
 literal =
     "true" |
     "false" |
+    "null" |
     string |
     number
 
-string: "\"" {!"\""} "\""
+interpolation = "${" {!"}"} "}"
+
+string: "\"" {interpolation | !"\""} "\""
 
 number: {1 `0-9` }
