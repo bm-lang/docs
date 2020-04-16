@@ -1,62 +1,63 @@
 @ref:suite
 == Suites
 
-Suites are distributable containers for all members that define an Application or a Library.
-The concepts of Application and Library are only important if the suite is expected to be executed.
-Only suites that contain an [Entry Point] can be executed and called _Applications_
-otherwise they can be considered only _Libraries_.
-At the end, all suites can be dependencies of other suites.
+_Suite_ is a Bm concept for representing projects, solutions, programs or packages.
+This concept is important since Bm is not designed for scripting, said in other 
+words, the design doesn't promote having stand-alone files:
 
-The suites can be stored in two formats:
+- Suites are created with a folder having at least a [suite file].
+- Folders inside a suite create [modules], for making reference to them it is required
+  to use the [member path] always relative to the suite folder.
+- Sibling source files have complete access to each others members, they can be
+  considered as a single content.
 
-- *Source suite*: Is a directory with a [Suite File] that contains the source files that can be compiled.
-- *Compiled suite*: Is a `.bms` file that can be distributed, it contains the necessary information to be imported in other suites or executed in any plattform.
+Suites can be compiled to a distributable file format containing the necessary information 
+to be imported in other suites or executed in any platform. Only suites containing an 
+[Entry Point] can be executed, however, all suites can be imported in other suites.
 
 === Suite File
 
-A suite file defines a source suite, the parent directory of the file is considered the [Global Module].
-The file should be named `bm.json` (JSON format) or `bm.yml` (YAML format).
-The following meta-data can be defined in the suite file:
+A suite file is a JSON file named `bm.json`, it describes the suite represented
+by the folder where the file is. This folder is considered the [Suite Module].
 
-|=Name|Type|Description|
+:: Required fields in a suite file.
+|= Name | Type | Description | Default value
 
-|-`id`
-  |String
-  |It is an UUID identifying the suite, it analogous to a fingerprint. This value should never be changed.|
+|- `id` 
+   | String 
+   | It is an UUID identifying the suite, it is analogous to a fingerprint. 
+     This value should never be changed since it is used to validate the correctness
+     of a suite reference.
+   | Random UUID.
 
-|-`name`
-  |String
-  |The code name of the suite following the [Naming Rules].|
+|- `name`
+   | String
+   | The name of the [Suite Module]. This name is used by other suites for importing
+     the members from this suite.
+   | The name of the suite folder.
 
-|-`version`
-  |String
-  |See [Suite Version].|
+|- `version`
+   | String
+   | Is a value composed by three numbers in the following format: _major.minor.patch_.
+     The numbers between a versions should be incremented by following these criteria:
 
-|-`dependencies`
-  |Object
-  |Each attribute represents a dependency of the suite.|
+     - _Major_: changes breaking backward-compatibility.
+     - _Minor_: changes introducing new features.
+     - _Patch_: changes solving bugs.
+   | `0.0.0`
 
-==== Suite Version
-
-The suite version is a value composed by three numbers in the following format: _major.minor.patch_.
-The numbers between a versions should be incremented by following these criteria:
-
-- _Major_ changes break backward-compatibility.
-- _Minor_ changes introduce new features.
-- _Patch_ changes solve bugs.
+Despite previous fields are required, they are auto-filled with the default values
+when they are missing.
 
 === Entry Point
 
-Since the all logic of the programs is contained in a member,
-the default entry point of a program is the function `main` that must be located in the [Global Module].
-In order to access to the arguments,
-the function may declare an array of strings (`Array\<String>`) as the only argument.
+A suite can be executed only if it contains an entry point which normally is a function
+in the [suite module] named `main`, however, it can be changed in the [suite file].
 
 +++ code:bm
-import Array, String from bm;
-
-function main(args Array<String>) {
+// main.bm
+function main() {
   // program logic
 }
 +++
-:^ main.bm
+:^ Example of an entry point.
