@@ -1,0 +1,53 @@
+
+
+
+let v = test()
+
+let t = typeof v
+
+
+
+
+interface Member {
+    
+    let name String
+
+    let parent Member
+
+}
+
+interface Module extends Member {
+
+    let parent Module
+
+}
+
+interface Field extends Member {
+
+    let type Type
+
+    function set(value Any)
+
+    function get()
+
+}
+
+interface Function extends Member {
+
+}
+
+interface FieldAccess {
+
+    let fieldCount
+
+    let fields List<Field>
+
+}
+
+interface Type extends FieldAccess {
+
+    let parent Module
+
+
+
+}

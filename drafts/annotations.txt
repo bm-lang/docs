@@ -1,0 +1,28 @@
+import Class from bm.reflect
+
+// Sugar Syntax
+
+function annotation(member Class, p1 int, p2 bool) {
+
+}
+
+@annotation(123, false)
+class SomeType {
+
+}
+
+function main() {
+    doSomething()
+}
+
+// Resolved Syntax
+
+class SomeType {}
+
+function main() {
+    annotation(typeof SomeType, 123, false)
+
+    //////
+
+    doSomething()
+}

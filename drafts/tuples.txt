@@ -1,0 +1,65 @@
+
+
+function test() Int, String {
+    return 1, "abc"
+}
+
+function main() {
+    let v1 = test()       // Type: D_Tuple_Int_String
+    let v2, v3 = test()   // Types: Int, String
+    let v4, v5 = v1       // Types: Int, String
+    let v6 = v1[0]        // Type: Any
+    let v7 = v1[1]        // Type: Any
+
+    for v in v1 {
+        print(v)    // Prints `1` and `abc`
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function test_resolved() D_Tuple_Int_String {
+    return D_Tuple_Int_String.new(1, "abc")
+}
+
+class D_Tuple_Int_String {
+
+    let value0 Int
+    let value1 String
+
+    let length = 2
+
+    constructor(@value0 Int, @value1 String) {
+        value0 = @value0
+        value1 = @value1
+    }
+
+    operator [] (index Int) Any {
+        if index == 0 {
+            return value0
+        }
+        else if index == 1 {
+            return value1
+        }
+        
+        throw IndexError.new(index)
+    }
+
+}
+
+
+function main_resolved() {
+    let v1 = test()
+    let tuple_v2_v3 = test()
+    let v2 = tuple_v2_v3.value0
+    let v3 = tuple_v2_v3.value1
+}

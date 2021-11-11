@@ -1,0 +1,71 @@
+
+
+delegate Runnable()
+delegate Supplier<T>() T
+
+
+interface ThreadPool {
+
+    function add(runnable Runnable) Promise
+
+    function add<T>(supplier Supplier<T>) Promise<T>
+
+}
+
+
+interface Promise<T> {
+
+    let resolved Bool
+    let rejected Bool
+
+    let result T
+    let error Error
+
+    function join()
+    function join(timeout Duration)
+    
+    function dispose()
+
+}
+
+
+interface Thread {
+    function join()
+    function join(timeout Duration)
+    function dispose()
+}
+
+
+
+// Sugar
+let promise = async doSomethingAsync(arg1, false)
+
+// Resolved
+import globalThreadPool from bm.concurrency
+
+let promise = globalThreadPool.add(() -> doSomethingAsync(arg1, false))
+
+
+
+
+// Sugar
+let result = await promise
+
+// Resolved
+let result T
+using promise {
+    promise.join()
+    if promise.resolved {
+        result = promise.result
+    }
+    else if promise.rejected {
+        throw RejectedError(promise.error)
+    }
+    else {
+        throw DisposedPromiseError()
+    }
+}
+
+
+
+let control = fork doSomethingNow()

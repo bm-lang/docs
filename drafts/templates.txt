@@ -1,0 +1,13 @@
+
+
+template WithLog {
+
+    protect let __log Logger? = null
+
+    protect getter log Logger {
+        if __log == null {
+            __log = Logger.new($CLASS_NAME$)
+        }
+    }
+
+}

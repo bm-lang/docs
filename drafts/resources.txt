@@ -1,0 +1,77 @@
+There must exists an interface `Disposable` that defines a method: `close()` 
+with no arguments and no returning type. This interface will be used by the 
+`using` statement to manage resources.
+
+- Values implementing this class can be used in a `using` block
+- The `close()` method will be called always, no matter if an exception is 
+  thrown inside the block. 
+- More than one resource can be used by using the `and` operator.
+- Declaring and assigning a variable can occur in the `using` block, the scope
+  of the variable will be only inside the block.
+
+```
+module bm {
+    interface Disposable {
+        function dispose()
+    }
+}
+
+import fs from bm
+
+class Resource {
+
+    let stream OutputStream
+
+    constructor new(file String) {
+        stream = fs.newOutputStream(file)
+    }
+
+    function doSomething() {
+        // ...
+    }
+
+    function dispose() {
+        stream.dispose()
+    }
+
+}
+
+function main() {
+    let res1 = Resource.new("test1")
+
+    using res1 and res2 = Resource.new("test2") {
+        res1.doSomething()
+        res2.doSomething()
+    }
+}
+```
+
+
+
+```
+// Sugar syntax:
+using r1 and r2 = new() {
+    r1.something()
+    r2.something()
+}
+
+// Resolved syntax:
+do {
+    // scope for r1
+    do {
+        // scope for r2
+        let r2 = new()
+        do {
+            // content block
+            r1.something()
+            r2.something()
+        }
+        finally {
+            r2.dispose()
+        }
+    }
+    finally {
+        r1.dispose()
+    }
+}
+```

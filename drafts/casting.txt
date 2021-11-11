@@ -1,25 +1,44 @@
+- Use the `is` operator to check if a value matches the indicated type.
+- More than one casting can be combined using the `and` operator.
+- Inside the when block, the casted values can be treated as the indicated type.
 
+```
 let value1 = generate_value()
 let value2 = generate_value()
 
-
-with value1 as Int, value2 as String {
-
+when value1 is Type1 and value2 is Type2 {
+    // value1 is Type1
+    // value2 is Type2
 }
-with value1 as Single, value2 as Double {
-
-}
-else {
-
-}
-
-
-if value1 is String and value2 is Int {
-  print("the string is ${value1}, the int is ${value2}")
-}
-else if value1 is Int and value2 is String {
-  print("the string is ${value2}, the int is ${value1}")
+else when value is Type1 or value is Type2 {
+    // value is the common ancestor between Type1 and Type2
 }
 else {
-  print("who knows?")
+
+}
+```
+
+```
+let value1 = value2 as Type   // throws exception
+let value1 = value2 be Type  // can be null
+let value3 = value2 is Type   // return true/false
+```
+
+
+// Sugar syntax:
+
+when v1 is Type1 and v2 is Type2 {
+    v1.doSomething()
+    v2.doSomething()
+}
+
+// Resolved syntax:
+
+do {
+    let v1_Type1 = v1 be Type1
+    let v2_Type2 = v2 be Type2
+    if v1_Type1 != null and v2_Type2 != null {
+        v1_Type1.doSomething()
+        v2_Type2.doSomething()
+    }
 }

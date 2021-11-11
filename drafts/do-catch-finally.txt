@@ -1,0 +1,104 @@
+import rand from math
+
+
+class MathError fits Error {
+
+    let message String = ""
+
+}
+
+class MathError1 inherits MathError {
+
+}
+
+class OtherError fits Error {
+    
+    let message String = ""
+
+}
+
+
+
+
+
+function something() Int {
+    if rand() >= 0.75 {
+        return 1
+    }
+    else if rand() >= 0.50 {
+        throw MathError1()
+    }
+    else if rand() >= 0.25 {
+        throw MathError2()
+    }
+    else {
+        throw OtherError()
+    }
+}
+
+function main() {
+    do {
+        let x = something()
+
+        print(x)
+    }
+    catch e MathError {
+        handleError(e)  // safe function
+    }
+    catch e {
+        handleError(e)  // safe function
+    }
+    finally {
+        cleanUp()  // safe function
+    }
+}
+
+
+STRUCT something_result
+FIELDS status byte
+,      error Error
+,      result int32
+
+PROC something_proc
+RETURNS something_result
+BEGIN
+    IF GTE FETCH rand, LITERAL 0.75 AS float32 THEN
+        RETURN NEW something_result 
+            INIT status WITH LITERAL 0
+            ,    error WITH NULL
+            ,    result WITH LITERAL 1
+    ELSE IF GTE FETCH rand, LITERAL 0.50 AS float32 THEN
+        RETURN NEW something_result 
+            INIT status WITH LITERAL 1
+            ,    error WITH NEW MathError1 INIT message WITH LITERAL ""
+            ,    result WITH NULL
+    ELSE IF GTE FETCH rand, LITERAL 0.25 AS float32 THEN
+        RETURN NEW something_result 
+            INIT status WITH LITERAL 1
+            ,    error WITH NEW MathError2 INIT message WITH LITERAL ""
+            ,    result WITH NULL
+    ELSE 
+        RETURN NEW something_result 
+            INIT status WITH LITERAL 1
+            ,    error WITH NEW OtherError INIT message WITH LITERAL ""
+            ,    result WITH NULL
+END
+
+PROC main
+BEGIN
+    DECLARE x_raw AS something_result
+        INIT FETCH something_proc
+
+    IF EQ REF x_raw.status, 0 THEN 
+        BEGIN
+            DECLARE x AS int32 INIT x_raw.result
+
+            CALL print ARGS REF x
+        END
+    ELSE IS x_raw.error IS MathError THEN
+        CALL handleError args x_raw.error
+    ELSE
+        CALL handleError args x_raw.error
+    
+    CALL cleanUp
+END

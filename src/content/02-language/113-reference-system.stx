@@ -1,7 +1,6 @@
 == Reference System
 
-This system defines the rules for referencing members in the code
-based on the relationship between containers and members.
+This system defines the rules for referencing members in the code.
 Referencing a member doesn't guarantees the access to it,
 the access to the members is managed by the [Access System].
 

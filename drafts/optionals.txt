@@ -1,0 +1,20 @@
+// sugar syntax
+
+function test() {
+    let x Int? = 0  
+    x = null
+
+    let y Int = x!
+}
+
+// resolved syntax
+
+function test() {
+    let x Int? = 0
+    x = null
+
+    if x == null {
+        throw NullPointerError.new()
+    }
+    let y Int? = x
+}

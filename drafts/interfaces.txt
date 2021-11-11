@@ -1,0 +1,23 @@
+interface List<T> {
+
+    let length UInt
+
+    operation [] (index UInt) T
+
+}
+
+interface Store<T> extends List<T> {
+
+    function add(item T)
+
+    function addAt(index UInt, item T)
+
+    function remove(item T) Bool
+
+    function removeAt(index UInt)
+
+    function indexOf(item T) UInt
+
+    operation [] (index UInt, item T)
+
+}
